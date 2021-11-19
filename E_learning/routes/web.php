@@ -16,6 +16,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/tui_la_ai', function () {
+
+ Route::get('/tui_la_ai', function () {
+    return view('welcome');
+});
+
+
+Route::get('/', function () {
     return view('welcome');
 });
