@@ -17,11 +17,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
- Route::get('/tui_la_ai', function () {
+ Route::get('lop-hoc', function () {
     return view('welcome');
 });
 
-
-Route::get('/', function () {
-    return view('welcome');
-});
