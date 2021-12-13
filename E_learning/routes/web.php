@@ -14,14 +14,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
-
- Route::get('/tui_la_ai', function () {
-    return view('welcome');
+    // return view('layouts/login/forgot-password');
+    return view('index');
 });
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
