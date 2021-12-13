@@ -22,18 +22,9 @@ class DBElearning extends Migration
             $table->string('dia_chi');
             $table->string('sdt');
             $table->string('email');
-            $table->integer('loai_nguoi_dung_id');
-            $table->boolean('trang_thai');
-            $table->timestamps();
-            $table->softDeletes();
-        });
-
-        Schema::create('tai_khoan', function (Blueprint $table) {
-            $table->bigIncrements('id');
             $table->string('ten_dang_nhap');
             $table->string('mat_khau');
-            $table->integer('nguoi_dung_id');
-            $table->boolean('trang_thai');
+            $table->integer('loai_nguoi_dung_id');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -41,16 +32,21 @@ class DBElearning extends Migration
         Schema::create('loai_nguoi_dung', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('ten_loai');
-            $table->boolean('trang_thai');
             $table->timestamps();
             $table->softDeletes();
         });
 
-        Schema::create('thong_bao', function (Blueprint $table) {
+        Schema::create('phong_cho_lop_hoc', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('tieu_de');
-            $table->string('noi_dung');
-            $table->boolean('trang_thai');
+            $table->integer('nguoi_dung_id');
+            $table->integer('lop_hoc_id');
+            $table->timestamps();
+            $table->softDeletes();
+        });
+
+        Schema::create('loai_bai_dang', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('ten_loai');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -59,82 +55,77 @@ class DBElearning extends Migration
         Schema::create('chi_tiet_lop_hoc', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('lop_hoc_id');
-            $table->integer('bai_giang_id');
-            $table->integer('bai_tap_id');
-            $table->integer('bai_kiem_tra_id');
-            $table->integer('thong_bao_id');
             $table->integer('nguoi_dung_id');
-            $table->boolean('trang_thai');
             $table->timestamps();
             $table->softDeletes();
         });
 
-        Schema::create('bai_kiem_tra', function (Blueprint $table) {
+        Schema::create('anh_nen', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('tieu_de');
-            $table->integer('noi_dung');
-            $table->dateTime('han_nop');
-            $table->boolean('trang_thai');
+            $table->string('ten_anh');
             $table->timestamps();
             $table->softDeletes();
         });
 
-        Schema::create('nop_bai_kiem_tra', function (Blueprint $table) {
+        Schema::create('bai_nop', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('bai_kiem_tra_id');
+            $table->integer('bai_dang_id');
             $table->integer('nguoi_dung_id');
-            $table->float('diem',3,1);
-            $table->boolean('trang_thai');
             $table->timestamps();
             $table->softDeletes();
         });
 
         Schema::create('lop_hoc', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('ma_lop');
             $table->string('ten_lop');
-            $table->boolean('trang_thai');
+            $table->string('mo_ta');
+            $table->string('anh_nen_id');
             $table->timestamps();
             $table->softDeletes();
         });
 
         //Long
-        Schema::create('bang_diem', function (Blueprint $table) {
+        Schema::create('bai_dang', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('tieu_de');
+            $table->string('noi_dung');
+            $table->datetime('han_nop');
+            $table->integer('loai_bai_dang_id');
             $table->integer('lop_hoc_id');
-            $table->integer('diem_chuyen_can');
-            $table->integer('nop_bai_tap_id');
-            $table->integer('nop_bai_kiem_tra_id');
-            $table->float('tong_ket', 3, 1);
-            $table->boolean('trang_thai');
             $table->timestamps();
             $table->softDeletes();
         });
 
-        Schema::create('bai_tap', function (Blueprint $table) {
+        Schema::create('binh_luan', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('tieu_de');
-            $table->string('noi_dung');
-            $table->dateTime('han_nop');
-            $table->boolean('trang_thai');
-            $table->timestamps();
-            $table->softDeletes();
-        });
-
-        Schema::create('nop_bai_tap', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->integer('bai_tap_id');
+            $table->integer('bai_dang_id');
             $table->integer('nguoi_dung_id');
-            $table->float('diem', 3, 1);
-            $table->boolean('trang_thai');
+            $table->string('noi_dung');
             $table->timestamps();
             $table->softDeletes();
         });
 
-        Schema::create('bai_giang', function (Blueprint $table) {
+        Schema::create('dinh_kem_binh_luan', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('tieu_de');
-            $table->string('noi_dung');
-            $table->boolean('trang_thai');
+            $table->integer('binh_luan_id');
+            $table->string('dinh_kem');
+            $table->timestamps();
+            $table->softDeletes();
+        });
+
+        Schema::create('dinh_kem_bai_dang', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->integer('bai_dang_id');
+            $table->string('dinh_kem');
+            $table->timestamps();
+            $table->softDeletes();
+        });
+
+        Schema::create('dinh_kem_bai_nop', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->integer('bai_nop_id');
+            $table->string('dinh_kem');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -150,28 +141,30 @@ class DBElearning extends Migration
         //Phong
         Schema::dropIfExists('nguoi_dung');
 
-        Schema::dropIfExists('tai_khoan');
-
         Schema::dropIfExists('loai_nguoi_dung');
 
-        Schema::dropIfExists('thong_bao');
+        Schema::dropIfExists('phong_cho_lop_hoc');
+
+        Schema::dropIfExists('loai_bai_dang');
 
         //Khoa
         Schema::dropIfExists('chi_tiet_lop_hoc');
 
-        Schema::dropIfExists('bai_kiem_tra');
+        Schema::dropIfExists('anh_nen');
 
-        Schema::dropIfExists('nop_bai_kiem_tra');
+        Schema::dropIfExists('bai_nop');
 
         Schema::dropIfExists('lop_hoc');
 
         //Long
-        Schema::dropIfExists('bang_diem');
+        Schema::dropIfExists('bai_dang');
 
-        Schema::dropIfExists('bai_tap');
+        Schema::dropIfExists('binh_luan');
 
-        Schema::dropIfExists('nop_bai_tap');
+        Schema::dropIfExists('dinh_kem_binh_luan');
 
-        Schema::dropIfExists('bai_giang');
+        Schema::dropIfExists('dinh_kem_bai_dang');
+
+        Schema::dropIfExists('dinh_kem_bai_nop');
     }
 }
