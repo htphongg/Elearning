@@ -22,7 +22,7 @@
         </div>
         <div class="right">
             <div class="addclass">
-                <i class="fas fa-plus"></i>
+                <a href="{{ route('them_lop') }}"><i class="fas fa-plus"></i></a>
             </div>
             <div class="menu">
                 <i class="fas fa-bars"></i>
@@ -109,7 +109,7 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="left">
-                                <a class="title" href="class.html">Lập trình Web PHP Nâng Cao </a>
+                                <a class="title" href="{{ route('lop') }}">Lập trình Web PHP Nâng Cao </a>
                                 <a class="subtitle" href="#">HK1 - NH 21-22 </a>
                                 <a href="#">Trần Thanh Tuấn</a>
                             </div>

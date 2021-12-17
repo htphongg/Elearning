@@ -5,8 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class BaiTap extends Model
+class AnhNen extends Model
 {
     use HasFactory;
-    protected $table = 'bai_tap';
+    protected $table = 'anh_nen';
 }

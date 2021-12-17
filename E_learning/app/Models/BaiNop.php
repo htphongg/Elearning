@@ -5,8 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class NopBaiKiemTra extends Model
+class BaiNop extends Model
 {
     use HasFactory;
-    protected $table='nop_bai_kiem_tra';
+    protected $table = 'bai_nop';
 }
