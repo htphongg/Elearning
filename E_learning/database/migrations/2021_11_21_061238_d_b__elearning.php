@@ -23,7 +23,7 @@ class DBElearning extends Migration
             $table->string('sdt');
             $table->string('email');
             $table->string('ten_dang_nhap');
-            $table->string('mat_khau');
+            $table->string('password');
             $table->integer('loai_nguoi_dung_id');
             $table->timestamps();
             $table->softDeletes();

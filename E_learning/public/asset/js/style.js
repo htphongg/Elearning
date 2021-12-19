@@ -12,3 +12,4 @@ function hiddenDrawer(){
 
 drawerBtn.addEventListener('click',showDrawer)
 header.addEventListener('click',hiddenDrawer)
+

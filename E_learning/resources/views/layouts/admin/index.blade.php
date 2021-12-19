@@ -36,7 +36,7 @@
         <div class="dra-header">
             <div class="dra-item">
                 <i class="fas fa-home icon"></i>
-                <a href="../teacher/index.html">Lớp học</a>
+                <a href="../student/index.html">Lớp học</a>
             </div>
             <div class="dra-item">
                 <i class="far fa-calendar icon"></i>
@@ -88,10 +88,6 @@
             <div class="dra-item">
                 <i class="fas fa-cog icon"></i>
                 Cài đặt
-            </div>
-            <div class="dra-item">
-                <i class="fas fa-user-circle icon"></i>
-                <a href="{{route('cap-nhat-thong-tin')}}">Cập nhật thông tin cá nhân</a>
             </div>
             <div class="dra-item">
                 <i class="fas fa-sign-out-alt icon"></i>
