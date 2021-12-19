@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Classroom</title>
+    <title>Trang chủ</title>
     <link rel="stylesheet" href="../asset/css/style.css">
     <link rel="stylesheet" href="../lib/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="../lib/fontawesome/css/all.css">
@@ -24,19 +24,20 @@
             <div class="addclass">
                 <i class="fas fa-plus"></i>
             </div>
-            <div class="menu">
+            <!-- <span>Tham gia lớp học</span> -->
+            <!-- <div class="menu">
                 <i class="fas fa-bars"></i>
             </div>
             <div class="account">
                 <i class="far fa-user-circle"></i>
-            </div>
+            </div> -->
         </div>
     </div>
     <div class="dra-details">
         <div class="dra-header">
             <div class="dra-item">
                 <i class="fas fa-home icon"></i>
-                <a href="../student/index.html">Lớp học</a>
+                <a href="{{route('trang-chu-sinh-vien')}}">Lớp học</a>
             </div>
             <div class="dra-item">
                 <i class="far fa-calendar icon"></i>
@@ -88,6 +89,18 @@
             <div class="dra-item">
                 <i class="fas fa-cog icon"></i>
                 Cài đặt
+            </div>
+            <div class="dra-item">
+                <i class="fas fa-user-circle icon"></i>
+                <a href="{{route('cap-nhat-thong-tin')}}">Cập nhật thông tin cá nhân</a>
+            </div>
+            <div class="dra-item">
+                <i class="fas fa-exchange-alt icon"></i>
+                <a href="{{route('doi-mat-khau')}}">Thay đổi mật khẩu</a>
+            </div>
+            <div class="dra-item">
+                <i class="fas fa-sign-out-alt icon"></i>
+                <a href="{{route('dang-xuat')}}">Đăng xuất</a>
             </div>
         </div>
     </div>
