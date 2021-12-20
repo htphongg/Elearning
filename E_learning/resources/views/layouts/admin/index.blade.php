@@ -90,6 +90,14 @@
                 Cài đặt
             </div>
             <div class="dra-item">
+                <i class="fas fa-user-circle icon"></i>
+                <a href="{{route('cap-nhat-thong-tin')}}">Cập nhật thông tin cá nhân</a>
+            </div>
+            <div class="dra-item">
+                <i class="fas fa-exchange-alt icon"></i>
+                <a href="{{route('doi-mat-khau')}}">Thay đổi mật khẩu</a>
+            </div>
+            <div class="dra-item">
                 <i class="fas fa-sign-out-alt icon"></i>
                 <a href="{{route('dang-xuat')}}">Đăng xuất</a>
             </div>

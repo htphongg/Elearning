@@ -25,34 +25,61 @@ use App\Http\Controllers\NguoiDungController;
 
 //Đăng nhập
 Route::get('/', [NguoiDungController::class,'formDangNhap'])->name('dang-nhap')->middleware('guest');
-Route::post('/', [NguoiDungController::class,'xuLyDangNhap'])->name('xl-dang-nhap');
+Route::post('/', [NguoiDungController::class,'xuLyDangNhap'])->name('xl-dang-nhap')->middleware('guest');
 Route::get('/forgot-password',[NguoiDungController::class,'formQuenMatKhau'])->name('quen-mat-khau');
 
 
 Route::middleware(['auth'])->group(function () {
     //Sinh viên
-    Route::get('/student',function(){
-        return view('.layouts/student/index');
-    })->name('trang-chu-sinh-vien')->middleware('auth');
+    Route::prefix('student')->group(function(){
+        //Trang chủ
+        Route::get('/',function(){
+            return view('.layouts/student/index');
+        })->name('trang-chu-sinh-vien')->middleware('auth');
 
+         //Cập nhật thông tin cá nhân
+        Route::get('/cap-nhat-thong-tin', [NguoiDungController::class, 'formCapNhatThongTinCaNhan'])->name('cap-nhat-thong-tin');
+        Route::post('/cap-nhat-thong-tin', [NguoiDungController::class, 'xuLyCapNhatThongTinCaNhan'])->name('xl-cap-nhat-thong-tin');
+
+        //Đổi mật khẩu
+        Route::get('/doi-mat-khau',[NguoiDungController::class,'formDoiMatKhau'])->name('doi-mat-khau');
+        Route::post('/doi-mat-khau',[NguoiDungController::class,'xuLyDoiMatKhau'])->name('xl-doi-mat-khau');
+    });
+    
     //Giảng viên
-    Route::get('/teacher',function(){
-        return view('.layouts/teacher/index');
-    })->name('trang-chu-giang-vien');
+    Route::prefix('teacher')->group(function(){
 
+        //Trang chủ
+        Route::get('/',function(){
+            return view('.layouts/teacher/index');
+        })->name('trang-chu-giang-vien');
+
+        //  //Cập nhật thông tin cá nhân
+        // Route::get('/cap-nhat-thong-tin', [NguoiDungController::class, 'formCapNhatThongTinCaNhan'])->name('cap-nhat-thong-tin');
+        // Route::post('/cap-nhat-thong-tin', [NguoiDungController::class, 'xuLyCapNhatThongTinCaNhan'])->name('xl-cap-nhat-thong-tin');
+
+        // //Đổi mật khẩu
+        // Route::get('/doi-mat-khau',[NguoiDungController::class,'formDoiMatKhau'])->name('doi-mat-khau');
+        // Route::post('/doi-mat-khau',[NguoiDungController::class,'xuLyDoiMatKhau'])->name('xl-doi-mat-khau');
+    });
+   
     //Admin
-    Route::get('/admin',function(){
-        return view('./layouts/admin/index');
-    })->name('trang-chu-admin');
+    Route::prefix('admin')->group(function(){
+        
+        //Trang chủ
+        Route::get('/',function(){
+            return view('./layouts/admin/index');
+        })->name('trang-chu-admin');   
 
-    //Cập nhật thông tin cá nhân
-    Route::get('/cap-nhat-thong-tin', [NguoiDungController::class, 'formCapNhatThongTinCaNhan'])->name('cap-nhat-thong-tin');
-    Route::post('/cap-nhat-thong-tin', [NguoiDungController::class, 'xuLyCapNhatThongTinCaNhan'])->name('xl-cap-nhat-thong-tin');
-
-    //Đổi mật khẩu
-    Route::get('/doi-mat-khau',[NguoiDungController::class,'formDoiMatKhau'])->name('doi-mat-khau');
-    Route::post('/doi-mat-khau',[NguoiDungController::class,'xuLyDoiMatKhau'])->name('xl-doi-mat-khau');
-
+        // //Cập nhật thông tin cá nhân
+        // Route::get('/cap-nhat-thong-tin', [NguoiDungController::class, 'formCapNhatThongTinCaNhan'])->name('cap-nhat-thong-tin');
+        // Route::post('/cap-nhat-thong-tin', [NguoiDungController::class, 'xuLyCapNhatThongTinCaNhan'])->name('xl-cap-nhat-thong-tin');
+    
+        // //Đổi mật khẩu
+        // Route::get('/doi-mat-khau',[NguoiDungController::class,'formDoiMatKhau'])->name('doi-mat-khau');
+        // Route::post('/doi-mat-khau',[NguoiDungController::class,'xuLyDoiMatKhau'])->name('xl-doi-mat-khau');
+    });
+   
     //Đăng xuất
     Route::get('/dang-xuat',[NguoiDungController::class,'dangXuat'])->name('dang-xuat');
 });
