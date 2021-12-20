@@ -18,9 +18,10 @@
                 </div>
            </div>
            <div class="text-center">Sign In</div>
-            <form action="#">
+            <form action="{{ route('DangNhap') }}" method="POST">
+                @csrf
                 <div class="form-group">
-                    <input type="email" class="form-control" placeholder="Email" required name="email">
+                    <input type="text" class="form-control" placeholder="Tên đăng nhập" required name="ten_dang_nhap">
                 </div>
                 <div class="form-group">
                     <input type="password" class="form-control" placeholder="Password" required name="password">

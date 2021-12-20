@@ -14,7 +14,8 @@
 <body>
     <div id="container">
         <div id="addclass">
-            <form action="addclass">
+            <form action="{{route('xlThemMoi')}}" method="POST">
+                @csrf
                 <div class="form-group">
                     <input type="text" class="form-control" placeholder="Mã lớp" required name="codeclass">
                 </div>
@@ -22,7 +23,7 @@
                 <div class="instructions"> Cách đăng nhập bằng mã lớp học:</div>
                 <ul>
                     <li>Sử dụng tài khoản được cấp phép</li>
-                    <li>Sử dụng mã lớp học gồm 5-7 chữ cái hoặc số, không có dấu cách hoặc ký hiệu</li>
+                    <li>Sử dụng mã lớp học gồm 6 chữ cái hoặc số, không có dấu cách hoặc ký hiệu</li>
                 </ul>
             </form>
         </div>

@@ -24,7 +24,7 @@
         </div>
         <div class="right">
             <div class="addclass">
-                <a href="{{ route('them_lop') }}"><i class="fas fa-plus"></i></a>
+                <a href="{{ route('Them_Lop') }}"><i class="fas fa-plus"></i></a>
             </div>
             <div class="menu">
                 <i class="fas fa-bars"></i>
