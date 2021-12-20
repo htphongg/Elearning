@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,8 +8,9 @@
     <title>Work</title>
     <link rel="stylesheet" href="../asset/css/work.css">
     <link rel="stylesheet" href="../lib/fontawesome/css/all.css">
-    <link rel="stylesheet" href="../lib/bootstrap/css/bootstrap.css">  
+    <link rel="stylesheet" href="../lib/bootstrap/css/bootstrap.css">
 </head>
+
 <body>
     <!-- Header -->
     <div id="header">
@@ -21,9 +23,9 @@
                 <span class="sub-title">Học kỳ 1 - NH 21-22</span>
             </div>
             <div class="route">
-                <a href="./class.html">Bảng tin</a>
-                <a href="./work.html">Bài tập trên lớp</a>
-                <a href="./everybody.html">Mọi người</a>
+                <a href="{{ route('lop') }}">Bảng tin</a>
+                <a href="{{ route('bai_tap') }}">Bài tập trên lớp</a>
+                <a href="{{ route('moi_nguoi') }}">Mọi người</a>
             </div>
         </div>
         <div class="right">
@@ -37,12 +39,12 @@
     </div>
     <!-- End Header -->
 
-    <!-- Drawer details --> 
+    <!-- Drawer details -->
     <div class="dra-details">
         <div class="dra-header">
             <div class="dra-item">
                 <i class="fas fa-home icon"></i>
-                <a href="../index.html">Lớp học</a>
+                <a href="{{ route('trang_chu_sv') }}">Lớp học</a>
             </div>
             <div class="dra-item">
                 <i class="far fa-calendar icon"></i>
@@ -58,7 +60,7 @@
             </div>
             <div class="dra-item">
                 <div class="dra-item-avt icon">C</div>
-               CĐTH19PMC
+                CĐTH19PMC
             </div>
             <div class="dra-item">
                 <div class="dra-item-avt icon">C</div>
@@ -98,7 +100,7 @@
         </div>
     </div>
     <!-- End Drawer details -->
-    
+
     <!-- Body -->
     <div id="container">
         <div id="sidebar">
@@ -118,7 +120,7 @@
         <div id="content">
             <!-- Navigation -->
             <div class="navbar">
-                <div class="nav-left"> 
+                <div class="nav-left">
                     <a href=""><i class="far fa-list-alt"></i> Xem bài tập</a>
                 </div>
                 <div class="nav-right">
@@ -135,7 +137,7 @@
                     <span>Thông báo</span>
                     <i class="fas fa-ellipsis-v"></i>
                 </div>
-                <hr>              
+                <hr>
             </div>
             <!-- Example -->
             <div class="example">
@@ -149,7 +151,7 @@
                     <div class="ex-date-up">
                         Đã đăng vào 11 thg 11
                     </div>
-                     <div class="ex-more-if">
+                    <div class="ex-more-if">
                         <i class="fas fa-ellipsis-v"></i>
                     </div>
                 </div>
@@ -165,7 +167,7 @@
                     <div class="ex-date-up">
                         Đã đăng vào 1 thg 11
                     </div>
-                     <div class="ex-more-if">
+                    <div class="ex-more-if">
                         <i class="fas fa-ellipsis-v"></i>
                     </div>
                 </div>
@@ -176,7 +178,7 @@
                     <span>Tài liệu</span>
                     <i class="fas fa-ellipsis-v"></i>
                 </div>
-                <hr>              
+                <hr>
             </div>
             <!-- Example -->
             <div class="example">
@@ -201,7 +203,7 @@
                     <span>Bài tập</span>
                     <i class="fas fa-ellipsis-v"></i>
                 </div>
-                <hr>              
+                <hr>
             </div>
             <!-- Example -->
             <div class="example">
@@ -269,11 +271,12 @@
                 </div>
             </div>
             <!-- End Example -->
-            
-            <!-- End Post -->        
+
+            <!-- End Post -->
         </div>
     </div>
-    
+
     <script src="../asset/js/style.js"></script>
 </body>
+
 </html>
