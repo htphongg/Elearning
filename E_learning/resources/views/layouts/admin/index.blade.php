@@ -22,7 +22,7 @@
         </div>
         <div class="right">
             <div class="addclass">
-                <a href="{{ route('them_lop') }}"><i class="fas fa-plus"></i></a>
+                <i class="fas fa-plus"></i>
             </div>
             <div class="menu">
                 <i class="fas fa-bars"></i>
@@ -36,7 +36,7 @@
         <div class="dra-header">
             <div class="dra-item">
                 <i class="fas fa-home icon"></i>
-                <a href="../teacher/index.html">Lớp học</a>
+                <a href="../student/index.html">Lớp học</a>
             </div>
             <div class="dra-item">
                 <i class="far fa-calendar icon"></i>
@@ -90,10 +90,6 @@
                 Cài đặt
             </div>
             <div class="dra-item">
-                <i class="fas fa-user-circle icon"></i>
-                <a href="{{route('cap-nhat-thong-tin')}}">Cập nhật thông tin cá nhân</a>
-            </div>
-            <div class="dra-item">
                 <i class="fas fa-sign-out-alt icon"></i>
                 <a href="{{route('dang-xuat')}}">Đăng xuất</a>
             </div>
@@ -117,7 +113,7 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="left">
-                                <a class="title" href="{{ route('lop') }}">Lập trình Web PHP Nâng Cao </a>
+                                <a class="title" href="class.html">Lập trình Web PHP Nâng Cao </a>
                                 <a class="subtitle" href="#">HK1 - NH 21-22 </a>
                                 <a href="#">Trần Thanh Tuấn</a>
                             </div>
