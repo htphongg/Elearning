@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,8 +8,9 @@
     <title>EveryBody</title>
     <link rel="stylesheet" href="../asset/css/everybody.css">
     <link rel="stylesheet" href="../lib/fontawesome/css/all.css">
-    <link rel="stylesheet" href="../lib/bootstrap/css/bootstrap.css">  
+    <link rel="stylesheet" href="../lib/bootstrap/css/bootstrap.css">
 </head>
+
 <body>
     <div id="header">
         <div class="left">
@@ -20,9 +22,9 @@
                 <span class="sub-title">Học kỳ 1 - NH 21-22</span>
             </div>
             <div class="route">
-                <a href="./class.html">Bảng tin</a>
-                <a href="./work.html">Bài tập trên lớp</a>
-                <a href="./everybody.html">Mọi người</a>
+                <a href="{{ route('lop') }}">Bảng tin</a>
+                <a href="{{ route('bai_tap') }}">Bài tập trên lớp</a>
+                <a href="{{ route('moi_nguoi') }}">Mọi người</a>
             </div>
         </div>
         <div class="right">
@@ -35,12 +37,12 @@
         </div>
     </div>
 
-    <!-- Drawer details --> 
+    <!-- Drawer details -->
     <div class="dra-details">
         <div class="dra-header">
             <div class="dra-item">
                 <i class="fas fa-home icon"></i>
-                <a href="../index.html">Lớp học</a>
+                <a href="{{ route('trang_chu_sv') }}">Lớp học</a>
             </div>
             <div class="dra-item">
                 <i class="far fa-calendar icon"></i>
@@ -56,7 +58,7 @@
             </div>
             <div class="dra-item">
                 <div class="dra-item-avt icon">C</div>
-               CĐTH19PMC
+                CĐTH19PMC
             </div>
             <div class="dra-item">
                 <div class="dra-item-avt icon">C</div>
@@ -165,4 +167,5 @@
 
     <script src="../asset/js/style.js"></script>
 </body>
+
 </html>
