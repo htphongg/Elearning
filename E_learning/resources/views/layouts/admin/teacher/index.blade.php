@@ -22,7 +22,11 @@
             </div>
             <span class="webname">Lớp học</span>
         </div>
-
+        <div class="right">
+            <div class="addclass">
+                <a href="{{ route('them_moi') }}"><i class="fas fa-plus"></i></a>
+            </div>
+        </div>
     </div>
     <div class="dra-details">
         <div class="dra-header">
@@ -30,11 +34,13 @@
                 <i class="fas fa-home icon"></i>
                 <a href="{{ route('trang-chu-admin') }}">Trang Chủ</a>
             </div>
-
+            <div class="dra-item">
+                <i class="far fa-calendar icon"></i>
+                Lịch
+            </div>
         </div>
         <hr>
         <div class="dra-body">
-
             <div class="dra-item">
                 <div class="dra-item-avt icon">G</div>
                 <a href="{{ route('ds_giang_vien') }}">Giảng Viên</a>
@@ -44,16 +50,15 @@
                 <a href="">Sinh Viên</a>
             </div>
             <div class="dra-item">
-                <i class="fas fa-user-circle icon"></i>
-                <a href="{{ route('ad-cap-nhat-thong-tin') }}">Cập nhật thông tin cá nhân</a>
+                <div class="dra-item-avt icon">L</div>
+                <a href="">Lớp Học</a>
             </div>
-            <div class="dra-item">
-                <i class="fas fa-exchange-alt icon"></i>
-                <a href="{{ route('ad-doi-mat-khau') }}">Thay đổi mật khẩu</a>
-            </div>
+        </div>
+        <hr>
+        <div class="dra-footer">
             <div class="dra-item">
                 <i class="fas fa-sign-out-alt icon"></i>
-                <a href="{{ route('ad-dang-xuat') }}">Đăng xuất</a>
+                <a href="{{ route('dang-xuat') }}">Đăng xuất</a>
             </div>
         </div>
     </div>
@@ -72,23 +77,45 @@
                     <span>Lịch</span>
                 </div>
             </div>
+            <div class="content">
+                <h1>Danh Sách Giảng Viên</h1>
+                <Table class="table">
+                    <thead>
+                        <tr>
+                            <th>Họ tên</th>
+                            <th>Ngày sinh</th>
+                            <th>Giới tính</th>
+                            <th>Địa chỉ</th>
+                            <th>Số điện thoại</th>
+                            <th>Email</th>
+                            <th>Tên đăng nhập</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($dsGV as $GV)
+                            <tr>
+                                <td>{{ $GV->ho_ten }}</td>
+                                <td>{{ $GV->ngay_sinh }}</td>
+                                <td>{{ $GV->gioi_tinh }}</td>
+                                <td>{{ $GV->dia_chi }}</td>
+                                <td>{{ $GV->sdt }}</td>
+                                <td>{{ $GV->email }}</td>
+                                <td>{{ $GV->ten_dang_nhap }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </Table>
 
-            <hr>
-            <div class="dra-footer">
-
-                <div class="dra-item">
-                    <i class="fas fa-exchange-alt icon"></i>
-                    <a href="{{ route('doi-mat-khau') }}">Thay đổi mật khẩu</a>
-                </div>
-                <div class="dra-item">
-                    <i class="fas fa-sign-out-alt icon"></i>
-                    <a href="{{ route('dang-xuat') }}">Đăng xuất</a>
-                </div>
             </div>
         </div>
 
+        <div id="footer">
 
-        <script src="../asset/js/style.js"></script>
+        </div>
+    </div>
+
+    <script src="../asset/js/style.js"></script>
 </body>
 
 </html>

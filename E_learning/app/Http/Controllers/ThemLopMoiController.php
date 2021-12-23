@@ -11,6 +11,9 @@ use Illuminate\Support\Facades\Auth;
 
 class ThemLopMoiController extends Controller
 {
+<<<<<<< HEAD
+    public function ThemLop()
+=======
     public function DangNhap(Request $request)
     {
         $lop = NguoiDung::where([['ten_dang_nhap', '=', $request->ten_dang_nhap], ['mat_khau', '=', $request->password]])->first();
@@ -20,6 +23,7 @@ class ThemLopMoiController extends Controller
         return view('./layouts/student/index');
     }
     public function thamGiaLop()
+>>>>>>> main
     {
         return view('./layouts/student/addclass');
     }
@@ -31,11 +35,18 @@ class ThemLopMoiController extends Controller
         //Kt đã tham gia lớP đó chưa?
         //Kt nếu mã lớp kh tồn tại?
 
+<<<<<<< HEAD
+        // $chiTietLop = new ChiTietLopHoc();
+        // $chiTietLop->lop_hoc_id = $lop->id;
+        // $chiTietLop->nguoi_dung_id =  //id nguoi dung đang đăng nhập
+        // $chiTietLop->save();
+=======
         $ctLopHoc = new ChiTietLopHoc();
         $ctLopHoc->lop_hoc_id = $lop->id;
         $ctLopHoc->nguoi_dung_id = $id;
         $ctLopHoc->save();
         
         return redirect()->route('sv-trang-chu');
+>>>>>>> main
     }
 }

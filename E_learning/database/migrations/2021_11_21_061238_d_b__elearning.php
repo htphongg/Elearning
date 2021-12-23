@@ -18,7 +18,7 @@ class DBElearning extends Migration
             $table->bigIncrements('id');
             $table->string('ho_ten');
             $table->date('ngay_sinh');
-            $table->string('gioi_tinh');
+            $table->string('gioi_tinh')->default('Nam');
             $table->string('dia_chi');
             $table->string('sdt');
             $table->string('email');
