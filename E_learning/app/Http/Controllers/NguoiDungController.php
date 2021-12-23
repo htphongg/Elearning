@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\NguoiDung;
+use App\Models\LopHoc;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\DangNhapRequest;
 use Illuminate\Support\Facades\Session;
@@ -26,17 +27,17 @@ class NguoiDungController extends Controller
             if(strcasecmp($infor->loaiNguoiDung->ten_loai,'admin') == 0 )
             {
                 // $request->session()->flash('signin', true);
-                return redirect()->route('trang-chu-admin');
+                return redirect()->route('ad-trang-chu');
             }
             if(strcasecmp($infor->loaiNguoiDung->ten_loai,'sinh viên') == 0 )
             {
                 // $request->session()->flash('signin', true);
-                return redirect()->route('trang-chu-sinh-vien');
+                return redirect()->route('sv-trang-chu');
             }
             if(strcasecmp($infor->loaiNguoiDung->ten_loai,'giảng viên') == 0 )
             {
                 // $request->session()->flash('signin', true);
-                return redirect()->route('trang-chu-giang-vien');
+                return redirect()->route('gv-trang-chu');
             }
         }
         else
@@ -108,10 +109,50 @@ class NguoiDungController extends Controller
         return view('./layouts/student/change-password',['ngDung'=>$ngDung]);
     }
     
+
+    public function layDsLop()
+    {
+        if(Auth::check())
+        {
+            $nguoi_dung_id = Auth::id();
+            $dsLop = NguoiDung::find($nguoi_dung_id)->dsLopHoc;
+
+            return view('./layouts/student/index',compact('dsLop'));
+        }
+    }
+
+    public function showChiTietLop(Request $req)
+    {
+        $nguoi_dung_id = Auth::id();
+        $dsLop = NguoiDung::find($nguoi_dung_id)->dsLopHoc;
+
+        $lopHoc = LopHoc::find($req->lop_hoc_id);
+        return view('./layouts/student/class',compact('lopHoc','dsLop'));
+    }
+
+    public function showCongViec(Request $req)
+    {
+        $nguoi_dung_id = Auth::id();
+        $dsLop = NguoiDung::find($nguoi_dung_id)->dsLopHoc;
+
+        $lopHoc = LopHoc::find($req->lop_hoc_id);
+        return view('./layouts/student/work',compact('lopHoc','dsLop'));
+    }
+
+    public function showTatCaThanhVien(Request $req)
+    {
+        $nguoi_dung_id = Auth::id();
+        $dsLop = NguoiDung::find($nguoi_dung_id)->dsLopHoc;
+
+        $lopHoc = LopHoc::find($req->lop_hoc_id);
+        return view('./layouts/student/everybody',compact('lopHoc','dsLop'));
+    }
+
     public function dangXuat()
     {
         Session::flush();
         Auth::logout();
         return redirect()->route('dang-nhap');       
     }
+
 }

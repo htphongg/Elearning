@@ -12,7 +12,7 @@
 <body>
     <div id="container">
         <h2>Form cập nhật thông tin cá nhân</h2>
-        <form action="{{route('sv-xl-cap-nhat-thong-tin')}}" class="was-validated" method="post">
+        <form action="{{route('gv-xl-cap-nhat-thong-tin')}}" class="was-validated" method="post">
           @csrf
           <input type="text" hidden name="nguoi_dung_id" value="{{$ngDung->id}}">
           <div class="form-group">
@@ -73,7 +73,7 @@
           </div>
           <div class="container-btn">
             <button type="submit" class="btn btn-success">Lưu thông tin</button>
-            <a href="{{route('sv-trang-chu')}}" class="btn btn-danger" >Quay về trang chủ</a>
+            <a href="{{route('gv-trang-chu')}}" class="btn btn-danger" >Quay về trang chủ</a>
           </div>
         </form>
     </div>

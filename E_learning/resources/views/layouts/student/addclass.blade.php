@@ -14,7 +14,7 @@
 <body>
     <div id="container">
         <div id="addclass">
-            <form action="{{route('xlThemMoi')}}" method="POST">
+            <form action="{{route('sv-xl-tham-gia-lop')}}" method="POST">
                 @csrf
                 <div class="form-group">
                     <input type="text" class="form-control" placeholder="Mã lớp" required name="codeclass">

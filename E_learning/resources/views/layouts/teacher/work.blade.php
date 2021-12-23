@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Work</title>
+    <title>Bài tập</title>
     <link rel="stylesheet" href="../asset/css/work.css">
     <link rel="stylesheet" href="../lib/fontawesome/css/all.css">
     <link rel="stylesheet" href="../lib/bootstrap/css/bootstrap.css">  
@@ -43,7 +43,7 @@
         <div class="dra-header">
             <div class="dra-item">
                 <i class="fas fa-home icon"></i>
-                <a href="../index.html">Lớp học</a>
+                <a href="{{route('trang-chu-sinh-vien')}}">Lớp học</a>
             </div>
             <div class="dra-item">
                 <i class="far fa-calendar icon"></i>

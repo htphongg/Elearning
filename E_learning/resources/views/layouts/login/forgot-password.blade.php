@@ -30,7 +30,7 @@
                         </div>
 	                </div>
 	                <div class="card-footer"> 
-                        <button class="btn btn-success" type="submit">Nhận mật khẩu mới</button> 
+                        <button class="btn btn-success" type="submit">Nhận liên kết</button> 
                         <a href="{{route('dang-nhap')}}" class="btn btn-danger">Quay về trang đăng nhập</a> 
                     </div>
 	            </form>
