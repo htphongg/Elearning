@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NguoiDungController;
+use App\Http\Controllers\ThemLopMoiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,29 +45,29 @@ Route::post('/them_lop', [ThemLopMoiController::class, 'xlThemMoi'])->name('xlTh
 //Star - Phong
 
 //Problems
-   //đăng nhập tư cách là sinh viên nhưng vẫn route dc vào giảng viên
-   //Chứng thực xong vẫn có thể lui về trang đăng nhập
+//đăng nhập tư cách là sinh viên nhưng vẫn route dc vào giảng viên
+//Chứng thực xong vẫn có thể lui về trang đăng nhập
 
 
 //Đăng nhập
-Route::get('/', [NguoiDungController::class,'formDangNhap'])->name('dang-nhap')->middleware('guest');
-Route::post('/', [NguoiDungController::class,'xuLyDangNhap'])->name('xl-dang-nhap');
-Route::get('/forgot-password',[NguoiDungController::class,'formQuenMatKhau'])->name('quen-mat-khau');
+Route::get('/', [NguoiDungController::class, 'formDangNhap'])->name('dang-nhap')->middleware('guest');
+Route::post('/', [NguoiDungController::class, 'xuLyDangNhap'])->name('xl-dang-nhap');
+Route::get('/forgot-password', [NguoiDungController::class, 'formQuenMatKhau'])->name('quen-mat-khau');
 
 
 Route::middleware(['auth'])->group(function () {
     //Sinh viên
-    Route::get('/student',function(){
+    Route::get('/student', function () {
         return view('.layouts/student/index');
     })->name('trang-chu-sinh-vien')->middleware('auth');
 
     //Giảng viên
-    Route::get('/teacher',function(){
+    Route::get('/teacher', function () {
         return view('.layouts/teacher/index');
     })->name('trang-chu-giang-vien');
 
     //Admin
-    Route::get('/admin',function(){
+    Route::get('/admin', function () {
         return view('./layouts/admin/index');
     })->name('trang-chu-admin');
 
@@ -75,11 +76,18 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/cap-nhat-thong-tin', [NguoiDungController::class, 'xuLyCapNhatThongTinCaNhan'])->name('xl-cap-nhat-thong-tin');
 
     //Đổi mật khẩu
-    Route::get('/doi-mat-khau',[NguoiDungController::class,'formDoiMatKhau'])->name('doi-mat-khau');
-    Route::post('/doi-mat-khau',[NguoiDungController::class,'xuLyDoiMatKhau'])->name('xl-doi-mat-khau');
+    Route::get('/doi-mat-khau', [NguoiDungController::class, 'formDoiMatKhau'])->name('doi-mat-khau');
+    Route::post('/doi-mat-khau', [NguoiDungController::class, 'xuLyDoiMatKhau'])->name('xl-doi-mat-khau');
 
     //Đăng xuất
-    Route::get('/dang-xuat',[NguoiDungController::class,'dangXuat'])->name('dang-xuat');
+    Route::get('/dang-xuat', [NguoiDungController::class, 'dangXuat'])->name('dang-xuat');
 });
 
 //End - Phong
+
+//Start - Long
+
+Route::get('/admin/ds_giang_vien', [NguoiDungController::class, 'LayDSGV'])->name('ds_giang_vien');
+
+Route::get('/admin/them_moi', [NguoiDungController::class, 'formThemMoi'])->name('them_moi');
+Route::post('/admin/them_moi', [NguoiDungController::class, 'xlThemMoi'])->name('xl_them_moi');

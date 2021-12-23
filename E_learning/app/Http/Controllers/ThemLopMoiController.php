@@ -9,14 +9,6 @@ use App\Models\NguoiDung;
 
 class ThemLopMoiController extends Controller
 {
-    public function DangNhap(Request $request)
-    {
-        $lop = NguoiDung::where([['ten_dang_nhap', '=', $request->ten_dang_nhap], ['mat_khau', '=', $request->password]])->first();
-        if ($lop == null) {
-            return 'tôi là ai';
-        }
-        return view('./layouts/student/index');
-    }
     public function ThemLop()
     {
         return view('./layouts/student/addclass');
@@ -27,7 +19,7 @@ class ThemLopMoiController extends Controller
 
         // $chiTietLop = new ChiTietLopHoc();
         // $chiTietLop->lop_hoc_id = $lop->id;
-        // // $chiTietLop->nguoi_dung_id =  //id nguoi dung đang đăng nhập
+        // $chiTietLop->nguoi_dung_id =  //id nguoi dung đang đăng nhập
         // $chiTietLop->save();
     }
 }
