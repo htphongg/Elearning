@@ -27,6 +27,7 @@ class NguoiDungSeeder extends Seeder
         $ngDung->loai_nguoi_dung_id = 3;
         $ngDung->save();
         // $ngDung = new NguoiDung();
+<<<<<<< HEAD
         // $ngDung->ho_ten = 'Trần Thanh Tuấn';
         // $ngDung->ngay_sinh = '1969-11-17';
         // $ngDung->gioi_tinh = 'Nam';
@@ -34,6 +35,15 @@ class NguoiDungSeeder extends Seeder
         // $ngDung->sdt = '0000000000';
         // $ngDung->email = 'tttuan@caothang.edu.vn';
         // $ngDung->ten_dang_nhap = 'tttuan';
+=======
+        // $ngDung->ho_ten = 'Nguyễn Thị Ngọc';
+        // $ngDung->ngay_sinh = '1980-1-1';
+        // $ngDung->gioi_tinh = 'Nữ';
+        // $ngDung->dia_chi = 'kh biết';
+        // $ngDung->sdt = '0000000000';
+        // $ngDung->email = 'ntngoc@gmail.vn';
+        // $ngDung->ten_dang_nhap = 'ntngoc';
+>>>>>>> main
         // $ngDung->password = Hash::make('123456');
         // $ngDung->loai_nguoi_dung_id = 2;
         // $ngDung->save();

@@ -44,8 +44,33 @@
                 <a href="">Sinh Viên</a>
             </div>
             <div class="dra-item">
-                <div class="dra-item-avt icon">L</div>
-                <a href="">Lớp Học</a>
+                <i class="fas fa-user-circle icon"></i>
+                <a href="{{ route('ad-cap-nhat-thong-tin') }}">Cập nhật thông tin cá nhân</a>
+            </div>
+            <div class="dra-item">
+                <i class="fas fa-exchange-alt icon"></i>
+                <a href="{{ route('ad-doi-mat-khau') }}">Thay đổi mật khẩu</a>
+            </div>
+            <div class="dra-item">
+                <i class="fas fa-sign-out-alt icon"></i>
+                <a href="{{ route('ad-dang-xuat') }}">Đăng xuất</a>
+            </div>
+        </div>
+    </div>
+    <div id="line">
+        <hr>
+    </div>
+    <div id="container">
+        <div id="body">
+            <div class="top">
+                <div class="work">
+                    <i class="far fa-list-alt"></i>
+                    <span>Việc cần làm</span>
+                </div>
+                <div class="calender">
+                    <i class="far fa-calendar-check"></i>
+                    <span>Lịch</span>
+                </div>
             </div>
 
             <hr>

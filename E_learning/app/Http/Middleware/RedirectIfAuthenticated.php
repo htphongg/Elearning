@@ -25,11 +25,11 @@ class RedirectIfAuthenticated
             if (Auth::guard($guard)->check()) {
                 $user = Auth::user();
                 if(strcasecmp($user->loaiNguoiDung->ten_loai,'admin') == 0 )
-                    return redirect()->route('trang-chu-admin');
+                    return redirect()->route('ad-trang-chu');
                 if(strcasecmp($user->loaiNguoiDung->ten_loai,'sinh viên') == 0 )
-                    return redirect()->route('trang-chu-sinh-vien');
+                    return redirect()->route('sv-trang-chu');
                 if(strcasecmp($user->loaiNguoiDung->ten_loai,'giảng viên') == 0 )
-                    return redirect()->route('trang-chu-giang-vien');
+                    return redirect()->route('gv-trang-chu');
             }
         }
         return $next($request);
