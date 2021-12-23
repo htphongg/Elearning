@@ -6,6 +6,8 @@ use App\Models\ChiTietLopHoc;
 use Illuminate\Http\Request;
 use App\Models\LopHoc;
 use App\Models\NguoiDung;
+use Illuminate\Support\Facades\Auth;
+
 
 class ThemLopMoiController extends Controller
 {
@@ -17,17 +19,23 @@ class ThemLopMoiController extends Controller
         }
         return view('./layouts/student/index');
     }
-    public function ThemLop()
+    public function thamGiaLop()
     {
         return view('./layouts/student/addclass');
     }
-    public function xlThemMoi(Request $request)
+    public function xlthamGiaLop(Request $request)
     {
         $lop = LopHoc::where('ma_lop', '=', $request->codeclass)->first();
+        $id = Auth::id();
 
-        // $chiTietLop = new ChiTietLopHoc();
-        // $chiTietLop->lop_hoc_id = $lop->id;
-        // // $chiTietLop->nguoi_dung_id =  //id nguoi dung đang đăng nhập
-        // $chiTietLop->save();
+        //Kt đã tham gia lớP đó chưa?
+        //Kt nếu mã lớp kh tồn tại?
+
+        $ctLopHoc = new ChiTietLopHoc();
+        $ctLopHoc->lop_hoc_id = $lop->id;
+        $ctLopHoc->nguoi_dung_id = $id;
+        $ctLopHoc->save();
+        
+        return redirect()->route('sv-trang-chu');
     }
 }

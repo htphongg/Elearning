@@ -24,10 +24,10 @@
         </div>
         <div class="right">
             <div class="addclass">
-                <a href="{{ route('Them_Lop') }}"><i class="fas fa-plus"></i></a>
+                <a href="{{ route('sv-tham-gia-lop') }}"><i class="fas fa-plus"></i></a>
             </div>
-            <!-- <span>Tham gia lớp học</span> -->
-            <!-- <div class="menu">
+             <!-- <span>Tham gia lớp học</span> 
+            <div class="menu">
                 <i class="fas fa-bars"></i>
             </div>
             <div class="account">
@@ -39,7 +39,7 @@
         <div class="dra-header">
             <div class="dra-item">
                 <i class="fas fa-home icon"></i>
-                <a href="{{route('trang-chu-sinh-vien')}}">Lớp học</a>
+                <a href="{{route('sv-trang-chu')}}">Lớp học</a>
             </div>
             <div class="dra-item">
                 <i class="far fa-calendar icon"></i>
@@ -53,34 +53,12 @@
                 <i class="far fa-list-alt icon"></i>
                 Việc cần làm
             </div>
-            <div class="dra-item">
-                <div class="dra-item-avt icon">C</div>
-                CĐTH19PMC
-            </div>
-            <div class="dra-item">
-                <div class="dra-item-avt icon">C</div>
-                Lập trình web PHP
-            </div>
-            <div class="dra-item">
-                <div class="dra-item-avt icon">C</div>
-                ASP.NET Core MVC
-            </div>
-            <div class="dra-item">
-                <div class="dra-item-avt icon">C</div>
-                Lập trình di động
-            </div>
-            <div class="dra-item">
-                <div class="dra-item-avt icon">C</div>
-                Lập trình di động
-            </div>
-            <div class="dra-item">
-                <div class="dra-item-avt icon">C</div>
-                Lập trình di động
-            </div>
-            <div class="dra-item">
-                <div class="dra-item-avt icon">C</div>
-                Lập trình di động
-            </div>
+            @foreach($dsLop as $lop)
+                <div class="dra-item">
+                    <div class="dra-item-avt icon">C</div>
+                    <a href=" {{route('sv-chi-tiet-lop',['lop_hoc_id' => $lop->id])}} " class="dra-item-desc"> {{ $lop->ten_lop }} </a>
+                </div>
+            @endforeach
         </div>
         <hr>
         <div class="dra-footer">
@@ -94,15 +72,15 @@
             </div>
             <div class="dra-item">
                 <i class="fas fa-user-circle icon"></i>
-                <a href="{{route('cap-nhat-thong-tin')}}">Cập nhật thông tin cá nhân</a>
+                <a href="{{route('sv-cap-nhat-thong-tin')}}">Cập nhật thông tin cá nhân</a>
             </div>
             <div class="dra-item">
                 <i class="fas fa-exchange-alt icon"></i>
-                <a href="{{route('doi-mat-khau')}}">Thay đổi mật khẩu</a>
+                <a href="{{route('sv-doi-mat-khau')}}">Thay đổi mật khẩu</a>
             </div>
             <div class="dra-item">
                 <i class="fas fa-sign-out-alt icon"></i>
-                <a href="{{route('dang-xuat')}}">Đăng xuất</a>
+                <a href="{{route('sv-dang-xuat')}}">Đăng xuất</a>
             </div>
         </div>
     </div>
@@ -122,28 +100,31 @@
                 </div>
             </div>
             <div class="content row ">
-                <div class="col-md-3">
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="left">
-                                <a class="title" href="{{ route('lop') }}">Lập trình Web PHP Nâng Cao </a>
-                                <a class="subtitle" href="{{ route('lop') }}">HK1 - NH 21-22 </a>
-                                <a href="{{ route('lop') }}">Trần Thanh Tuấn</a>
+                @foreach($dsLop as $lop)
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="left">
+                                    <a class="title" href="{{ route('sv-chi-tiet-lop',['lop_hoc_id' => $lop->id]) }}">{{ $lop->ten_lop }}</a>
+                                    <a class="subtitle" href="#"> {{ $lop->mo_ta}} </a>
+                                    <a href="#">
+                                      <!-- Hiển thị tên giảng viên -->
+                                    </a>
+                                </div>
+                                <div class="right">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </div>
+                                <div class="avt">
+                                </div>
                             </div>
-                            <div class="right">
-                                <i class="fas fa-ellipsis-v"></i>
+                            <div class="card-body"></div>
+                            <div class="card-footer">
+                                <i class="fas fa-briefcase"></i>
+                                <i class="far fa-folder"></i>
                             </div>
-                            <div class="avt">
-
-                            </div>
-                        </div>
-                        <div class="card-body"></div>
-                        <div class="card-footer">
-                            <i class="fas fa-briefcase"></i>
-                            <i class="far fa-folder"></i>
                         </div>
                     </div>
-                </div>
+                @endforeach
             </div>
         </div>
 

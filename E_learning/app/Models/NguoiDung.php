@@ -15,4 +15,9 @@ class NguoiDung extends Authenticatable
     {
         return $this->belongsTo('App\Models\LoaiNguoiDung');
     }
+
+    public function dsLopHoc()
+    {
+        return $this->belongsToMany('App\Models\LopHoc','chi_tiet_lop_hoc')->withPivot('lop_hoc_id','nguoi_dung_id');
+    }
 }

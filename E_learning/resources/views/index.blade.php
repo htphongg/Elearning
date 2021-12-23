@@ -38,12 +38,13 @@
                 <button  class="button" id="js-btnDangNhap" type="submit">Đăng nhập</button>
             </form>
             <div class="footer">
-                <div class="form-check">
+                <!-- <div class="form-check">
                     <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
                     <label class="form-check-label text-primary" for="flexCheckChecked">
                       Ghi nhớ đăng nhập
                     </label>
-                </div>
+                </div> -->
+                <div></div>
                 <div class="forgot-pass text-primary">
                     <a href="{{route('quen-mat-khau')}}">Quên mật khẩu?</a>
                 </div>  
