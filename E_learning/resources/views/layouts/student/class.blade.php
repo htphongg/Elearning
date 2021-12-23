@@ -5,35 +5,26 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Class Student</title>
+    <title>Chi tiết lớp học</title>
     <link rel="stylesheet" href="../asset/css/class.css">
     <link rel="stylesheet" href="../lib/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="../lib/fontawesome/css/all.css">
 </head>
 
 <body>
-
     <div id="header">
         <div class="left">
             <div class="drawer js-drawer">
                 <i class="fas fa-bars"></i>
             </div>
             <div class="title">
-                <span class="main-title">CĐ TH 19PMC - Lập trình web PHP Nâng cao (LT + ĐA)</span>
-                <span class="sub-title">Học kỳ 1 - NH 21-22</span>
+                <a href="{{ route('sv-chi-tiet-lop', ['lop_hoc_id' => $lopHoc->id] )}}" class="main-title">{{ $lopHoc->ten_lop }}</a>
+                <a href="{{ route('sv-chi-tiet-lop', ['lop_hoc_id' => $lopHoc->id] )}}" class="sub-title">{{ $lopHoc->mo_ta }}</a>
             </div>
             <div class="route">
-                <a href="{{ route('lop') }}">Bảng tin</a>
-                <a href="{{ route('bai_tap') }}">Bài tập trên lớp</a>
-                <a href="{{ route('moi_nguoi') }}">Mọi người</a>
-            </div>
-        </div>
-        <div class="right">
-            <div class="menu">
-                <i class="fas fa-bars"></i>
-            </div>
-            <div class="account">
-                <i class="far fa-user-circle"></i>
+                <a href="{{route( 'sv-chi-tiet-lop', ['lop_hoc_id' => $lopHoc->id] )}}">Bảng tin</a>
+                <a href="{{route( 'sv-cong-viec', ['lop_hoc_id' => $lopHoc->id] )}}">Bài tập trên lớp</a>
+                <a href="{{route( 'sv-moi-nguoi', ['lop_hoc_id' => $lopHoc->id] )}}">Mọi người</a>
             </div>
         </div>
     </div>
@@ -43,7 +34,7 @@
         <div class="dra-header">
             <div class="dra-item">
                 <i class="fas fa-home icon"></i>
-                <a href="{{ route('trang_chu_sv') }}">Lớp học</a>
+                <a href="{{ route('sv-trang-chu') }}">Lớp học</a>
             </div>
             <div class="dra-item">
                 <i class="far fa-calendar icon"></i>
@@ -57,34 +48,12 @@
                 <i class="far fa-list-alt icon"></i>
                 Việc cần làm
             </div>
-            <div class="dra-item">
-                <div class="dra-item-avt icon">C</div>
-                CĐTH19PMC
-            </div>
-            <div class="dra-item">
-                <div class="dra-item-avt icon">C</div>
-                Lập trình web PHP
-            </div>
-            <div class="dra-item">
-                <div class="dra-item-avt icon">C</div>
-                ASP.NET Core MVC
-            </div>
-            <div class="dra-item">
-                <div class="dra-item-avt icon">C</div>
-                Lập trình di động
-            </div>
-            <div class="dra-item">
-                <div class="dra-item-avt icon">C</div>
-                Lập trình di động
-            </div>
-            <div class="dra-item">
-                <div class="dra-item-avt icon">C</div>
-                Lập trình di động
-            </div>
-            <div class="dra-item">
-                <div class="dra-item-avt icon">C</div>
-                Lập trình di động
-            </div>
+            @foreach($dsLop as $lop)
+                <div class="dra-item">
+                    <div class="dra-item-avt icon">C</div>
+                    <a href=" {{route('sv-chi-tiet-lop',['lop_hoc_id' => $lop->id])}} " class="dra-item-desc"> {{ $lop->ten_lop }} </a>
+                </div>
+            @endforeach
         </div>
         <hr>
         <div class="dra-footer">
@@ -96,6 +65,18 @@
                 <i class="fas fa-cog icon"></i>
                 Cài đặt
             </div>
+            <div class="dra-item">
+                <i class="fas fa-user-circle icon"></i>
+                <a href="{{route('sv-cap-nhat-thong-tin')}}">Cập nhật thông tin cá nhân</a>
+            </div>
+            <div class="dra-item">
+                <i class="fas fa-exchange-alt icon"></i>
+                <a href="{{route('sv-doi-mat-khau')}}">Thay đổi mật khẩu</a>
+            </div>
+            <div class="dra-item">
+                <i class="fas fa-sign-out-alt icon"></i>
+                <a href="{{route('sv-dang-xuat')}}">Đăng xuất</a>
+            </div>
         </div>
     </div>
     <!-- End Drawer details -->
@@ -104,8 +85,8 @@
         <div id="body">
             <div class="content">
                 <div class="title">
-                    <span class="subject-name">CĐ TH 19PMC - Lập trình web PHP Nâng cao (LT + ĐA)</span>
-                    <span class="desc">Học kỳ 1 - NH 21-22</span>
+                    <span class="subject-name">{{ $lopHoc->ten_lop }}</span>
+                    <span class="desc">{{ $lopHoc->mo_ta }}</span>
                 </div>
                 <div class="main-content">
                     <div class="left">

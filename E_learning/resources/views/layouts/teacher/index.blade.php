@@ -22,13 +22,7 @@
         </div>
         <div class="right">
             <div class="addclass">
-                <a href="{{ route('them_lop') }}"><i class="fas fa-plus"></i></a>
-            </div>
-            <div class="menu">
-                <i class="fas fa-bars"></i>
-            </div>
-            <div class="account">
-                <i class="far fa-user-circle"></i>
+                <a href="#"><i class="fas fa-plus"></i></a>
             </div>
         </div>
     </div>
@@ -91,15 +85,15 @@
             </div>
             <div class="dra-item">
                 <i class="fas fa-user-circle icon"></i>
-                <a href="{{route('cap-nhat-thong-tin')}}">Cập nhật thông tin cá nhân</a>
+                <a href="{{route('gv-cap-nhat-thong-tin')}}">Cập nhật thông tin cá nhân</a>
             </div>
             <div class="dra-item">
                 <i class="fas fa-exchange-alt icon"></i>
-                <a href="{{route('doi-mat-khau')}}">Thay đổi mật khẩu</a>
+                <a href="{{route('gv-doi-mat-khau')}}">Thay đổi mật khẩu</a>
             </div>
             <div class="dra-item">
                 <i class="fas fa-sign-out-alt icon"></i>
-                <a href="{{route('dang-xuat')}}">Đăng xuất</a>
+                <a href="{{route('gv-dang-xuat')}}">Đăng xuất</a>
             </div>
         </div>
     </div>
@@ -121,7 +115,7 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="left">
-                                <a class="title" href="{{ route('lop') }}">Lập trình Web PHP Nâng Cao </a>
+                                <a class="title" href="{{ route('gv-chi-tiet-lop') }}">Lập trình Web PHP Nâng Cao </a>
                                 <a class="subtitle" href="#">HK1 - NH 21-22 </a>
                                 <a href="#">Trần Thanh Tuấn</a>
                             </div>

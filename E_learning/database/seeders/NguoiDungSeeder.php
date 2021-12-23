@@ -16,15 +16,15 @@ class NguoiDungSeeder extends Seeder
     public function run()
     {
         // $ngDung = new NguoiDung();
-        // $ngDung->ho_ten = 'Huỳnh Thanh Ngân';
-        // $ngDung->ngay_sinh = '2010-8-11';
+        // $ngDung->ho_ten = 'Nguyễn Thị Ngọc';
+        // $ngDung->ngay_sinh = '1980-1-1';
         // $ngDung->gioi_tinh = 'Nữ';
-        // $ngDung->dia_chi = 'Bến Tre';
+        // $ngDung->dia_chi = 'kh biết';
         // $ngDung->sdt = '0000000000';
-        // $ngDung->email = 'htngan@gmail.vn';
-        // $ngDung->ten_dang_nhap = 'htngan';
+        // $ngDung->email = 'ntngoc@gmail.vn';
+        // $ngDung->ten_dang_nhap = 'ntngoc';
         // $ngDung->password = Hash::make('123456');
-        // $ngDung->loai_nguoi_dung_id = 1;
+        // $ngDung->loai_nguoi_dung_id = 2;
         // $ngDung->save();
     }
 }
