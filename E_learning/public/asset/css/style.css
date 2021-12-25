@@ -10,6 +10,12 @@
 
 #container {
     z-index: 0;
+    height: 900px;
+}
+
+#container .navbar{
+   z-index: 1;
+   
 }
 
 #header {
@@ -183,6 +189,8 @@
     display: flex;
     height: 64px;
     align-items: center;
+    padding-top: 100px;
+    margin-bottom: 20px;
 }
 
 #body .top .work {

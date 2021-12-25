@@ -1,23 +1,29 @@
 <?php
 
-namespace App\Http\Controllers\SinhVien;
+namespace App\Http\Controllers\GiangVien;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\NguoiDung;
-use App\Models\ChiTietLopHoc;
-use App\Models\LopHoc;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
 
-class SinhVienController extends Controller
+class GiangVienController extends Controller
 {
-   
-
-    public function formQuenMatKhau()
+    public function layDsLop()
     {
-        return view('./login/forgot-password');
+        if (Auth::check()) {
+            $nguoi_dung_id = Auth::id();
+            $dsLop = NguoiDung::find($nguoi_dung_id)->dsLopHoc;
+
+            return view('./teacher/index', compact('dsLop'));
+        }
+    }
+
+    public function taoLop()
+    {
+        return view('./teacher/create-class');
     }
 
     public function formCapNhatThongTinCaNhan()
@@ -25,9 +31,9 @@ class SinhVienController extends Controller
         if (Auth::check()) {
             $id = Auth::id();
             $ngDung = NguoiDung::find($id);
-            return view('./student/update-infor', ['ngDung' => $ngDung]);
+            return view('./teacher/update-infor', ['ngDung' => $ngDung]);
         }
-        // return view('./student/update-infor');
+        // return view('./teacher/update-infor');
     }
 
     public function xuLyCapNhatThongTinCaNhan(Request $req)
@@ -40,7 +46,7 @@ class SinhVienController extends Controller
         //Làm thế nào để kiểm tra email trùng nhau?
         $ngDung->save();
 
-        return view('./student/update-infor', ['ngDung' => $ngDung]);
+        return view('./teacher/update-infor', ['ngDung' => $ngDung]);
     }
 
     public function formDoiMatKhau()
@@ -48,7 +54,7 @@ class SinhVienController extends Controller
         if (Auth::check()) {
             $id = Auth::id();
             $ngDung = NguoiDung::find($id);
-            return view('./student/change-password', ['ngDung' => $ngDung]);
+            return view('./teacher/change-password', ['ngDung' => $ngDung]);
         }
     }
 
@@ -67,18 +73,10 @@ class SinhVienController extends Controller
         } else
             echo "Mật khẩu cũ không hợp lệ";
 
-        return view('./student/change-password', ['ngDung' => $ngDung]);
+        return view('./teacher/change-password', ['ngDung' => $ngDung]);
     }
 
-    public function layDsLop()
-    {
-        if (Auth::check()) {
-            $nguoi_dung_id = Auth::id();
-            $dsLop = NguoiDung::find($nguoi_dung_id)->dsLopHoc;
-
-            return view('./student/index', compact('dsLop'));
-        }
-    }
+    
     
     public function showChiTietLop(Request $req)
     {
@@ -86,7 +84,7 @@ class SinhVienController extends Controller
         $dsLop = NguoiDung::find($nguoi_dung_id)->dsLopHoc;
 
         $lopHoc = LopHoc::find($req->lop_hoc_id);
-        return view('./student/class', compact('lopHoc', 'dsLop'));
+        return view('./teacher/class', compact('lopHoc', 'dsLop'));
     }
 
     public function showCongViec(Request $req)
@@ -95,7 +93,7 @@ class SinhVienController extends Controller
         $dsLop = NguoiDung::find($nguoi_dung_id)->dsLopHoc;
 
         $lopHoc = LopHoc::find($req->lop_hoc_id);
-        return view('./student/work', compact('lopHoc', 'dsLop'));
+        return view('./teacher/work', compact('lopHoc', 'dsLop'));
     }
 
     public function showTatCaThanhVien(Request $req)
@@ -104,29 +102,7 @@ class SinhVienController extends Controller
         $dsLop = NguoiDung::find($nguoi_dung_id)->dsLopHoc;
 
         $lopHoc = LopHoc::find($req->lop_hoc_id);
-        return view('./student/everybody', compact('lopHoc', 'dsLop'));
-    }
-
-    
-
-    public function thamGiaLop()
-    {
-        return view('./student/addclass');
-    }
-    public function xlthamGiaLop(Request $request)
-    {
-        $lop = LopHoc::where('ma_lop', '=', $request->codeclass)->first();
-        $id = Auth::id();
-
-        //Kt đã tham gia lớP đó chưa?
-        //Kt nếu mã lớp kh tồn tại?
-
-        $ctLopHoc = new ChiTietLopHoc();
-        $ctLopHoc->lop_hoc_id = $lop->id;
-        $ctLopHoc->nguoi_dung_id = $id;
-        $ctLopHoc->save();
-        
-        return redirect()->route('sv-trang-chu');
+        return view('./teacher/everybody', compact('lopHoc', 'dsLop'));
     }
 
     public function dangXuat()
