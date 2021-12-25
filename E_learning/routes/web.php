@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NguoiDungController;
 use App\Http\Controllers\ThemLopMoiController;
+use App\Http\Controllers\SinhVien\SinhVienController;
 
 /*
 |---------------------------------
@@ -36,7 +37,7 @@ Route::post('/', [NguoiDungController::class, 'xuLyDangNhap'])->name('xl-dang-nh
 Route::middleware(['auth'])->group(function () {
     //Sinh viên
     Route::middleware('student.check')->prefix('student')->group(function () {
-
+        //Trang chủ
         Route::get('/', [NguoiDungController::class, 'layDsLop'])->name('sv-trang-chu');
 
         //Cập nhật thông tin cá nhân
@@ -48,8 +49,8 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/doi-mat-khau', [NguoiDungController::class, 'xuLyDoiMatKhau'])->name('sv-xl-doi-mat-khau');
 
         //Tham gia lớp học
-        Route::get('/them_lop', [ThemLopMoiController::class, 'thamGiaLop'])->name('sv-tham-gia-lop');
-        Route::post('/them_lop', [ThemLopMoiController::class, 'xlthamGiaLop'])->name('sv-xl-tham-gia-lop');
+        Route::get('/them_lop', [SinhVienController::class, 'thamGiaLop'])->name('sv-tham-gia-lop');
+        Route::post('/them_lop', [SinhVienController::class, 'xlthamGiaLop'])->name('sv-xl-tham-gia-lop');
 
         //Chi tiết lớp
         Route::get('/chi-tiet-lop', [NguoiDungController::class, 'showChiTietLop'])->name('sv-chi-tiet-lop');
@@ -124,6 +125,5 @@ Route::middleware(['auth'])->group(function () {
 //Start - Long
 
 Route::get('/admin/ds_giang_vien', [NguoiDungController::class, 'LayDSGV'])->name('ds_giang_vien');
-
 Route::get('/admin/them_moi', [NguoiDungController::class, 'formThemMoi'])->name('them_moi');
 Route::post('/admin/them_moi', [NguoiDungController::class, 'xlThemMoi'])->name('xl_them_moi');

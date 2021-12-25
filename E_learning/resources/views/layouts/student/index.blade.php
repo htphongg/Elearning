@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,9 +11,8 @@
     <link rel="stylesheet" href="../lib/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="../lib/fontawesome/css/all.css">
 </head>
-
 <body>
-    <div id="header">
+<div id="header">
         <div class="left">
             <div class="drawer js-drawer">
                 <i class="fas fa-bars"></i>
@@ -84,9 +84,6 @@
             </div>
         </div>
     </div>
-    <div id="line">
-        <hr>
-    </div>
     <div id="container">
         <div id="body">
             <div class="top">
@@ -127,13 +124,9 @@
                 @endforeach
             </div>
         </div>
-
-        <div id="footer">
-
-        </div>
+        <div id="footer"></div>
     </div>
-
     <script src="../asset/js/style.js"></script>
 </body>
-
 </html>
+
