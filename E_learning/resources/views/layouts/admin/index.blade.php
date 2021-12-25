@@ -52,7 +52,7 @@
             </div>
             <div class="dra-item">
                 <i class="fas fa-sign-out-alt icon"></i>
-                <a href="#">Đăng xuất</a>
+                <a href="{{ route('ad-dang-xuat')}}">Đăng xuất</a>
             </div>
         </div>
     </div>
