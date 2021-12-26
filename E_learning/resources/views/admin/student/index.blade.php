@@ -24,7 +24,7 @@
         </div>
         <div class="right">
             <div class="addclass">
-                <a href="{{ route('ad-them-moi-gv') }}"><i class="fas fa-plus"></i></a>
+                <a href="{{ route('ad-them-moi-sv') }}"><i class="fas fa-plus"></i></a>
             </div>
         </div>
     </div>
@@ -78,7 +78,7 @@
                 </div>
             </div>
             <div class="content">
-                <h1>Danh Sách Giảng Viên</h1>
+                <h1>Danh Sách Sinh Viên</h1>
                 <Table class="table">
                     <thead>
                         <tr>
@@ -93,18 +93,18 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($dsGV as $GV)
+                        @foreach ($dsSV as $SV)
                             <tr>
-                                <td>{{ $GV->ho_ten }}</td>
-                                <td>{{ $GV->ngay_sinh }}</td>
-                                <td>{{ $GV->gioi_tinh }}</td>
-                                <td>{{ $GV->dia_chi }}</td>
-                                <td>{{ $GV->sdt }}</td>
-                                <td>{{ $GV->email }}</td>
-                                <td>{{ $GV->ten_dang_nhap }}</td>
+                                <td>{{ $SV->ho_ten }}</td>
+                                <td>{{ $SV->ngay_sinh }}</td>
+                                <td>{{ $SV->gioi_tinh }}</td>
+                                <td>{{ $SV->dia_chi }}</td>
+                                <td>{{ $SV->sdt }}</td>
+                                <td>{{ $SV->email }}</td>
+                                <td>{{ $SV->ten_dang_nhap }}</td>
                                 <td>
-                                    <a href="{{ route('ad-cap-nhat-gv', ['id' => $GV->id]) }}">Sửa</a> |
-                                    <a href="{{ route('ad-xoa-bo-gv', ['id' => $GV->id]) }}">Xóa</a>
+                                    <a href="{{ route('ad-cap-nhat-sv', ['id' => $SV->id]) }}">Sửa</a> |
+                                    <a href="{{ route('ad-xoa-bo-sv', ['id' => $SV->id]) }}">Xóa</a>
                                 </td>
                             </tr>
                         @endforeach

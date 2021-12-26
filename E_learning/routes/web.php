@@ -70,10 +70,10 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware('teacher.check')->prefix('teacher')->group(function () {
 
         //Trang chủ
-        Route::get('/', [GiangVienController::class,'layDsLop'])->name('gv-trang-chu');
+        Route::get('/', [GiangVienController::class, 'layDsLop'])->name('gv-trang-chu');
 
         //Tạo lớp học
-        Route::get('/tao-lop',[GiangVienController::class,'taoLop'])->name('gv-tao-lop');
+        Route::get('/tao-lop', [GiangVienController::class, 'taoLop'])->name('gv-tao-lop');
 
         //Cập nhật thông tin cá nhân
         Route::get('/cap-nhat-thong-tin', [GiangVienController::class, 'formCapNhatThongTinCaNhan'])->name('gv-cap-nhat-thong-tin');
@@ -109,9 +109,50 @@ Route::middleware(['auth'])->group(function () {
             return view('./admin/index');
         })->name('ad-trang-chu');
 
-        //Cập nhật thông tin cá nhân
+        //Load danh sách giảng viên
+        Route::get('/ds_giang_vien', [AdminController::class, 'LayDSGV'])->name('ad-ds-giang-vien');
+
+        //Thêm mới giảng viên
+        Route::get('/them_moi_gv', [AdminController::class, 'formThemMoiGV'])->name('ad-them-moi-gv');
+        Route::post('/them_moi_gv', [AdminController::class, 'xlThemMoiGV'])->name('ad-xl-them-moi-gv');
+
+        //Cập nhật giảng viên
+        Route::get('/cap_nhat_gv/{id}', [AdminController::class, 'formCapNhatGV'])->name('ad-cap-nhat-gv');
+
+        //Xóa giảng viên
+        Route::get('/xoa_bo_gv/{id}', [AdminController::class, 'xlXoaGV'])->name('ad-xoa-bo-gv');
+
+
+        // //Load danh sách sinh viên
+        Route::get('/ds_sinh_vien', [AdminController::class, 'LayDSSV'])->name('ad-ds-sinh-vien');
+
+        // //Thêm mới giảng viên
+        Route::get('/them_moi_sv', [AdminController::class, 'formThemMoiSV'])->name('ad-them-moi-sv');
+        Route::post('/them_moi_sv', [AdminController::class, 'xlThemMoiSV'])->name('ad-xl-them-moi-sv');
+
+        //Cập nhật sinh viên
+        Route::get('/cap_nhat_sv/{id}', [AdminController::class, 'formCapNhatSV'])->name('ad-cap-nhat-sv');
+
+        //Xóa bỏ sinh viên
+        Route::get('/xoa_bo_sv/{id}', [AdminController::class, 'xlXoaSV'])->name('ad-xoa-bo-sv');
+
+        //Load DS Lớp
+        Route::get('/ds_lop', [AdminController::class, 'LayDSLop'])->name('ad-ds-lop');
+
+        //Thêm mới giảng viên
+        Route::get('/them_moi_lh', [AdminController::class, 'formThemMoiLH'])->name('ad-them-moi-lh');
+        Route::post('/them_moi_lh', [AdminController::class, 'xlThemMoiLH'])->name('ad-xl-them-moi-lh');
+
+        //Cập nhật sinh viên
+        Route::get('/cap_nhat_lh/{id}', [AdminController::class, 'formCapNhatLH'])->name('ad-cap-nhat-lh');
+
+        //Xóa bỏ sinh viên
+        Route::get('/xoa_bo_lh/{id}', [AdminController::class, 'xlXoaLH'])->name('ad-xoa-bo-lh');
+
+        //Cập nhật thông tin cá nhân admin
         Route::get('/cap-nhat-thong-tin', [NguoiDungController::class, 'formCapNhatThongTinCaNhan'])->name('ad-cap-nhat-thong-tin');
         Route::post('/cap-nhat-thong-tin', [NguoiDungController::class, 'xuLyCapNhatThongTinCaNhan'])->name('ad-xl-cap-nhat-thong-tin');
+
 
         //Đổi mật khẩu
         Route::get('/doi-mat-khau', [NguoiDungController::class, 'formDoiMatKhau'])->name('ad-doi-mat-khau');
@@ -123,9 +164,3 @@ Route::middleware(['auth'])->group(function () {
 });
 
 //End - Phong
-
-//Start - Long
-
-// Route::get('/admin/ds_giang_vien', [NguoiDungController::class, 'LayDSGV'])->name('ds_giang_vien');
-// Route::get('/admin/them_moi', [NguoiDungController::class, 'formThemMoi'])->name('them_moi');
-// Route::post('/admin/them_moi', [NguoiDungController::class, 'xlThemMoi'])->name('xl_them_moi');

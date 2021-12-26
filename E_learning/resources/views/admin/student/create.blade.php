@@ -44,7 +44,7 @@
             </div>
             <div class="dra-item">
                 <div class="dra-item-avt icon">S</div>
-                <a href="{{ route('ad-ds-sinh-vien') }}">Sinh Viên</a>
+                <a href="">Sinh Viên</a>
             </div>
             <div class="dra-item">
                 <div class="dra-item-avt icon">L</div>
@@ -76,7 +76,7 @@
             </div>
             <div class="content">
                 <h1>Thêm mới</h1>
-                <form action="{{ route('ad-xl-them-moi-gv') }}" class="was-validated" method="POST">
+                <form action="{{ route('ad-xl-them-moi-sv') }}" class="was-validated" method="POST">
                     @csrf
                     <div class="form-group">
                         <label for="uname">Tên đăng nhập:</label>
@@ -134,7 +134,7 @@
                     </div>
                     <div>
                         <button type="submit" class="btn btn-primary">Thêm</button>
-                        <a href="{{ route('ad-ds-giang-vien') }}" class="btn btn-danger">Quay lại</a>
+                        <a href="{{ route('ad-ds-sinh-vien') }}" class="btn btn-danger">Quay lại</a>
                     </div>
 
                 </form>

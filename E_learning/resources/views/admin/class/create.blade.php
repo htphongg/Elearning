@@ -6,25 +6,22 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Classroom</title>
-    <link rel="stylesheet" href="../asset/css/style.css">
+    <link rel="stylesheet" href="../asset/css/create.css">
     <link rel="stylesheet" href="../lib/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="../lib/fontawesome/css/all.css">
 </head>
 
 <body>
     <div id="header">
-        <div class="left">
-            <div class="drawer js-drawer">
-                <i class="fas fa-bars"></i>
-            </div>
-            <div class="logo">
-                <img src="../asset/img/googlelogo_clr_74x24px.svg" alt="">
-            </div>
-            <span class="webname">Lớp học</span>
-        </div>
-        <div class="right">
-            <div class="addclass">
-                <a href="{{ route('ad-them-moi-gv') }}"><i class="fas fa-plus"></i></a>
+        <div id="header">
+            <div class="left">
+                <div class="drawer js-drawer">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <div class="logo">
+                    <img src="../asset/img/googlelogo_clr_74x24px.svg" alt="">
+                </div>
+                <span class="webname">Lớp học</span>
             </div>
         </div>
     </div>
@@ -51,7 +48,7 @@
             </div>
             <div class="dra-item">
                 <div class="dra-item-avt icon">L</div>
-                <a href="{{ route('ad-ds-lop') }}">Lớp Học</a>
+                <a href="">Lớp Học</a>
             </div>
         </div>
         <hr>
@@ -78,39 +75,34 @@
                 </div>
             </div>
             <div class="content">
-                <h1>Danh Sách Giảng Viên</h1>
-                <Table class="table">
-                    <thead>
-                        <tr>
-                            <th>Họ tên</th>
-                            <th>Ngày sinh</th>
-                            <th>Giới tính</th>
-                            <th>Địa chỉ</th>
-                            <th>Số điện thoại</th>
-                            <th>Email</th>
-                            <th>Tên đăng nhập</th>
-                            <th>Chức năng</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($dsGV as $GV)
-                            <tr>
-                                <td>{{ $GV->ho_ten }}</td>
-                                <td>{{ $GV->ngay_sinh }}</td>
-                                <td>{{ $GV->gioi_tinh }}</td>
-                                <td>{{ $GV->dia_chi }}</td>
-                                <td>{{ $GV->sdt }}</td>
-                                <td>{{ $GV->email }}</td>
-                                <td>{{ $GV->ten_dang_nhap }}</td>
-                                <td>
-                                    <a href="{{ route('ad-cap-nhat-gv', ['id' => $GV->id]) }}">Sửa</a> |
-                                    <a href="{{ route('ad-xoa-bo-gv', ['id' => $GV->id]) }}">Xóa</a>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </Table>
+                <h1>Thêm mới</h1>
+                <form action="{{ route('ad-xl-them-moi-lh') }}" class="was-validated" method="POST">
+                    @csrf
+                    <div class="form-group">
+                        <label for="code">Mã lớp:</label>
+                        <input type="text" class="form-control" value="{{ Str::random(6) }}" name="ma_lop" required>
+                        <div class="valid-feedback">Valid.</div>
+                        <div class="invalid-feedback">Please fill out this field.</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Tên lớp:</label>
+                        <input type="text" class="form-control" placeholder="Tên lớp" name="ten_lop" required>
+                        <div class="valid-feedback">Valid.</div>
+                        <div class="invalid-feedback">Please fill out this field.</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Mô tả:</label>
+                        <input type="text" class="form-control" placeholder="Mô tả" name="mo_ta" required>
+                        <div class="valid-feedback">Valid.</div>
+                        <div class="invalid-feedback">Please fill out this field.</div>
+                    </div>
 
+                    <div>
+                        <button type="submit" class="btn btn-primary">Thêm</button>
+                        <a href="{{ route('ad-ds-lop') }}" class="btn btn-danger">Quay lại</a>
+                    </div>
+
+                </form>
             </div>
         </div>
 

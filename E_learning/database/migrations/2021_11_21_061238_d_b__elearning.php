@@ -80,7 +80,7 @@ class DBElearning extends Migration
             $table->string('ma_lop');
             $table->string('ten_lop');
             $table->string('mo_ta');
-            $table->string('anh_nen_id');
+            $table->int('anh_nen_id');
             $table->timestamps();
             $table->softDeletes();
         });
