@@ -23,10 +23,15 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                return redirect(RouteServiceProvider::HOME);
+                $user = Auth::user();
+                if(strcasecmp($user->loaiNguoiDung->ten_loai,'admin') == 0 )
+                    return redirect()->route('ad-trang-chu');
+                if(strcasecmp($user->loaiNguoiDung->ten_loai,'sinh viên') == 0 )
+                    return redirect()->route('sv-trang-chu');
+                if(strcasecmp($user->loaiNguoiDung->ten_loai,'giảng viên') == 0 )
+                    return redirect()->route('gv-trang-chu');
             }
         }
-
         return $next($request);
     }
 }
