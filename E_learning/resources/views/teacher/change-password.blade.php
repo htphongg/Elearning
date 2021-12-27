@@ -64,6 +64,21 @@
             </div>
         </form>
     </div>
+    <div id="toast"></div>
+    <script src="../asset/js/showNoti.js"></script>
+    <script>
+        if( {{ Session::has('success') }} )
+        {
+            showSuccessToast( 'Thành công',"{{ Session::get('success') }} ");
+        }
+        
+    </script>
+    <script>
+        if( {{ Session::has('error') }} )
+        {
+            showErrorToast( 'Lỗi',"{{ Session::get('error') }}");
+        }   
+    </script>
     <script src="../asset/js/change-password.js"></script>
 </body>
 </html>

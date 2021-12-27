@@ -384,8 +384,9 @@
   }
   
   #body .content .main-content .left .pathclass .text {
-    margin-top: 10px;
-    margin-right: 5px;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
   }
   
   #body .content .main-content .left .pathclass .text i {
@@ -397,7 +398,6 @@
     font-size: 1.375rem;
     color: #1967d2;
     font-family: "Google Sans", Roboto, Arial, sans-serif;
-    margin: auto;
     white-space: pre-wrap;
   }
   /*hết*/

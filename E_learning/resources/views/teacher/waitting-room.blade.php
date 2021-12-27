@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trang chủ</title>
+    <title>Phòng chờ</title>
     <link rel="stylesheet" href="../asset/css/style.css">
     <link rel="stylesheet" href="../lib/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="../lib/fontawesome/css/all.css">
@@ -19,11 +19,6 @@
                 <img src="../asset/img/googlelogo_clr_74x24px.svg" alt="">                   
             </div>
             <span class="webname">Lớp học</span>
-        </div>
-        <div class="right">
-            <div class="create-class mr-5 ">
-                <a href="{{ route('gv-tao-lop') }}"><i class="fas fa-plus text-dark"></i></a>
-            </div>
         </div>
     </div>
     <div class="dra-details">
@@ -75,61 +70,44 @@
             </div>
         </div>
     </div>
-    <div id="container">      
-        <div id="body">
-            <div class="top">
-                <div class="work">
-                    <i class="far fa-list-alt"></i>
-                    <span>Để đánh giá</span>
-                </div>
-                <div class="calender">
-                    <i class="far fa-calendar-check"></i>
-                    <span>Lịch</span>
-                </div>
-            </div>
-            <div class="content row ">
-               @foreach($dsLop as $lop)
-                    <div class="col-md-3">
-                        <div class="card">
-                            <div class="card-header">
-                                <div class="left">
-                                    <a class="title" href="{{ route('gv-chi-tiet-lop',['lop_hoc_id' => $lop->id]) }}">{{ $lop->ten_lop }}</a>
-                                    <a class="subtitle" href="#">{{ $lop->mo_ta }}</a>
-                                </div>
-                                <div class="right">
-                                    <i class="fas fa-ellipsis-v"></i>
-                                </div>
-                                <div class="avt">
-
-                                </div>
-                            </div>
-                            <div class="card-body"></div>
-                            <div class="card-footer">
-                                <a href="{{ route('gv-xoa-lop',['lop_hoc_id' => $lop->id]) }}"><i class="fas fa-trash text-dark"></i> </i></a>
-                                <a href="{{ route('gv-chinh-sua-lop',['lop_hoc_id' => $lop->id]) }}"><i class="far fa-edit text-dark"></i></a>
-                            </div>
-                        </div>
-                    </div>
-               @endforeach
-            </div>
+    <div id="container">   
+        <div class="ds-sv">
+            <h2 class="text-center">Danh sách sinh viên </h2>   
+            <table class="table table-bordered mt-3 text-center">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Họ tên</th>
+                        <th>Email</th>
+                        <th>Loại người dùng</th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>John</td>
+                        <td>john@example.com</td>
+                        <td></td>
+                        <td>
+                            <a href="http://" class="btn btn-success">Chấp nhận</a>
+                            <a href="http://" class="btn btn-danger">Xoá</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Mary</td>
+                        <td>john@example.com</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>July</td>
+                        <td>july@example.com</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-        <div id="toast"></div>
-        <div id="footer"></div>
     </div>
-    <script src="../asset/js/showNoti.js"></script>
-    <script>
-        if( {{ Session::has('success') }} )
-        {
-            showSuccessToast( 'Thành công',"{{ Session::get('success') }} ");
-        }
-        
-    </script>
-    <script>
-        if( {{ Session::has('error') }} )
-        {
-            showErrorToast( 'Lỗi',"{{ Session::get('error') }}");
-        }   
-    </script>
     <script src="../asset/js/style.js"></script>
 </body>
 </html>

@@ -109,16 +109,32 @@
                             </div>
                             <div class="card-body"></div>
                             <div class="card-footer">
+                                <i class="far fa-trash-alt"></i>
                                 <i class="fas fa-briefcase"></i>
-                                <i class="far fa-folder"></i>
                             </div>
                         </div>
                     </div>
                 @endforeach
             </div>
         </div>
+        <div id="toast"></div>
         <div id="footer"></div>
     </div>
+    <script src="../asset/js/showNoti.js"></script>
+   <script>
+        if( {{ Session::has('success') }} )
+        {
+            showSuccessToast( 'Thành công',"{{ Session::get('success') }} ");
+        }
+        
+    </script>
+    <script>
+        if( {{ Session::has('error') }} )
+        {
+            showErrorToast( 'Lỗi',"{{ Session::get('error') }}");
+        }   
+    </script>
+   <script src="../asset/js/login.js"></script>
     <script src="../asset/js/style.js"></script>
 </body>
 </html>

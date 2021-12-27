@@ -1,16 +1,25 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-#container{
-    padding: 50px 400px;
+body{
+    background-color: #ccc !important;
 }
 
-.container-btn{
+#container{
+    margin: 130px 400px;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+}
+
+#container .btn-create{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 /* Toast */
@@ -18,14 +27,13 @@
     position: fixed;
     top: 20px;
     right: 25px;
-    /* bottom: 50px; */
     z-index: 999999;
 }
   
 .toast {
     display: flex;
     align-items: center; 
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: #fff;
     border-radius: 2px;
     padding: 20px 0;
     min-width: 380px;

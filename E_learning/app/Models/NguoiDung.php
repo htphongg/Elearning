@@ -20,4 +20,9 @@ class NguoiDung extends Authenticatable
     {
         return $this->belongsToMany('App\Models\LopHoc','chi_tiet_lop_hoc')->withPivot('lop_hoc_id','nguoi_dung_id');
     }
+
+    // public function phongCho()
+    // {
+    //     return $this->belongsTo('App\Models\PhongChoLopHoc');
+    // }
 }

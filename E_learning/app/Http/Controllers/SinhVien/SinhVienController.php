@@ -7,18 +7,24 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\NguoiDung;
 use App\Models\ChiTietLopHoc;
 use App\Models\LopHoc;
+use App\Models\PhongChoLopHoc;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Hash;
+
 
 
 class SinhVienController extends Controller
 {
-   
-
-    public function formQuenMatKhau()
+    public function layDsLop()
     {
-        return view('./login/forgot-password');
-    }
+        if (Auth::check()) {
+            $nguoi_dung_id = Auth::id();
+            $dsLop = NguoiDung::find($nguoi_dung_id)->dsLopHoc;
+
+            return view('./student/index', compact('dsLop'));
+        }
+    } 
 
     public function formCapNhatThongTinCaNhan()
     {
@@ -32,15 +38,29 @@ class SinhVienController extends Controller
 
     public function xuLyCapNhatThongTinCaNhan(Request $req)
     {
-        $ngDung = NguoiDung::find($req->nguoi_dung_id);
+        
+        if($req->nguoi_dung_id != null)
+        {
+            $ngDung = NguoiDung::find($req->nguoi_dung_id);
 
-        $ngDung->dia_chi = $req->address;
-        $ngDung->email = $req->email;
+            $ngDung->dia_chi = $req->address;
 
-        //Làm thế nào để kiểm tra email trùng nhau?
-        $ngDung->save();
+            $ng = NguoiDung::where('email','=',$req->email)->first();
 
-        return view('./student/update-infor', ['ngDung' => $ngDung]);
+            if($ng != null)
+            {
+                return redirect()->route('sv-xl-cap-nhat-thong-tin',['nguoi_dung_id' => $req->nguoi_dung_id] )->with('error','Email đã được sử dụng');   
+            }
+            else
+            {
+                $ngDung->email = $req->email;
+            }
+
+            $ngDung->save();
+
+            return redirect()->route('sv-trang-chu')->with('success','Cập nhật thông tin cá nhân thành công');
+        }
+        return redirect()->route('sv-trang-chu')->with('error','Xác thực người dùng thất bại');
     }
 
     public function formDoiMatKhau()
@@ -61,23 +81,16 @@ class SinhVienController extends Controller
                 $ngDung->password = Hash::make($req->new_password);
                 $ngDung->save();
                 Auth::logout();
-                return redirect()->route('dang-nhap');
+                return redirect()->route('dang-nhap')->with('success','Đổi mật khâu thành công. Hãy đăng nhập lại');
             } else
-                echo "Xác nhận mật khẩu mới không hợp lệ";
+            {
+                return redirect()->route('sv-xl-doi-mat-khau')->with('error','Xác nhận mật khẩu mới không đÚng');
+            }
         } else
-            echo "Mật khẩu cũ không hợp lệ";
-
-        return view('./student/change-password', ['ngDung' => $ngDung]);
-    }
-
-    public function layDsLop()
-    {
-        if (Auth::check()) {
-            $nguoi_dung_id = Auth::id();
-            $dsLop = NguoiDung::find($nguoi_dung_id)->dsLopHoc;
-
-            return view('./student/index', compact('dsLop'));
+        {
+            return redirect()->route('sv-xl-doi-mat-khau')->with('error','Mật khẩu cũ không đúng');
         }
+        return redirect()->route('sv-trang-chu')->with('error','Xác thực người dùng thất bại');
     }
     
     public function showChiTietLop(Request $req)
@@ -116,17 +129,29 @@ class SinhVienController extends Controller
     public function xlthamGiaLop(Request $request)
     {
         $lop = LopHoc::where('ma_lop', '=', $request->codeclass)->first();
-        $id = Auth::id();
+        if($lop == null)
+        {
+            return redirect()->route('sv-trang-chu')->with('error','Không tìm thấy lớp học này');
+        }
+        else
+        {
+            $user = ChiTietLopHoc::where('lop_hoc_id','=',$lop->id)
+                                ->where('nguoi_dung_id','=',Auth::id())->first();
 
-        //Kt đã tham gia lớP đó chưa?
-        //Kt nếu mã lớp kh tồn tại?
-
-        $ctLopHoc = new ChiTietLopHoc();
-        $ctLopHoc->lop_hoc_id = $lop->id;
-        $ctLopHoc->nguoi_dung_id = $id;
-        $ctLopHoc->save();
-        
-        return redirect()->route('sv-trang-chu');
+            if($user != null)
+            {
+                return redirect()->route('sv-trang-chu')->with('error','Bạn đã tham gia lớp học này rồi.');
+            }
+            else
+            {
+                $phongCho = new PhongChoLopHoc();
+                $phongCho->lop_hoc_id = $lop->id;
+                $phongCho->nguoi_dung_id = Auth::id();
+                $phongCho->save();
+                
+                return redirect()->route('sv-trang-chu')->with('success','Hãy chờ Giảng viên cho phép bạn tham gia lớp');
+            }
+        }
     }
 
     public function dangXuat()

@@ -37,9 +37,9 @@
                 <div class="input-group mb-3">
                     <input type="password" class="form-control" id="new-password" placeholder="Nhập vào mật khẩu mới" name="new_password" required>
                     <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button" id="btnPasswordNew">
-                        <span class="fas fa-eye"></span>
-                    </button>
+                        <button class="btn btn-outline-secondary" type="button" id="btnPasswordNew">
+                            <span class="fas fa-eye"></span>
+                        </button>
                     </div>
                     <div class="valid-feedback">Hợp lệ.</div>
                     <div class="invalid-feedback">Vui lòng điền vào trường này.</div>
@@ -50,9 +50,9 @@
                 <div class="input-group mb-3">
                     <input type="password" class="form-control" id="cf-new-password" placeholder="Xác nhận mật khẩu mới" name="cf_new_password" required>
                     <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button" id="btnPasswordCf">
-                        <span class="fas fa-eye"></span>
-                    </button>
+                        <button class="btn btn-outline-secondary" type="button" id="btnPasswordCf">
+                            <span class="fas fa-eye"></span>
+                        </button>
                     </div>
                     <div class="valid-feedback">Hợp lệ.</div>
                     <div class="invalid-feedback">Vui lòng điền vào trường này.</div>
@@ -64,6 +64,22 @@
             </div>
         </form>
     </div>
+    <div id="toast"></div>
+    <script src="../asset/js/showNoti.js"></script>
+    <script>
+        if( {{ Session::has('success') }} )
+        {
+            showSuccessToast( 'Thành công',"{{ Session::get('success') }} ");
+        }
+        
+    </script>
+    <script>
+        if( {{ Session::has('error') }} )
+        {
+            showErrorToast( 'Lỗi',"{{ Session::get('error') }}");
+        }   
+    </script>
+    <script src="../asset/js/login.js"></script>
     <script src="../asset/js/change-password.js"></script>
 </body>
 </html>

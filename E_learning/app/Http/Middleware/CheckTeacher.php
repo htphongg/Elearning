@@ -20,7 +20,7 @@ class CheckTeacher
         if(Auth::user()->loai_nguoi_dung_id == 2)
             return $next($request);
         else if(Auth::user()->loai_nguoi_dung_id == 0)
-            return redirect()->route('trang-chu-admin');
+            return redirect()->route('ad-trang-chu');
         else if(Auth::user()->loai_nguoi_dung_id == 1)
             return redirect()->route('sv-trang-chu');
     }
