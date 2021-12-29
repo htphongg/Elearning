@@ -118,6 +118,7 @@ Route::middleware(['auth'])->group(function () {
 
         //Cập nhật giảng viên
         Route::get('/cap_nhat_gv/{id}', [AdminController::class, 'formCapNhatGV'])->name('ad-cap-nhat-gv');
+        Route::post('/cap_nhat_gv/{id}', [AdminController::class, 'xlCapnhatGV'])->name('ad-xl-cap-nhat-gv');
 
         //Xóa giảng viên
         Route::get('/xoa_bo_gv/{id}', [AdminController::class, 'xlXoaGV'])->name('ad-xoa-bo-gv');
@@ -132,6 +133,7 @@ Route::middleware(['auth'])->group(function () {
 
         //Cập nhật sinh viên
         Route::get('/cap_nhat_sv/{id}', [AdminController::class, 'formCapNhatSV'])->name('ad-cap-nhat-sv');
+        Route::post('/cap_nhat_sv/{id}', [AdminController::class, 'xlCapnhatSV'])->name('ad-xl-cap-nhat-sv');
 
         //Xóa bỏ sinh viên
         Route::get('/xoa_bo_sv/{id}', [AdminController::class, 'xlXoaSV'])->name('ad-xoa-bo-sv');
@@ -139,14 +141,15 @@ Route::middleware(['auth'])->group(function () {
         //Load DS Lớp
         Route::get('/ds_lop', [AdminController::class, 'LayDSLop'])->name('ad-ds-lop');
 
-        //Thêm mới giảng viên
+        //Thêm mới lớp
         Route::get('/them_moi_lh', [AdminController::class, 'formThemMoiLH'])->name('ad-them-moi-lh');
         Route::post('/them_moi_lh', [AdminController::class, 'xlThemMoiLH'])->name('ad-xl-them-moi-lh');
 
-        //Cập nhật sinh viên
+        //Cập nhật lớp
         Route::get('/cap_nhat_lh/{id}', [AdminController::class, 'formCapNhatLH'])->name('ad-cap-nhat-lh');
+        Route::post('/cap_nhat_lh/{id}', [AdminController::class, 'xlCapnhatLH'])->name('ad-xl-cap-nhat-lh');
 
-        //Xóa bỏ sinh viên
+        //Xóa bỏ lớp
         Route::get('/xoa_bo_lh/{id}', [AdminController::class, 'xlXoaLH'])->name('ad-xoa-bo-lh');
 
         //Cập nhật thông tin cá nhân admin

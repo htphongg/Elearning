@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Classroom</title>
-    <link rel="stylesheet" href="../asset/css/create.css">
+    <link rel="stylesheet" href="../asset/css/function-style-admin.css">
     <link rel="stylesheet" href="../lib/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="../lib/fontawesome/css/all.css">
 </head>
@@ -65,17 +65,9 @@
     <div id="container">
         <div id="body">
             <div class="top">
-                <div class="work">
-                    <i class="far fa-list-alt"></i>
-                    <span>Việc cần làm</span>
-                </div>
-                <div class="calender">
-                    <i class="far fa-calendar-check"></i>
-                    <span>Lịch</span>
-                </div>
             </div>
             <div class="content">
-                <h1>Thêm mới</h1>
+                <h1>Thêm mới sinh viên</h1>
                 <form action="{{ route('ad-xl-them-moi-sv') }}" class="was-validated" method="POST">
                     @csrf
                     <div class="form-group">

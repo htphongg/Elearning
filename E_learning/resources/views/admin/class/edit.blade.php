@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Classroom</title>
-    <link rel="stylesheet" href="{{ URL::asset('asset/css/style.css') }}">
-    <link rel="stylesheet" href="../lib/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="/asset/css/function-style-admin.css">
+    <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="../lib/fontawesome/css/all.css">
 </head>
 
@@ -78,56 +78,36 @@
                 </div>
             </div>
             <div class="content">
-                <h1>Cập nhật</h1>
-                <form action="#" class="was-validated" method="POST">
+                <h1>Cập nhật lớp</h1>
+                <form action="{{ route('ad-xl-cap-nhat-lh', ['id' => $dsLH->id]) }}" class="was-validated"
+                    method="POST">
                     @csrf
                     <div class="form-group">
-                        <label for="uname">Tên đăng nhập:</label>
-                        <input type="text" class="form-control" id="uname" placeholder="Tên đăng nhập"
-                            name="ten_dang_nhap" readonly>
+                        <label for="code">Mã lớp:</label>
+                        <input type="text" class="form-control" value="{{ $dsLH->ma_lop }}" name="ma_lop" required>
                         <div class="valid-feedback">Valid.</div>
                         <div class="invalid-feedback">Please fill out this field.</div>
                     </div>
                     <div class="form-group">
-                        <label for="name">Họ tên:</label>
-                        <input type="text" class="form-control" id="name" placeholder="Họ tên" name="ho_ten" required>
+                        <label for="name">Tên lớp:</label>
+                        <input type="text" class="form-control" placeholder="Tên lớp" name="ten_lop"
+                            value="{{ $dsLH->ten_lop }}" required>
                         <div class="valid-feedback">Valid.</div>
                         <div class="invalid-feedback">Please fill out this field.</div>
                     </div>
                     <div class="form-group">
-                        <label for="date">Ngày Sinh:</label>
-                        <input type="date" class="form-control" id="date" name="ngay_sinh" required>
+                        <label for="description">Mô tả:</label>
+                        <input type="text" class="form-control" placeholder="Mô tả" name="mo_ta"
+                            value="{{ $dsLH->mo_ta }}" required>
                         <div class="valid-feedback">Valid.</div>
                         <div class="invalid-feedback">Please fill out this field.</div>
                     </div>
-                    <div class="form-group">
-                        <label for="date">Giới tính:</label>
-                        <br>
-                        <input type="radio" class="" id="gender" name="gioi_tinh"> Nam
-                        <input type="radio" class="" id="gender" name="gioi_tinh"> Nữ
+
+                    <div>
+                        <button type="submit" class="btn btn-primary">Thêm</button>
+                        <a href="{{ route('ad-ds-lop') }}" class="btn btn-danger">Quay lại</a>
                     </div>
-                    <div class="form-group">
-                        <label for="address">Địa chỉ:</label>
-                        <input type="text" class="form-control" id="address" name="dia_chi" placeholder="Địa chỉ"
-                            required>
-                        <div class="valid-feedback">Valid.</div>
-                        <div class="invalid-feedback">Please fill out this field.</div>
-                    </div>
-                    <div class="form-group">
-                        <label for="phone">Số điện thoại:</label>
-                        <input type="text" class="form-control" id="phone" maxlength="10" name="sdt"
-                            placeholder="Số điện thoại" required>
-                        <div class="valid-feedback">Valid.</div>
-                        <div class="invalid-feedback">Please fill out this field.</div>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email:</label>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
-                        <div class="valid-feedback">Valid.</div>
-                        <div class="invalid-feedback">Please fill out this field.</div>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Lưu</button>
-                    <a href="{{ route('ad-ds-giang-vien') }}" class="btn btn-danger">Quay lại</a>
+
                 </form>
 
             </div>

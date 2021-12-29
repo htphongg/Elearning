@@ -31,19 +31,19 @@ class AdminController extends Controller
     }
     public function xlThemMoiGV(Request $rq)
     {
-        $ngdung = new NguoiDung();
-        $ngdung->ten_dang_nhap = $rq->ten_dang_nhap;
-        $ngdung->password = Hash::make($rq->password);
-        $ngdung->ho_ten = $rq->ho_ten;
-        $ngdung->ngay_sinh = $rq->ngay_sinh;
+        $GV = new NguoiDung();
+        $GV->ten_dang_nhap = $rq->ten_dang_nhap;
+        $GV->password = Hash::make($rq->password);
+        $GV->ho_ten = $rq->ho_ten;
+        $GV->ngay_sinh = $rq->ngay_sinh;
         if ($rq->gioi_tinh == "Nam" || $rq->gioi_tinh == "Nữ") {
-            $ngdung->gioi_tinh = $rq->gioi_tinh;
+            $GV->gioi_tinh = $rq->gioi_tinh;
         }
-        $ngdung->dia_chi = $rq->dia_chi;
-        $ngdung->sdt = $rq->sdt;
-        $ngdung->email = $rq->email;
-        $ngdung->loai_nguoi_dung_id = 2;
-        $ngdung->save();
+        $GV->dia_chi = $rq->dia_chi;
+        $GV->sdt = $rq->sdt;
+        $GV->email = $rq->email;
+        $GV->loai_nguoi_dung_id = 2;
+        $GV->save();
         return redirect()->route('ad-ds-giang-vien');
     }
     public function formCapNhatGV($id)
@@ -52,9 +52,25 @@ class AdminController extends Controller
         if ($dsGV == null) {
             return "Không có giảng viên có ID = {$id} này ";
         }
-        return view('./admin/teacher/edit', compact($dsGV));
+        return view('../admin/teacher/edit', ['dsGV'  => $dsGV]);
     }
-
+    public function xlCapnhatGV(Request $rq, $id)
+    {
+        $GV = NguoiDung::find($id);
+        if ($GV == null) {
+            return "không tìm thấy giảng viên có ID = {$id} ";
+        }
+        $GV->ho_ten = $rq->ho_ten;
+        $GV->ngay_sinh = $rq->ngay_sinh;
+        if ($rq->gioi_tinh == "Nam" || $rq->gioi_tinh == "Nữ") {
+            $GV->gioi_tinh = $rq->gioi_tinh;
+        }
+        $GV->dia_chi = $rq->dia_chi;
+        $GV->sdt = $rq->sdt;
+        $GV->email = $rq->email;
+        $GV->save();
+        return redirect()->route('ad-ds-giang-vien');
+    }
     public function xlXoaGV($id)
     {
         $dsGV = NguoiDung::find($id);
@@ -77,19 +93,19 @@ class AdminController extends Controller
     }
     public function xlThemMoiSV(Request $rq)
     {
-        $ngdung = new NguoiDung();
-        $ngdung->ten_dang_nhap = $rq->ten_dang_nhap;
-        $ngdung->password = Hash::make($rq->password);
-        $ngdung->ho_ten = $rq->ho_ten;
-        $ngdung->ngay_sinh = $rq->ngay_sinh;
+        $SV = new NguoiDung();
+        $SV->ten_dang_nhap = $rq->ten_dang_nhap;
+        $SV->password = Hash::make($rq->password);
+        $SV->ho_ten = $rq->ho_ten;
+        $SV->ngay_sinh = $rq->ngay_sinh;
         if ($rq->gioi_tinh == "Nam" || $rq->gioi_tinh == "Nữ") {
-            $ngdung->gioi_tinh = $rq->gioi_tinh;
+            $SV->gioi_tinh = $rq->gioi_tinh;
         }
-        $ngdung->dia_chi = $rq->dia_chi;
-        $ngdung->sdt = $rq->sdt;
-        $ngdung->email = $rq->email;
-        $ngdung->loai_nguoi_dung_id = 1;
-        $ngdung->save();
+        $SV->dia_chi = $rq->dia_chi;
+        $SV->sdt = $rq->sdt;
+        $SV->email = $rq->email;
+        $SV->loai_nguoi_dung_id = 1;
+        $SV->save();
         return redirect()->route('ad-ds-sinh-vien');
     }
 
@@ -99,9 +115,25 @@ class AdminController extends Controller
         if ($dsSV == null) {
             return "Không có sinh viên có ID = {$id} này ";
         }
-        return view('./admin/student/edit', compact($dsSV));
+        return view('./admin/student/edit', ['dsSV'  => $dsSV]);
     }
-
+    public function xlCapnhatSV(Request $rq, $id)
+    {
+        $SV = NguoiDung::find($id);
+        if ($SV == null) {
+            return "không tìm thấy giảng viên có ID = {$id} ";
+        }
+        $SV->ho_ten = $rq->ho_ten;
+        $SV->ngay_sinh = $rq->ngay_sinh;
+        if ($rq->gioi_tinh == "Nam" || $rq->gioi_tinh == "Nữ") {
+            $SV->gioi_tinh = $rq->gioi_tinh;
+        }
+        $SV->dia_chi = $rq->dia_chi;
+        $SV->sdt = $rq->sdt;
+        $SV->email = $rq->email;
+        $SV->save();
+        return redirect()->route('ad-ds-sinh-vien');
+    }
 
     public function xlXoaSV($id)
     {
@@ -139,7 +171,19 @@ class AdminController extends Controller
         if ($dsLH == null) {
             return "Không có lớp có ID = {$id} này ";
         }
-        return view('./admin/class/edit', compact($dsLH));
+        return view('./admin/class/edit', compact('dsLH'));
+    }
+
+    public function xlCapnhatLH(Request $rq, $id)
+    {
+        $LH = LopHoc::find($id);
+        if ($LH == null) {
+            return "không tìm thấy lớp học có ID = {$id} ";
+        }
+        $LH->ten_lop = $rq->ten_lop;
+        $LH->mo_ta = $rq->mo_ta;
+        $LH->save();
+        return redirect()->route('ad-ds-lop');
     }
 
 
