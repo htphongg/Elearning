@@ -48,7 +48,7 @@
                 <i class="far fa-list-alt icon"></i>
                 Việc cần làm
             </div>
-            @foreach($dsLop as $lop)
+            @foreach($dsLopDaVao as $lop)
                 <div class="dra-item">
                     <div class="dra-item-avt icon">C</div>
                     <a href=" {{route('sv-chi-tiet-lop',['lop_hoc_id' => $lop->id])}} " class="dra-item-desc"> {{ $lop->ten_lop }} </a>
@@ -113,19 +113,13 @@
                             <div class="post-noti-avt"></div>
                             <a href="#">Thông báo nội dung nào đó cho lớp học của bạn</a>
                         </div>
-                        <div class="post">
-
-                        </div>
+                        <div class="post"></div>
                     </div>
                 </div>
             </div>
         </div>
-        <div id="footer">
-
-        </div>
+        <div id="footer"></div>
     </div>
-
     <script src="../asset/js/style.js"></script>
 </body>
-
 </html>

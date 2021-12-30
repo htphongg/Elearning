@@ -100,8 +100,18 @@
   #header .right {
     display: flex;
     align-items: center;
+    margin-right: 35px;
   }
-  
+  #header .right i:hover{
+    opacity: 1;
+  }
+
+  #header .right i{
+    font-size: 30px;
+    cursor: pointer;
+    opacity: 0.8;
+  }
+
   #header .right .menu {
   }
   

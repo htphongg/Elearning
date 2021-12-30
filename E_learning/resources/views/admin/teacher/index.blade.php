@@ -65,13 +65,11 @@
 
     <div id="container">
         <div id="body">
-            <div class="top">
-
-            </div>
+            <div class="top mt-5 "> </div>
             <div class="content">
-                <h1>Danh Sách Giảng Viên</h1>
-                <Table class="table">
-                    <thead>
+                <h2 class="text-center mb-3">Danh Sách Giảng Viên</h2>
+                <Table class="table text-center table-bordered">
+                    <thead class="table-dark">
                         <tr>
                             <th>Họ tên</th>
                             <th>Ngày sinh</th>
@@ -94,8 +92,8 @@
                                 <td>{{ $GV->email }}</td>
                                 <td>{{ $GV->ten_dang_nhap }}</td>
                                 <td>
-                                    <a href="{{ route('ad-cap-nhat-gv', ['id' => $GV->id]) }}">Sửa</a> |
-                                    <a href="{{ route('ad-xoa-bo-gv', ['id' => $GV->id]) }}">Xóa</a>
+                                    <a class="btn btn-success"href="{{ route('ad-cap-nhat-gv', ['id' => $GV->id]) }}">Sửa</a>
+                                    <a class="btn btn-danger"href="{{ route('ad-xoa-bo-gv', ['id' => $GV->id]) }}">Xóa</a>
                                 </td>
                             </tr>
                         @endforeach

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trang chủ</title>
+    <title>Lớp học đã lưu trữ</title>
     <link rel="stylesheet" href="../asset/css/style.css">
     <link rel="stylesheet" href="../lib/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="../lib/fontawesome/css/all.css">
@@ -77,23 +77,14 @@
     </div>
     <div id="container">      
         <div id="body">
-            <div class="top">
-                <div class="work">
-                    <i class="far fa-list-alt"></i>
-                    <span>Để đánh giá</span>
-                </div>
-                <div class="calender">
-                    <i class="far fa-calendar-check"></i>
-                    <span>Lịch</span>
-                </div>
-            </div>
+            <div class="top"></div>
             <div class="content row ">
-               @foreach($dsLop as $lop)
+               @foreach($dsLopLuuTru as $lop)
                     <div class="col-md-3">
                         <div class="card">
                             <div class="card-header">
                                 <div class="left">
-                                    <a class="title" href="{{ route('gv-chi-tiet-lop',['lop_hoc_id' => $lop->id]) }}">{{ $lop->ten_lop }}</a>
+                                    <a class="title" href="#">{{ $lop->ten_lop }}</a>
                                     <a class="subtitle" href="#">{{ $lop->mo_ta }}</a>
                                 </div>
                                 <div class="right">
@@ -105,31 +96,16 @@
                             </div>
                             <div class="card-body"></div>
                             <div class="card-footer">
-                                <a href="{{ route('gv-xoa-lop',['lop_hoc_id' => $lop->id]) }}"><i class="fas fa-trash text-dark"></i> </i></a>
-                                <a href="{{ route('gv-chinh-sua-lop',['lop_hoc_id' => $lop->id]) }}"><i class="far fa-edit text-dark"></i></a>
+                                <a href="#"><i class="fas fa-trash-restore text-dark"></i></a>
+                                <a href="#"><i class="far fa-edit text-dark"></i></a>
                             </div>
                         </div>
                     </div>
                @endforeach
             </div>
         </div>
-        <div id="toast"></div>
         <div id="footer"></div>
     </div>
-    <script src="../asset/js/showNoti.js"></script>
-    <script>
-        if( {{ Session::has('success') }} )
-        {
-            showSuccessToast( 'Thành công',"{{ Session::get('success') }} ");
-        }
-        
-    </script>
-    <script>
-        if( {{ Session::has('error') }} )
-        {
-            showErrorToast( 'Lỗi',"{{ Session::get('error') }}");
-        }   
-    </script>
     <script src="../asset/js/style.js"></script>
 </body>
 </html>

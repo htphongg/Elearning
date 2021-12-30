@@ -22,6 +22,6 @@ class CheckAdmin
         else if(Auth::user()->loai_nguoi_dung_id == 1)
             return redirect()->route('sv-trang-chu');
         else if(Auth::user()->loai_nguoi_dung_id == 2)
-            return redirect()->route('trang-chu-giang-vien');
+            return redirect()->route('gv-trang-chu');
     }
 }

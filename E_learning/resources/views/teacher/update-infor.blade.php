@@ -12,9 +12,8 @@
 <body>
     <div id="container">
         <h2>Form cập nhật thông tin cá nhân</h2>
-        <form action="{{route('gv-xl-cap-nhat-thong-tin')}}" class="was-validated" method="post">
+        <form action="{{route('gv-xl-cap-nhat-thong-tin',['nguoi_dung_id' => $ngDung->id])}}" class="was-validated" method="post">
           @csrf
-          <input type="text" hidden name="nguoi_dung_id" value="{{$ngDung->id}}">
           <div class="form-group">
               <label for="role">Vai trò:</label>
               <input type="text" class="form-control" value="{{$ngDung->loaiNguoiDung->ten_loai}}" readonly>
@@ -77,5 +76,20 @@
           </div>
         </form>
     </div>
+    <div id="toast"></div>
+    <script src="../asset/js/showNoti.js"></script>
+    <script>
+        if( {{ Session::has('success') }} )
+        {
+            showSuccessToast( 'Thành công',"{{ Session::get('success') }} ");
+        }
+        
+    </script>
+    <script>
+        if( {{ Session::has('error') }} )
+        {
+            showErrorToast( 'Lỗi',"{{ Session::get('error') }}");
+        }   
+    </script>
 </body>
 </html>

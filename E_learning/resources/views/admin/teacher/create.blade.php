@@ -57,16 +57,11 @@
             </div>
         </div>
     </div>
-    <div id="line">
-        <hr>
-    </div>
     <div id="container">
         <div id="body">
-            <div class="top">
-
-            </div>
+            <div class="top"> </div>
             <div class="content">
-                <h1>Thêm mới giảng viên</h1>
+                <h1 class="text-center">Thêm mới giảng viên</h1>
                 <form action="{{ route('ad-xl-them-moi-gv') }}" class="was-validated" method="POST">
                     @csrf
                     <div class="form-group">
@@ -123,21 +118,15 @@
                         <div class="valid-feedback">Valid.</div>
                         <div class="invalid-feedback">Please fill out this field.</div>
                     </div>
-                    <div>
+                    <div class="btn-sub">
                         <button type="submit" class="btn btn-primary">Thêm</button>
                         <a href="{{ route('ad-ds-giang-vien') }}" class="btn btn-danger">Quay lại</a>
                     </div>
-
                 </form>
             </div>
-        </div>
-
-        <div id="footer">
-
+        </div><div id="footer">
         </div>
     </div>
-
     <script src="../asset/js/style.js"></script>
 </body>
-
 </html>

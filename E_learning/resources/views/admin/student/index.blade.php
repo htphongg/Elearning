@@ -62,18 +62,17 @@
             </div>
         </div>
     </div>
-    <div id="line">
-        <hr>
-    </div>
+    <!-- <div id="line">
+    </div> -->
     <div id="container">
         <div id="body">
             <div class="top">
 
             </div>
             <div class="content">
-                <h1>Danh Sách Sinh Viên</h1>
-                <Table class="table">
-                    <thead>
+                <h2 class="text-center mt-3 mb-3 mt-5">Danh Sách Sinh Viên</h2>
+                <table class="table text-center table-bordered">
+                    <thead class="table-dark">
                         <tr>
                             <th>Họ tên</th>
                             <th>Ngày sinh</th>
@@ -96,13 +95,13 @@
                                 <td>{{ $SV->email }}</td>
                                 <td>{{ $SV->ten_dang_nhap }}</td>
                                 <td>
-                                    <a href="{{ route('ad-cap-nhat-sv', ['id' => $SV->id]) }}">Sửa</a> |
-                                    <a href="{{ route('ad-xoa-bo-sv', ['id' => $SV->id]) }}">Xóa</a>
+                                    <a class="btn btn-success"href="{{ route('ad-cap-nhat-sv', ['id' => $SV->id]) }}">Sửa</a>
+                                    <a class="btn btn-danger"href="{{ route('ad-xoa-bo-sv', ['id' => $SV->id]) }}">Xóa</a>
                                 </td>
                             </tr>
                         @endforeach
                     </tbody>
-                </Table>
+                </table>
 
             </div>
         </div>

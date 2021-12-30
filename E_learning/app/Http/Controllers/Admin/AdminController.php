@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 use App\Models\NguoiDung;
 use App\Models\LopHoc;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
@@ -42,6 +43,7 @@ class AdminController extends Controller
         $GV->dia_chi = $rq->dia_chi;
         $GV->sdt = $rq->sdt;
         $GV->email = $rq->email;
+        $GV->token = Str::random(10);
         $GV->loai_nguoi_dung_id = 2;
         $GV->save();
         return redirect()->route('ad-ds-giang-vien');
