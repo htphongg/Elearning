@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Classroom</title>
-    <link rel="stylesheet" href="../asset/css/function-style-admin.css">
-    <link rel="stylesheet" href="../lib/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="/asset/css/function-style-admin.css">
+    <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="../lib/fontawesome/css/all.css">
 </head>
 
@@ -18,9 +18,14 @@
                 <i class="fas fa-bars"></i>
             </div>
             <div class="logo">
-                <img src="../asset/img/googlelogo_clr_74x24px.svg" alt="">
+                <img src="/asset/img/googlelogo_clr_74x24px.GVg" alt="">
             </div>
             <span class="webname">Lớp học</span>
+        </div>
+        <div class="right">
+            <div class="addclass">
+                <a href="{{ route('ad-them-moi-gv') }}"><i class="fas fa-plus"></i></a>
+            </div>
         </div>
     </div>
     <div class="dra-details">
@@ -46,7 +51,7 @@
             </div>
             <div class="dra-item">
                 <div class="dra-item-avt icon">L</div>
-                <a href="{{ route('ad-ds-lop') }}">Lớp Học</a>
+                <a href="">Lớp Học</a>
             </div>
         </div>
         <hr>
@@ -66,69 +71,67 @@
 
             </div>
             <div class="content">
-                <h1>Thêm mới giảng viên</h1>
-                <form action="{{ route('ad-xl-them-moi-gv') }}" class="was-validated" method="POST">
+                <h1>Cập nhật giảng viên</h1>
+                <form action="{{ route('ad-xl-cap-nhat-gv', ['id' => $dsGV->id]) }}" class="was-validated"
+                    method="POST">
                     @csrf
                     <div class="form-group">
                         <label for="uname">Tên đăng nhập:</label>
                         <input type="text" class="form-control" id="uname" placeholder="Tên đăng nhập"
-                            name="ten_dang_nhap" required>
-                        <div class="valid-feedback">Valid.</div>
-                        <div class="invalid-feedback">Please fill out this field.</div>
-                    </div>
-                    <div class="form-group">
-                        <label for="pwd">Mật khẩu:</label>
-                        <input type="password" class="form-control" id="pwd" placeholder="Mật khẩu" name="password"
-                            required>
+                            name="ten_dang_nhap" value="{{ $dsGV->ten_dang_nhap }}" readonly>
                         <div class="valid-feedback">Valid.</div>
                         <div class="invalid-feedback">Please fill out this field.</div>
                     </div>
                     <div class="form-group">
                         <label for="name">Họ tên:</label>
-                        <input type="text" class="form-control" id="name" placeholder="Họ tên" name="ho_ten" required>
+                        <input type="text" class="form-control" id="name" placeholder="Họ tên" name="ho_ten"
+                            value="{{ $dsGV->ho_ten }}" required>
                         <div class="valid-feedback">Valid.</div>
                         <div class="invalid-feedback">Please fill out this field.</div>
                     </div>
                     <div class="form-group">
                         <label for="date">Ngày Sinh:</label>
-                        <input type="date" class="form-control" id="date" name="ngay_sinh" required>
+                        <input type="date" class="form-control" id="date" name="ngay_sinh"
+                            value="{{ $dsGV->ngay_sinh }}" required>
                         <div class="valid-feedback">Valid.</div>
                         <div class="invalid-feedback">Please fill out this field.</div>
                     </div>
                     <div class="form-group">
                         <label for="date">Giới tính:</label>
                         <br>
-                        <input type="radio" class="" id="gender" name="gioi_tinh" value="Nam" checked> Nam
-                        <input type="radio" class="" id="gender" name="gioi_tinh" value="Nữ"> Nữ
-                        <div class="valid-feedback">Valid.</div>
-                        <div class="invalid-feedback">Please fill out this field.</div>
+                        @if (strcasecmp($dsGV->gioi_tinh, 'Nam') == 0)
+                            <input type="radio" id="gender" checked value="Nam" name="gioi_tinh"> Nam
+                            <input type="radio" id="gender" value="Nữ" name="gioi_tinh"> Nữ
+                        @elseif(strcasecmp($dsGV->gioi_tinh, 'Nữ') == 0)
+                            <input type="radio" id="gender" value="Nam" name="gioi_tinh"> Nam
+                            <input type="radio" id="gender" checked value="Nữ" name="gioi_tinh"> Nữ
+                        @endif
                     </div>
                     <div class="form-group">
                         <label for="address">Địa chỉ:</label>
-                        <input type="text" class="form-control" id="address" name="dia_chi" placeholder="Địa chỉ"
-                            required>
+                        <input type="text" class="form-control" id="address" name="dia_chi"
+                            value="{{ $dsGV->dia_chi }}" required>
                         <div class="valid-feedback">Valid.</div>
                         <div class="invalid-feedback">Please fill out this field.</div>
                     </div>
                     <div class="form-group">
                         <label for="phone">Số điện thoại:</label>
                         <input type="text" class="form-control" id="phone" maxlength="10" name="sdt"
-                            placeholder="Số điện thoại" required>
+                            value="{{ $dsGV->sdt }}" required>
                         <div class="valid-feedback">Valid.</div>
                         <div class="invalid-feedback">Please fill out this field.</div>
                     </div>
                     <div class="form-group">
                         <label for="email">Email:</label>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+                        <input type="email" class="form-control" id="email" name="email" value="{{ $dsGV->email }}"
+                            required>
                         <div class="valid-feedback">Valid.</div>
                         <div class="invalid-feedback">Please fill out this field.</div>
                     </div>
-                    <div>
-                        <button type="submit" class="btn btn-primary">Thêm</button>
-                        <a href="{{ route('ad-ds-giang-vien') }}" class="btn btn-danger">Quay lại</a>
-                    </div>
-
+                    <button type="submit" class="btn btn-primary">Lưu</button>
+                    <a href="{{ route('ad-ds-giang-vien') }}" class="btn btn-danger">Quay lại</a>
                 </form>
+
             </div>
         </div>
 

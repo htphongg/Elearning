@@ -9,11 +9,11 @@ use App\Models\ChiTietLopHoc;
 use App\Models\LopHoc;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
-
+use Illuminate\Support\Facades\Hash;
 
 class SinhVienController extends Controller
 {
-   
+
 
     public function formQuenMatKhau()
     {
@@ -79,7 +79,7 @@ class SinhVienController extends Controller
             return view('./student/index', compact('dsLop'));
         }
     }
-    
+
     public function showChiTietLop(Request $req)
     {
         $nguoi_dung_id = Auth::id();
@@ -107,7 +107,7 @@ class SinhVienController extends Controller
         return view('./student/everybody', compact('lopHoc', 'dsLop'));
     }
 
-    
+
 
     public function thamGiaLop()
     {
@@ -125,7 +125,7 @@ class SinhVienController extends Controller
         $ctLopHoc->lop_hoc_id = $lop->id;
         $ctLopHoc->nguoi_dung_id = $id;
         $ctLopHoc->save();
-        
+
         return redirect()->route('sv-trang-chu');
     }
 

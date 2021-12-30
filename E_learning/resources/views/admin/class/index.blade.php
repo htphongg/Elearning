@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trang chủ</title>
-    <link rel="stylesheet" href="../asset/css/style.css">
+    <title>Classroom</title>
+    <link rel="stylesheet" href="../asset/css/style-admin.css">
     <link rel="stylesheet" href="../lib/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="../lib/fontawesome/css/all.css">
 </head>
@@ -21,6 +21,11 @@
                 <img src="../asset/img/googlelogo_clr_74x24px.svg" alt="">
             </div>
             <span class="webname">Lớp học</span>
+        </div>
+        <div class="right">
+            <div class="addclass">
+                <a href="{{ route('ad-them-moi-lh') }}"><i class="fas fa-plus"></i></a>
+            </div>
         </div>
     </div>
     <div class="dra-details">
@@ -52,41 +57,51 @@
         <hr>
         <div class="dra-footer">
             <div class="dra-item">
-                <i class="fas fa-cog icon"></i>
-                Cài đặt
-            </div>
-            <div class="dra-item">
-                <i class="fas fa-user-circle icon"></i>
-                <a href="#">Cập nhật thông tin cá nhân</a>
-            </div>
-            <div class="dra-item">
-                <i class="fas fa-exchange-alt icon"></i>
-                <a href="#">Thay đổi mật khẩu</a>
-            </div>
-            <div class="dra-item">
                 <i class="fas fa-sign-out-alt icon"></i>
                 <a href="{{ route('ad-dang-xuat') }}">Đăng xuất</a>
             </div>
         </div>
     </div>
-    <!-- <div id="line"><hr></div> -->
+    <div id="line">
+        <hr>
+    </div>
     <div id="container">
-        <!-- <div class="navbar">
-            <ul class="nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#">Disabled</a>
-                </li>
-            </ul>
-       </div> -->
+        <div id="body">
+            <div class="top">
+            </div>
+            <div class="content">
+                <h1>Danh Sách Lớp</h1>
+                <Table class="table">
+                    <thead>
+                        <tr>
+                            <th>Mã lớp</th>
+                            <th>Tên lớp</th>
+                            <th>Mô tả</th>
+                            <th>Chức năng</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($dsLH as $LH)
+                            <tr>
+                                <td>{{ $LH->ma_lop }}</td>
+                                <td>{{ $LH->ten_lop }}</td>
+                                <td>{{ $LH->mo_ta }}</td>
+                                <td>
+                                    <a href="{{ route('ad-cap-nhat-lh', ['id' => $LH->id]) }}">Sửa</a> |
+                                    <a href="{{ route('ad-xoa-bo-lh', ['id' => $LH->id]) }}">Xóa</a>
+                                </td>
+
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </Table>
+
+            </div>
+        </div>
+
+        <div id="footer">
+
+        </div>
     </div>
 
     <script src="../asset/js/style.js"></script>

@@ -13,14 +13,16 @@
 
 <body>
     <div id="header">
-        <div class="left">
-            <div class="drawer js-drawer">
-                <i class="fas fa-bars"></i>
+        <div id="header">
+            <div class="left">
+                <div class="drawer js-drawer">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <div class="logo">
+                    <img src="../asset/img/googlelogo_clr_74x24px.svg" alt="">
+                </div>
+                <span class="webname">Lớp học</span>
             </div>
-            <div class="logo">
-                <img src="../asset/img/googlelogo_clr_74x24px.svg" alt="">
-            </div>
-            <span class="webname">Lớp học</span>
         </div>
     </div>
     <div class="dra-details">
@@ -42,11 +44,11 @@
             </div>
             <div class="dra-item">
                 <div class="dra-item-avt icon">S</div>
-                <a href="{{ route('ad-ds-sinh-vien') }}">Sinh Viên</a>
+                <a href="">Sinh Viên</a>
             </div>
             <div class="dra-item">
                 <div class="dra-item-avt icon">L</div>
-                <a href="{{ route('ad-ds-lop') }}">Lớp Học</a>
+                <a href="">Lớp Học</a>
             </div>
         </div>
         <hr>
@@ -63,11 +65,10 @@
     <div id="container">
         <div id="body">
             <div class="top">
-
             </div>
             <div class="content">
-                <h1>Thêm mới giảng viên</h1>
-                <form action="{{ route('ad-xl-them-moi-gv') }}" class="was-validated" method="POST">
+                <h1>Thêm mới sinh viên</h1>
+                <form action="{{ route('ad-xl-them-moi-sv') }}" class="was-validated" method="POST">
                     @csrf
                     <div class="form-group">
                         <label for="uname">Tên đăng nhập:</label>
@@ -105,7 +106,7 @@
                     </div>
                     <div class="form-group">
                         <label for="address">Địa chỉ:</label>
-                        <input type="text" class="form-control" id="address" name="dia_chi" placeholder="Địa chỉ"
+                        <input type="text" class="form-control" id="address" name="dia_chi" placeholder="địa chỉ"
                             required>
                         <div class="valid-feedback">Valid.</div>
                         <div class="invalid-feedback">Please fill out this field.</div>
@@ -125,7 +126,7 @@
                     </div>
                     <div>
                         <button type="submit" class="btn btn-primary">Thêm</button>
-                        <a href="{{ route('ad-ds-giang-vien') }}" class="btn btn-danger">Quay lại</a>
+                        <a href="{{ route('ad-ds-sinh-vien') }}" class="btn btn-danger">Quay lại</a>
                     </div>
 
                 </form>
