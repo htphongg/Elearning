@@ -110,35 +110,4 @@ class NguoiDungController extends Controller
         else
             return redirect()->back()->with('error','Hãy nhập đầy đủ thông tin');
     }
-
-    //LONG
-
-    // public function LayDSGV()
-    // {
-    //     $dsGV = NguoiDung::all()->where('loai_nguoi_dung_id', '2');
-    //     return view('./layouts/admin/teacher/index', compact('dsGV'));
-    // }
-    // public function formThemMoi()
-    // {
-    //     return view('./layouts/admin/teacher/create');
-    // }
-    // public function xlThemMoi(Request $rq)
-    // {
-    //     $ngdung = new NguoiDung();
-    //     $ngdung->ten_dang_nhap = $rq->ten_dang_nhap;
-    //     $ngdung->password = $rq->password;
-    //     $ngdung->ho_ten = $rq->ho_ten;
-    //     $ngdung->ngay_sinh = $rq->ngay_sinh;
-    //     if ($rq->gioi_tinh == "Nam") {
-    //         $ngdung->gioi_tinh = $rq->gioi_tinh;
-    //     } else if ($rq->gioi_tinh == "Nữ") {
-    //         $ngdung->gioi_tinh = $rq->gioi_tinh;
-    //     }
-    //     $ngdung->dia_chi = $rq->dia_chi;
-    //     $ngdung->sdt = $rq->sdt;
-    //     $ngdung->email = $rq->email;
-    //     $ngdung->loai_nguoi_dung_id = 2;
-    //     $ngdung->save();
-    //     return redirect()->route('ds_giang_vien');
-    // }
 }

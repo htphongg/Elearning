@@ -12,11 +12,29 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Hash;
 
-
-
 class SinhVienController extends Controller
 {
     public function layDsLop()
+    {
+        if (Auth::check()) {
+
+            $nguoi_dung_id = Auth::id();
+
+            $dsLopDaVao =[];
+            
+            $dsLop = NguoiDung::find($nguoi_dung_id)->dsLopHoc;
+            
+            foreach($dsLop as $lop)
+            {
+                if($lop->pivot->trang_thai == 1)
+                    array_push($dsLopDaVao,$lop);
+            }
+            
+            return view('./student/index', compact('dsLopDaVao'));
+        }
+    } 
+
+    public function formQuenMatKhau()
     {
         if (Auth::check()) {
 
@@ -102,7 +120,7 @@ class SinhVienController extends Controller
         }
         return redirect()->route('sv-trang-chu')->with('error','Xác thực người dùng thất bại');
     }
-    
+
     public function showChiTietLop(Request $req)
     {
         $nguoi_dung_id = Auth::id();
@@ -154,6 +172,8 @@ class SinhVienController extends Controller
         $lopHoc = LopHoc::find($req->lop_hoc_id);
         return view('./student/everybody', compact('lopHoc', 'dsLopDaVao'));
     }
+
+
 
     public function thamGiaLop()
     {

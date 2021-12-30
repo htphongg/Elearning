@@ -24,7 +24,7 @@
         </div>
         <div class="right">
             <div class="addclass">
-                <a href="{{ route('ad-them-moi-gv') }}"><i class="fas fa-plus"></i></a>
+                <a href="{{ route('ad-them-moi-sv') }}"><i class="fas fa-plus"></i></a>
             </div>
         </div>
     </div>
@@ -62,13 +62,16 @@
             </div>
         </div>
     </div>
-
+    <!-- <div id="line">
+    </div> -->
     <div id="container">
         <div id="body">
-            <div class="top mt-5 "> </div>
+            <div class="top">
+
+            </div>
             <div class="content">
-                <h2 class="text-center mb-3">Danh Sách Giảng Viên</h2>
-                <Table class="table text-center table-bordered">
+                <h2 class="text-center mt-3 mb-3 mt-5">Danh Sách Sinh Viên</h2>
+                <table class="table text-center table-bordered">
                     <thead class="table-dark">
                         <tr>
                             <th>Họ tên</th>
@@ -82,23 +85,23 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($dsGV as $GV)
+                        @foreach ($dsSV as $SV)
                             <tr>
-                                <td>{{ $GV->ho_ten }}</td>
-                                <td>{{ $GV->ngay_sinh }}</td>
-                                <td>{{ $GV->gioi_tinh }}</td>
-                                <td>{{ $GV->dia_chi }}</td>
-                                <td>{{ $GV->sdt }}</td>
-                                <td>{{ $GV->email }}</td>
-                                <td>{{ $GV->ten_dang_nhap }}</td>
+                                <td>{{ $SV->ho_ten }}</td>
+                                <td>{{ $SV->ngay_sinh }}</td>
+                                <td>{{ $SV->gioi_tinh }}</td>
+                                <td>{{ $SV->dia_chi }}</td>
+                                <td>{{ $SV->sdt }}</td>
+                                <td>{{ $SV->email }}</td>
+                                <td>{{ $SV->ten_dang_nhap }}</td>
                                 <td>
-                                    <a class="btn btn-success"href="{{ route('ad-cap-nhat-gv', ['id' => $GV->id]) }}">Sửa</a>
-                                    <a class="btn btn-danger"href="{{ route('ad-xoa-bo-gv', ['id' => $GV->id]) }}">Xóa</a>
+                                    <a class="btn btn-success"href="{{ route('ad-cap-nhat-sv', ['id' => $SV->id]) }}">Sửa</a>
+                                    <a class="btn btn-danger"href="{{ route('ad-xoa-bo-sv', ['id' => $SV->id]) }}">Xóa</a>
                                 </td>
                             </tr>
                         @endforeach
                     </tbody>
-                </Table>
+                </table>
 
             </div>
         </div>

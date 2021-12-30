@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="../lib/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="../lib/fontawesome/css/all.css">
 </head>
-
 <body>
     <div id="header">
         <div class="left">
@@ -24,7 +23,7 @@
         </div>
         <div class="right">
             <div class="addclass">
-                <a href="{{ route('ad-them-moi-gv') }}"><i class="fas fa-plus"></i></a>
+                <a href="{{ route('ad-them-moi-lh') }}"><i class="fas fa-plus"></i></a>
             </div>
         </div>
     </div>
@@ -62,43 +61,38 @@
             </div>
         </div>
     </div>
-
+    <!-- <div id="line">
+        <hr>
+    </div> -->
     <div id="container">
         <div id="body">
-            <div class="top mt-5 "> </div>
+            <div class="top"> </div>
             <div class="content">
-                <h2 class="text-center mb-3">Danh Sách Giảng Viên</h2>
-                <Table class="table text-center table-bordered">
-                    <thead class="table-dark">
+                <h2 class="mb-3 text-center mt-5">Danh Sách Lớp</h2>
+                <table class="table table-bordered">
+                    <thead class="table-dark  text-center">
                         <tr>
-                            <th>Họ tên</th>
-                            <th>Ngày sinh</th>
-                            <th>Giới tính</th>
-                            <th>Địa chỉ</th>
-                            <th>Số điện thoại</th>
-                            <th>Email</th>
-                            <th>Tên đăng nhập</th>
+                            <th>Mã lớp</th>
+                            <th>Tên lớp</th>
+                            <th>Mô tả</th>
                             <th>Chức năng</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($dsGV as $GV)
+                        @foreach ($dsLH as $LH)
                             <tr>
-                                <td>{{ $GV->ho_ten }}</td>
-                                <td>{{ $GV->ngay_sinh }}</td>
-                                <td>{{ $GV->gioi_tinh }}</td>
-                                <td>{{ $GV->dia_chi }}</td>
-                                <td>{{ $GV->sdt }}</td>
-                                <td>{{ $GV->email }}</td>
-                                <td>{{ $GV->ten_dang_nhap }}</td>
-                                <td>
-                                    <a class="btn btn-success"href="{{ route('ad-cap-nhat-gv', ['id' => $GV->id]) }}">Sửa</a>
-                                    <a class="btn btn-danger"href="{{ route('ad-xoa-bo-gv', ['id' => $GV->id]) }}">Xóa</a>
+                                <td class="text-center">{{ $LH->ma_lop }}</td>
+                                <td>{{ $LH->ten_lop }}</td>
+                                <td>{{ $LH->mo_ta }}</td>
+                                <td class="text-center">
+                                    <a class="btn btn-success" href="{{ route('ad-cap-nhat-lh', ['id' => $LH->id]) }}">Sửa</a>
+                                    <a class="btn btn-danger" href="{{ route('ad-xoa-bo-lh', ['id' => $LH->id]) }}">Xóa</a>
                                 </td>
+
                             </tr>
                         @endforeach
                     </tbody>
-                </Table>
+                </table>
 
             </div>
         </div>
