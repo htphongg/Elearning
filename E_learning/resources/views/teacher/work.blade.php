@@ -102,7 +102,7 @@
             <!-- Navigation -->
             <div class="navbar">
                 <div class="nav-left"> 
-                    <a href="#"  class="btn btn-primary"><i class="fas fa-plus"></i>Tạo</a>
+                    <a href="{{ route('gv-dang-bai') }}"  class="btn btn-primary"><i class="fas fa-plus"></i>Tạo</a>
                 </div>
                 <div class="nav-right">
                     <a href="#"><i class="far fa-calendar"></i> Lịch Google</a>

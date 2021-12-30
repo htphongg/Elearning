@@ -19,10 +19,20 @@ class SinhVienController extends Controller
     public function layDsLop()
     {
         if (Auth::check()) {
-            $nguoi_dung_id = Auth::id();
-            $dsLop = NguoiDung::find($nguoi_dung_id)->dsLopHoc;
 
-            return view('./student/index', compact('dsLop'));
+            $nguoi_dung_id = Auth::id();
+
+            $dsLopDaVao =[];
+            
+            $dsLop = NguoiDung::find($nguoi_dung_id)->dsLopHoc;
+            
+            foreach($dsLop as $lop)
+            {
+                if($lop->pivot->trang_thai == 1)
+                    array_push($dsLopDaVao,$lop);
+            }
+            
+            return view('./student/index', compact('dsLopDaVao'));
         }
     } 
 
@@ -96,31 +106,54 @@ class SinhVienController extends Controller
     public function showChiTietLop(Request $req)
     {
         $nguoi_dung_id = Auth::id();
+        $dsLopDaVao =[];
+            
         $dsLop = NguoiDung::find($nguoi_dung_id)->dsLopHoc;
+        
+        foreach($dsLop as $lop)
+        {
+            if($lop->pivot->trang_thai == 1)
+                array_push($dsLopDaVao,$lop);
+        }
 
         $lopHoc = LopHoc::find($req->lop_hoc_id);
-        return view('./student/class', compact('lopHoc', 'dsLop'));
+        return view('./student/class', compact('lopHoc', 'dsLopDaVao'));
     }
 
     public function showCongViec(Request $req)
     {
         $nguoi_dung_id = Auth::id();
+        $dsLopDaVao =[];
+            
         $dsLop = NguoiDung::find($nguoi_dung_id)->dsLopHoc;
+        
+        foreach($dsLop as $lop)
+        {
+            if($lop->pivot->trang_thai == 1)
+                array_push($dsLopDaVao,$lop);
+        }
+
 
         $lopHoc = LopHoc::find($req->lop_hoc_id);
-        return view('./student/work', compact('lopHoc', 'dsLop'));
+        return view('./student/work', compact('lopHoc', 'dsLopDaVao'));
     }
 
     public function showTatCaThanhVien(Request $req)
     {
         $nguoi_dung_id = Auth::id();
+        $dsLopDaVao =[];
+            
         $dsLop = NguoiDung::find($nguoi_dung_id)->dsLopHoc;
+        
+        foreach($dsLop as $lop)
+        {
+            if($lop->pivot->trang_thai == 1)
+                array_push($dsLopDaVao,$lop);
+        }
 
         $lopHoc = LopHoc::find($req->lop_hoc_id);
-        return view('./student/everybody', compact('lopHoc', 'dsLop'));
+        return view('./student/everybody', compact('lopHoc', 'dsLopDaVao'));
     }
-
-    
 
     public function thamGiaLop()
     {
@@ -144,10 +177,12 @@ class SinhVienController extends Controller
             }
             else
             {
-                $phongCho = new PhongChoLopHoc();
-                $phongCho->lop_hoc_id = $lop->id;
-                $phongCho->nguoi_dung_id = Auth::id();
-                $phongCho->save();
+                $ctLopHoc = new ChiTietLopHoc();
+                $ctLopHoc->lop_hoc_id = $lop->id;
+                $ctLopHoc->nguoi_dung_id = Auth::id();
+                $ctLopHoc->trang_thai = false;  // false trang thái chờ, true đã tham gia
+                $ctLopHoc->cach_tham_gia = false; //Tham gia bằng code = false, true: tham gia bằng mail
+                $ctLopHoc->save();
                 
                 return redirect()->route('sv-trang-chu')->with('success','Hãy chờ Giảng viên cho phép bạn tham gia lớp');
             }

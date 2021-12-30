@@ -4,8 +4,17 @@
     box-sizing: border-box;
 }
 
+body{
+    background-color: #ccc !important;
+}
+
 #container{
-    padding: 50px 400px;
+    margin: 22px 380px;
+    padding: 40px;
+    height: auto;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 .container-btn{

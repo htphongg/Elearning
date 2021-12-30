@@ -16,17 +16,17 @@ class NguoiDungSeeder extends Seeder
      */
     public function run()
     {
-        // $ngDung = new NguoiDung();
-        // $ngDung->ho_ten = 'Administrator';
-        // $ngDung->ngay_sinh = '2001-1-1';
-        // $ngDung->gioi_tinh = 'Nam';
-        // $ngDung->dia_chi = 'Hồ Chí Minh';
-        // $ngDung->sdt = '528';
-        // $ngDung->email = 'htphongg96@gmail.com';
-        // $ngDung->ten_dang_nhap = 'admin';
-        // $ngDung->password = Hash::make('123456');
-        // $ngDung->token = Str::random(10);
-        // $ngDung->loai_nguoi_dung_id = 1;
-        // $ngDung->save();
+        $ngDung = new NguoiDung();
+        $ngDung->ho_ten = 'Hồ Thanh Phúc';
+        $ngDung->ngay_sinh = '2001-1-1';
+        $ngDung->gioi_tinh = 'Nam';
+        $ngDung->dia_chi = 'Hồ Chí Minh';
+        $ngDung->sdt = '564561';
+        $ngDung->email = '0306191259@caothang.edu.vn';
+        $ngDung->ten_dang_nhap = 'htphuc';
+        $ngDung->password = Hash::make('123456');
+        $ngDung->token = Str::random(10);
+        $ngDung->loai_nguoi_dung_id = 1;
+        $ngDung->save();
     }
 }

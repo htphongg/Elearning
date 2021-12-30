@@ -59,7 +59,7 @@
                 </div>
             </div>
             <div class="container-btn">
-                <button type="submit" class="btn btn-success">Lưu thông tin</button>
+                <button type="submit" class="btn btn-success">Lưu thay đổi</button>
                 <a href="{{route('gv-trang-chu')}}" class="btn btn-danger" >Quay về trang chủ</a>
             </div>
         </form>

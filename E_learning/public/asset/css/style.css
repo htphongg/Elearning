@@ -10,7 +10,7 @@
 
 #container {
     z-index: 0;
-    height: auto;
+    height: 600px;
 }
 
 #container .navbar{

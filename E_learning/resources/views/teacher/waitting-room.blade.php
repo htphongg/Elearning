@@ -20,6 +20,9 @@
             </div>
             <span class="webname">Lớp học</span>
         </div>
+        <div class="right">
+            <a class="btn btn-info mr-5" href="{{ route('gv-moi-nguoi',['lop_hoc_id' => $lopHoc->id]) }}">Quay lại</a>
+        </div> 
     </div>
     <div class="dra-details">
         <div class="dra-header">
@@ -72,7 +75,7 @@
     </div>
     <div id="container">   
         <div class="ds-sv">
-            <h2 class="text-center">Danh sách sinh viên </h2>   
+            <h2 class="text-center">Danh sách sinh viên đang chờ duyệt</h2>   
             <table class="table table-bordered mt-3 text-center">
                 <thead class="table-dark">
                     <tr>
@@ -83,31 +86,38 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>John</td>
-                        <td>john@example.com</td>
-                        <td></td>
-                        <td>
-                            <a href="http://" class="btn btn-success">Chấp nhận</a>
-                            <a href="http://" class="btn btn-danger">Xoá</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Mary</td>
-                        <td>john@example.com</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>July</td>
-                        <td>july@example.com</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
+                    @foreach($lopHoc->dsNguoiDung as $ngDung)
+                       @if($ngDung->pivot->trang_thai == 0)
+                            <tr>
+                                <td>{{ $ngDung->ho_ten}}</td>
+                                <td>{{ $ngDung->email}}</td>
+                                <td>{{ $ngDung->loaiNguoiDung->ten_loai}}</td>
+                                <td>
+                                    <a href="{{ route('gv-xl-phong-cho-lop-hoc',['lop_id' => $lopHoc->id, 'ngd_id' => $ngDung->id, 'tacvu' => 't' ]) }}" class="btn btn-success">Chấp nhận</a>
+                                    <a href="{{ route('gv-xl-phong-cho-lop-hoc',['lop_id' => $lopHoc->id, 'ngd_id' => $ngDung->id, 'tacvu' => 'x' ]) }}" class="btn btn-danger">Xoá</a>
+                                </td>
+                            </tr>
+                       @endif
+                   @endforeach
                 </tbody>
             </table>
         </div>
     </div>
+    <div id="toast"></div>
+    <script src="../asset/js/showNoti.js"></script>
+    <script>
+        if( {{ Session::has('success') }} )
+        {
+            showSuccessToast( 'Thành công',"{{ Session::get('success') }} ");
+        }
+        
+    </script>
+    <script>
+        if( {{ Session::has('error') }} )
+        {
+            showErrorToast( 'Lỗi',"{{ Session::get('error') }}");
+        }   
+    </script>
     <script src="../asset/js/style.js"></script>
 </body>
 </html>

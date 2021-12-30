@@ -13,7 +13,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\CapNhatThongTinCaNhanRequest;
-
+use Mail;
 
 class GiangVienController extends Controller
 {
@@ -36,23 +36,32 @@ class GiangVienController extends Controller
     {
         if($req->ten_lop != "" || $req->mo_ta !="")
         {
-            $lopHoc = new LopHoc();
+            if(LopHoc::where('ten_lop','=',$req->ten_lop)->first())
+            {
+                return redirect()->route('gv-tao-lop')->with('error','Tên lớp đã được sử dụng');
+            }
+            else
+            {
+                $lopHoc = new LopHoc();
 
-            $lopHoc->ma_lop = Str::random(6);
-            $lopHoc->ten_lop = $req->ten_lop;
-            $lopHoc->mo_ta = $req->mo_ta;
-            $lopHoc->anh_nen_id = 1;
-            $lopHoc->save();
-
-            $ctLopHoc = new ChiTietLopHoc();
-            $ctLopHoc->lop_hoc_id = $lopHoc->id;
-            $ctLopHoc->nguoi_dung_id = Auth::id();
-            $ctLopHoc->save();
-
-            return redirect()->route('gv-trang-chu');
+                $lopHoc->ma_lop = Str::random(6);
+                $lopHoc->ten_lop = $req->ten_lop;
+                $lopHoc->mo_ta = $req->mo_ta;
+                $lopHoc->anh_nen_id = 1;
+                $lopHoc->save();
+    
+                $ctLopHoc = new ChiTietLopHoc();
+                $ctLopHoc->lop_hoc_id = $lopHoc->id;
+                $ctLopHoc->nguoi_dung_id = Auth::id();
+                $ctLopHoc->trang_thai = true;
+                $ctLopHoc->cach_tham_gia = false;
+                $ctLopHoc->save();
+    
+                return redirect()->route('gv-trang-chu')->with('success','Tạo lớp thành công.');
+            }
         }
         else
-            return redirect()->route('gv-tao-lop');
+            return redirect()->route('gv-tao-lop')->with('error','Tên lớp không được trống.');
     }
 
     public function chinhSuaLop(Request $req)
@@ -99,10 +108,42 @@ class GiangVienController extends Controller
 
     public function phongCho(Request $req)
     {   
+        //Lấy ds lớP đã tham gia của ng dùng đang đăng nhập
         $nguoi_dung_id = Auth::id();
         $dsLop = NguoiDung::find($nguoi_dung_id)->dsLopHoc;
 
-        return view('./teacher/waitting-room',compact('dsLop'));
+        $lopHoc = LopHoc::find($req->lop_hoc_id);
+
+        return view('./teacher/waitting-room',compact('dsLop','lopHoc'));
+    }
+
+    public function xlPhongCho($lop_id, $ngd_id,$tacvu)
+    {   
+        if($lop_id != null && $ngd_id != null && $tacvu != null)
+        {
+            $dsNguoiDung = LopHoc::find($lop_id)->dsNguoiDung;
+            
+            foreach($dsNguoiDung as $ngDung)
+            {
+                if($ngDung->pivot->nguoi_dung_id == $ngd_id && $ngDung->pivot->trang_thai == 0 && $tacvu == "t")
+                {
+                    $ngDung->pivot->update(['trang_thai' => 1]);
+                    return redirect()->back()->with('success','Đã duyệt sinh viên này vào lớp.');   
+                }
+                if($ngDung->pivot->nguoi_dung_id == $ngd_id && $ngDung->pivot->trang_thai == 0 && $tacvu == "x")
+                {
+                    $ngDung->pivot->delete();
+                    return redirect()->back()->with('success','Đã xoá sinh viên này khỏi danh sách chờ.');  
+                }
+            }
+        }
+        else
+            return redirect()->back()->with('error','Không thể thực hiện tác vụ này.');
+    }
+
+    public function formDangBai()
+    {
+        return view('./teacher/create-post');
     }
 
     public function formCapNhatThongTinCaNhan()
@@ -196,6 +237,69 @@ class GiangVienController extends Controller
 
         $lopHoc = LopHoc::find($req->lop_hoc_id);
         return view('./teacher/everybody', compact('lopHoc', 'dsLop'));
+    }
+
+    public function formMoiThamGia(Request $req)
+    {
+        return view('./teacher/invite-student',['lop_hoc_id' => $req->lop_hoc_id]);
+    }
+
+    public function xlMoiThamGia(Request $req)
+    {
+        if($req->lop_hoc_id != null && $req->email != null)
+        {
+            $user = NguoiDung::where('email','=',$req->email)->first();
+            if($user != null)
+            {
+                $joined = LopHoc::find($req->lop_hoc_id)->dsNguoiDung->where('email','=',$req->email)->first();
+                if($joined == null)
+                {
+                    $name = $user->ho_ten;
+                    $email_address = $user->email;
+    
+                    $data=[
+                        'id' =>$user->id,
+                        'name' => $user->ho_ten,
+                        'lop_hoc_id' => $req->lop_hoc_id,
+                    ];
+    
+                    Mail::send('./mails/invite-student',compact('data'),function($email) use($name, $email_address){
+                        $email->subject('Lời mời tham gia lớp học');
+                        $email->to($email_address,$name);
+                    });
+                    return redirect()->back()->with('success','Đã gửi lời mời đến người dùng này.');
+                }   
+                else
+                    return redirect()->back()->with('error','Người dùng này đã tham gia lớp học rồi.');  
+            }
+            else
+                return redirect()->back()->with('error','Email này không tồn tại trong hệ thống');
+        }
+        else
+        {
+            return redirect()->back()->with('error','Thao tác thất bại');
+        }
+    }
+
+    public function xlThamGia($ng_dung_id, $lop_hoc_id)
+    {
+        if($ng_dung_id != null && $lop_hoc_id != null)
+        {
+            // $temp = LopHoc::find($lop_hoc_id)->dsNguoiDung->where('nguoi_dung_id','=',$ng_dung_id)->pivot->trang_thai->first();
+
+            $ctLopHoc = new ChiTietLopHoc();
+
+            $ctLopHoc->lop_hoc_id = $lop_hoc_id;
+            $ctLopHoc->nguoi_dung_id = $ng_dung_id;
+            $ctLopHoc->trang_thai = true;
+            $ctLopHoc->cach_tham_gia = true;
+
+            $ctLopHoc->save();
+
+            return "Tham gia lớp học thành công";
+            // return view('index');
+        }
+        return view('./errors/404');
     }
 
     public function dangXuat()

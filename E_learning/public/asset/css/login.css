@@ -8,7 +8,8 @@
     display:flex ;
     background-color: #f8f9fd;
     justify-content: center;
-    padding: 50px 0px;
+    padding: 70px 0px;
+    height: fit-content;
 }
 
 #login{
@@ -83,7 +84,7 @@
 /* Toast */
 #toast {
     position: fixed;
-    top: 80px;
+    top: 10px;
     right: 25px;
     /* bottom: 50px; */
     z-index: 999999;

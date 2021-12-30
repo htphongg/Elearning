@@ -9,4 +9,5 @@ class ChiTietLopHoc extends Model
 {
     use HasFactory;
     protected $table = 'chi_tiet_lop_hoc';
+
 }

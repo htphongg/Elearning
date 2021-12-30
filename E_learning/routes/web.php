@@ -25,7 +25,12 @@ use App\Http\Controllers\Admin\AdminController;
 
 //Problems
 //Chứng thực xong vẫn có thể lui về trang đăng nhập
-
+// Sinh viên tham gia băg mã lớp và đang trong phòng chờ
+// và giảng viên gửi mail mời tham gia thì ntn?
+//Xử lý hết hạn cho link email
+//Gửi mail có template
+//Link đầy đủ
+// Thông báo cần xác nhận trc khi xoá
 
 //Đăng nhập
 Route::get('/', [NguoiDungController::class, 'formDangNhap'])->name('dang-nhap')->middleware('guest');
@@ -51,8 +56,8 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/doi-mat-khau', [SinhVienController::class, 'xuLyDoiMatKhau'])->name('sv-xl-doi-mat-khau');
 
         //Tham gia lớp học
-        Route::get('/them_lop', [SinhVienController::class, 'thamGiaLop'])->name('sv-tham-gia-lop');
-        Route::post('/them_lop', [SinhVienController::class, 'xlthamGiaLop'])->name('sv-xl-tham-gia-lop');
+        Route::get('/tham-gia-lop', [SinhVienController::class, 'thamGiaLop'])->name('sv-tham-gia-lop');
+        Route::post('/tham-gia-lop', [SinhVienController::class, 'xlthamGiaLop'])->name('sv-xl-tham-gia-lop');
 
         //Chi tiết lớp
         Route::get('/chi-tiet-lop', [SinhVienController::class, 'showChiTietLop'])->name('sv-chi-tiet-lop');
@@ -69,7 +74,6 @@ Route::middleware(['auth'])->group(function () {
 
     //Giảng viên
     Route::middleware('teacher.check')->prefix('teacher')->group(function () {
-
         //Trang chủ
         Route::get('/', [GiangVienController::class,'layDsLop'])->name('gv-trang-chu');
 
@@ -89,6 +93,15 @@ Route::middleware(['auth'])->group(function () {
 
         //Phòng chờ lớp học
         Route::get('/phong-cho',[GiangVienController::class,'phongCho'])->name('gv-phong-cho-lop-hoc');
+        Route::get('/phong-cho/{lop_id}/{ngd_id}/{tacvu}',[GiangVienController::class,'xlPhongCho'])->name('gv-xl-phong-cho-lop-hoc');
+
+        //Gửi mail mời tham gia lớp học
+        Route::get('/moi-tham-gia',[GiangVienController::class,'formMoiThamGia'])->name('gv-moi-tham-gia');
+        Route::post('/moi-tham-gia',[GiangVienController::class,'xlMoiThamGia'])->name('gv-xl-moi-tham-gia');
+        Route::get('/xl-tham-gia/{id}/{lop_id}',[GiangVienController::class,'xlThamGia'])->name('gv-xl-tham-gia');
+
+        //Đăng bài
+        Route::get('/dang-bai',[GiangVienController::class,'formDangBai'])->name('gv-dang-bai');
 
         //Cập nhật thông tin cá nhân
         Route::get('/cap-nhat-thong-tin', [GiangVienController::class, 'formCapNhatThongTinCaNhan'])->name('gv-cap-nhat-thong-tin');
@@ -118,23 +131,22 @@ Route::middleware(['auth'])->group(function () {
             return view('./admin/index');
         })->name('ad-trang-chu');
 
-    //     //Cập nhật thông tin cá nhân
-    //     Route::get('/cap-nhat-thong-tin', [NguoiDungController::class, 'formCapNhatThongTinCaNhan'])->name('ad-cap-nhat-thong-tin');
-    //     Route::post('/cap-nhat-thong-tin', [NguoiDungController::class, 'xuLyCapNhatThongTinCaNhan'])->name('ad-xl-cap-nhat-thong-tin');
+        //Cập nhật thông tin cá nhân
+        Route::get('/cap-nhat-thong-tin', [NguoiDungController::class, 'formCapNhatThongTinCaNhan'])->name('ad-cap-nhat-thong-tin');
+        Route::post('/cap-nhat-thong-tin', [NguoiDungController::class, 'xuLyCapNhatThongTinCaNhan'])->name('ad-xl-cap-nhat-thong-tin');
 
-    //     //Đổi mật khẩu
-    //     Route::get('/doi-mat-khau', [NguoiDungController::class, 'formDoiMatKhau'])->name('ad-doi-mat-khau');
-    //     Route::post('/doi-mat-khau', [NguoiDungController::class, 'xuLyDoiMatKhau'])->name('ad-xl-doi-mat-khau');
+        //Đổi mật khẩu
+        Route::get('/doi-mat-khau', [NguoiDungController::class, 'formDoiMatKhau'])->name('ad-doi-mat-khau');
+        Route::post('/doi-mat-khau', [NguoiDungController::class, 'xuLyDoiMatKhau'])->name('ad-xl-doi-mat-khau');
 
-    //     //Đăng xuất
-    //     Route::get('/dang-xuat', [AdminController::class, 'dangXuat'])->name('ad-dang-xuat');
+        //Đăng xuất
+        Route::get('/dang-xuat', [AdminController::class, 'dangXuat'])->name('ad-dang-xuat');
     });
 });
 
 //End - Phong
 
 //Start - Long
-
 // Route::get('/admin/ds_giang_vien', [NguoiDungController::class, 'LayDSGV'])->name('ds_giang_vien');
 // Route::get('/admin/them_moi', [NguoiDungController::class, 'formThemMoi'])->name('them_moi');
 // Route::post('/admin/them_moi', [NguoiDungController::class, 'xlThemMoi'])->name('xl_them_moi');

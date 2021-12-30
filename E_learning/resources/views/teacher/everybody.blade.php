@@ -27,6 +27,7 @@
             </div>
         </div> 
         <div class="right">
+            <a href="{{ route('gv-moi-tham-gia',['lop_hoc_id' => $lopHoc->id]) }}" class="btn btn-info mr-5">Mời tham gia lớp</a>
             <a href="{{ route('gv-phong-cho-lop-hoc',['lop_hoc_id' => $lopHoc->id]) }}"><i class="fas fa-user-clock text-dark"></i></a>
         </div>    
     </div>
@@ -88,14 +89,14 @@
             <div class="post">
                 <div class="post-name">Giảng viên</div>
                 <div class="quantity">
-                    <a href="#" class="add-user"><i class="fas fa-user-plus"></i></a>
+                    <a href="#" class="add-user"></a>
                 </div>
 
             </div>
             <hr>
         </div>
         @foreach ($lopHoc->dsNguoiDung as $ngDung)
-            @if($ngDung->loai_nguoi_dung_id == 2)
+            @if($ngDung->loai_nguoi_dung_id == 2 && $ngDung->pivot->trang_thai == 1)
                 <div class="wrap-ac">
                     <div class="account">
                         <div class="ac-avt"></div>
@@ -109,7 +110,7 @@
             <div class="post">
                 <div class="post-name">Sinh viên</div>
                 <div class="quantity">
-                    <a href="#" class="add-user"><i class="fas fa-user-plus"></i></a>
+                    <a href="#" class="add-user"></a>
                 </div>
             </div>
             <hr>
@@ -120,7 +121,7 @@
             <i class="fas fa-lg fa-sort sort"></i>
         </div>
         @foreach ($lopHoc->dsNguoiDung as $ngDung)
-            @if($ngDung->loai_nguoi_dung_id == 1)
+            @if($ngDung->loai_nguoi_dung_id == 1 && $ngDung->pivot->trang_thai == 1)
                 <div class="wrap-ac">
                     <div class="account">
                         <div class="ac-avt"></div>

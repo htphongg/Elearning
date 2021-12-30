@@ -37,13 +37,13 @@ class DBElearning extends Migration
             $table->softDeletes();
         });
 
-        Schema::create('phong_cho_lop_hoc', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('nguoi_dung_id');
-            $table->integer('lop_hoc_id');
-            $table->timestamps();
-            $table->softDeletes();
-        });
+        // Schema::create('phong_cho_lop_hoc', function (Blueprint $table) {
+        //     $table->increments('id');
+        //     $table->integer('nguoi_dung_id');
+        //     $table->integer('lop_hoc_id');
+        //     $table->timestamps();
+        //     $table->softDeletes();
+        // });
 
         Schema::create('loai_bai_dang', function (Blueprint $table) {
             $table->increments('id');
@@ -57,6 +57,8 @@ class DBElearning extends Migration
             $table->increments('id');
             $table->integer('lop_hoc_id');
             $table->integer('nguoi_dung_id');
+            $table->boolean('trang_thai');
+            $table->boolean('cach_tham_gia');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -144,7 +146,7 @@ class DBElearning extends Migration
 
         Schema::dropIfExists('loai_nguoi_dung');
 
-        Schema::dropIfExists('phong_cho_lop_hoc');
+        // Schema::dropIfExists('phong_cho_lop_hoc');
 
         Schema::dropIfExists('loai_bai_dang');
 

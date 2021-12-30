@@ -46,7 +46,7 @@
                 <i class="far fa-list-alt icon"></i>
                 Việc cần làm
             </div>
-            @foreach($dsLop as $lop)
+            @foreach($dsLopDaVao as $lop)
                 <div class="dra-item">
                     <div class="dra-item-avt icon">C</div>
                     <a href=" {{route('sv-chi-tiet-lop',['lop_hoc_id' => $lop->id])}} " class="dra-item-desc"> {{ $lop->ten_lop }} </a>
@@ -90,7 +90,7 @@
                 </div>
             </div>
             <div class="content row ">
-                @foreach($dsLop as $lop)
+                @foreach($dsLopDaVao as $lop)
                     <div class="col-md-3">
                         <div class="card">
                             <div class="card-header">
