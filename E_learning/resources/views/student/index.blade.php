@@ -24,7 +24,7 @@
         </div>
         <div class="right">
             <div class="addclass">
-                <a href="{{ route('sv-tham-gia-lop') }}"><i class="fas fa-plus"></i></a>
+                <a href="{{ route('sv-tham-gia-lop') }}"><i class="fas fa-plus mr-2"></i>Tham gia lớp học</a>
             </div>
         </div>
     </div>
@@ -46,7 +46,7 @@
                 <i class="far fa-list-alt icon"></i>
                 Việc cần làm
             </div>
-            @foreach($dsLop as $lop)
+            @foreach($dsLopDaVao as $lop)
                 <div class="dra-item">
                     <div class="dra-item-avt icon">C</div>
                     <a href=" {{route('sv-chi-tiet-lop',['lop_hoc_id' => $lop->id])}} " class="dra-item-desc"> {{ $lop->ten_lop }} </a>
@@ -90,7 +90,7 @@
                 </div>
             </div>
             <div class="content row ">
-                @foreach($dsLop as $lop)
+                @foreach($dsLopDaVao as $lop)
                     <div class="col-md-3">
                         <div class="card">
                             <div class="card-header">
@@ -109,16 +109,32 @@
                             </div>
                             <div class="card-body"></div>
                             <div class="card-footer">
+                                <a href="{{ route('sv-roi-lop',['lop_hoc_id' => $lop->id ]) }}" onClick="return confirm('Bạn có chắc muốn rời khỏi lớp học này?')" ><i class="far fa-trash-alt text-dark"></i></a>
                                 <i class="fas fa-briefcase"></i>
-                                <i class="far fa-folder"></i>
                             </div>
                         </div>
                     </div>
                 @endforeach
             </div>
         </div>
+        <div id="toast"></div>
         <div id="footer"></div>
     </div>
+    <script src="../asset/js/showNoti.js"></script>
+   <script>
+        if( {{ Session::has('success') }} )
+        {
+            showSuccessToast( 'Thành công',"{{ Session::get('success') }} ");
+        }
+        
+    </script>
+    <script>
+        if( {{ Session::has('error') }} )
+        {
+            showErrorToast( 'Lỗi',"{{ Session::get('error') }}");
+        }   
+    </script>
+   <script src="../asset/js/login.js"></script>
     <script src="../asset/js/style.js"></script>
 </body>
 </html>

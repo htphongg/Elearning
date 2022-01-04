@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="../lib/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="../lib/fontawesome/css/all.css">
 </head>
-
 <body>
     <div id="header">
         <div class="left">
@@ -62,17 +61,16 @@
             </div>
         </div>
     </div>
-    <div id="line">
+    <!-- <div id="line">
         <hr>
-    </div>
+    </div> -->
     <div id="container">
         <div id="body">
-            <div class="top">
-            </div>
+            <div class="top"> </div>
             <div class="content">
-                <h1>Danh Sách Lớp</h1>
-                <Table class="table">
-                    <thead>
+                <h2 class="mb-3 text-center mt-5">Danh Sách Lớp</h2>
+                <table class="table table-bordered">
+                    <thead class="table-dark  text-center">
                         <tr>
                             <th>Mã lớp</th>
                             <th>Tên lớp</th>
@@ -83,18 +81,18 @@
                     <tbody>
                         @foreach ($dsLH as $LH)
                             <tr>
-                                <td>{{ $LH->ma_lop }}</td>
+                                <td class="text-center">{{ $LH->ma_lop }}</td>
                                 <td>{{ $LH->ten_lop }}</td>
                                 <td>{{ $LH->mo_ta }}</td>
-                                <td>
-                                    <a href="{{ route('ad-cap-nhat-lh', ['id' => $LH->id]) }}">Sửa</a> |
-                                    <a href="{{ route('ad-xoa-bo-lh', ['id' => $LH->id]) }}">Xóa</a>
+                                <td class="text-center">
+                                    <a class="btn btn-success" href="{{ route('ad-cap-nhat-lh', ['id' => $LH->id]) }}">Sửa</a>
+                                    <a class="btn btn-danger" href="{{ route('ad-xoa-bo-lh', ['id' => $LH->id]) }}">Xóa</a>
                                 </td>
 
                             </tr>
                         @endforeach
                     </tbody>
-                </Table>
+                </table>
 
             </div>
         </div>

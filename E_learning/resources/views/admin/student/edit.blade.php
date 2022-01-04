@@ -6,9 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Classroom</title>
-    <link rel="stylesheet" href="/asset/css/function-style-admin.css">
-    <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.css">
-    <link rel="stylesheet" href="../lib/fontawesome/css/all.css">
+    <link rel="stylesheet" href="{{ asset('../asset/css/function-style-admin.css') }}">
+    <link rel="stylesheet" href="{{ asset('../lib/bootstrap/css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ asset('../lib/fontawesome/css/all.css') }}">
 </head>
 
 <body>
@@ -18,7 +18,7 @@
                 <i class="fas fa-bars"></i>
             </div>
             <div class="logo">
-                <img src="../asset/img/googlelogo_clr_74x24px.SVg" alt="">
+                <img src="{{ asset('../asset/img/googlelogo_clr_74x24px.SVg') }}" alt="">
             </div>
             <span class="webname">Lớp học</span>
         </div>
@@ -60,16 +60,11 @@
             </div>
         </div>
     </div>
-    <div id="line">
-        <hr>
-    </div>
     <div id="container">
         <div id="body">
-            <div class="top">
-
-            </div>
+            <div class="top"></div>
             <div class="content">
-                <h1>Cập nhật giảng viên</h1>
+                <h1 class="text-center">Cập nhật sinh viên</h1>
                 <form action="{{ route('ad-xl-cap-nhat-sv', ['id' => $dsSV->id]) }}" class="was-validated"
                     method="POST">
                     @csrf
@@ -126,19 +121,16 @@
                         <div class="valid-feedback">Valid.</div>
                         <div class="invalid-feedback">Please fill out this field.</div>
                     </div>
-                    <button type="submit" class="btn btn-primary">Lưu</button>
-                    <a href="{{ route('ad-ds-sinh-vien') }}" class="btn btn-danger">Quay lại</a>
+                    <div class="btn-sub">
+                        <button type="submit" class="btn btn-primary">Lưu</button>
+                        <a href="{{ route('ad-ds-sinh-vien') }}" class="btn btn-danger">Quay lại</a>
+                    </div>
                 </form>
 
             </div>
         </div>
-
-        <div id="footer">
-
-        </div>
+        <div id="footer"></div>
     </div>
-
-    <script src="../asset/js/style.js"></script>
+    <script src="{{ asset('../asset/js/style.js') }}"></script>
 </body>
-
 </html>

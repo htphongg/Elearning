@@ -36,11 +36,11 @@ return [
     'mailers' => [
         'smtp' => [
             'transport' => 'smtp',
-            'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
-            'port' => env('MAIL_PORT', 587),
-            'encryption' => env('MAIL_ENCRYPTION', 'tls'),
-            'username' => env('MAIL_USERNAME'),
-            'password' => env('MAIL_PASSWORD'),
+            'host' => 'smtp.gmail.com',
+            'port' => 587,
+            'encryption' => 'tls',
+            'username' => 'htphongg96@gmail.com',
+            'password' => 'panczoiwzwhbsotf',
             'timeout' => null,
             'auth_mode' => null,
         ],
@@ -80,6 +80,14 @@ return [
         ],
     ],
 
+    'stream' => [
+        'ssl' => [
+           'allow_self_signed' => true,
+           'verify_peer' => false,
+           'verify_peer_name' => false,
+        ],
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Global "From" Address
@@ -92,8 +100,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-        'name' => env('MAIL_FROM_NAME', 'Example'),
+        'address' => '0306191258@caothang.edu.vn',
+        'name' => 'E-Learning',
     ],
 
     /*

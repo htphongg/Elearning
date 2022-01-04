@@ -59,20 +59,19 @@
             </div>
         </div>
     </div>
-    <div id="line">
+    <!-- <div id="line">
         <hr>
-    </div>
+    </div> -->
     <div id="container">
         <div id="body">
-            <div class="top">
-            </div>
+            <div class="top"> </div>
             <div class="content">
-                <h1>Thêm mới lớp</h1>
+                <h1 class="text-center">Thêm mới lớp</h1>
                 <form action="{{ route('ad-xl-them-moi-lh') }}" class="was-validated" method="POST">
                     @csrf
                     <div class="form-group">
                         <label for="code">Mã lớp:</label>
-                        <input type="text" class="form-control" value="{{ Str::random(6) }}" name="ma_lop" required>
+                        <input type="text" class="form-control" value="{{ Str::random(6) }}" name="ma_lop" required disabled>
                         <div class="valid-feedback">Valid.</div>
                         <div class="invalid-feedback">Please fill out this field.</div>
                     </div>
@@ -89,7 +88,7 @@
                         <div class="invalid-feedback">Please fill out this field.</div>
                     </div>
 
-                    <div>
+                    <div class="btn-sub">
                         <button type="submit" class="btn btn-primary">Thêm</button>
                         <a href="{{ route('ad-ds-lop') }}" class="btn btn-danger">Quay lại</a>
                     </div>
@@ -97,13 +96,8 @@
                 </form>
             </div>
         </div>
-
-        <div id="footer">
-
-        </div>
+        <div id="footer"> </div>
     </div>
-
     <script src="../asset/js/style.js"></script>
 </body>
-
 </html>

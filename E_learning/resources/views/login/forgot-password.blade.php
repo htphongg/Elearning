@@ -21,11 +21,12 @@
 	                    <li><span class="text-primary text-medium">3. </span>Sử dụng liên kết để đặt lại mật khẩu của bạn</li>
 	                </ol>
 	            </div>
-	            <form action="#" class="card mt-4">
+	            <form action="{{ route('xl-quen-mat-khau') }}" class="card mt-4" method="post">
+					@csrf
 	                <div class="card-body">
 	                    <div class="form-group"> 
-                            <label for="email-for-pass">Nhập địa chỉ Email của bạn.</label> 
-                            <input class="form-control" type="text" name="email-for-pass" required="">
+                            <label for="email_for_pass">Nhập địa chỉ Email của bạn.</label> 
+                            <input class="form-control" type="text" name="email_for_pass" required>
                             <small class="form-text text-muted">Nhập địa chỉ email bạn đã sử dụng trong quá trình đăng ký trên E-learning. Sau đó, chúng tôi sẽ gửi một liên kết đến địa chỉ email này.</small> 
                         </div>
 	                </div>
@@ -37,5 +38,20 @@
 	        </div>
 	    </div>
 	</div>
+	<div id="toast"></div>
+    <script src="../asset/js/showNoti.js"></script>
+    <script>
+        if( {{ Session::has('success') }} )
+        {
+            showSuccessToast( 'Thành công',"{{ Session::get('success') }} ");
+        }
+        
+    </script>
+    <script>
+        if( {{ Session::has('error') }} )
+        {
+            showErrorToast( 'Lỗi',"{{ Session::get('error') }}");
+        }   
+    </script>
 </body>
 </html>

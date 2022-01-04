@@ -8,9 +8,18 @@
     margin-top: 15px;
 }
 
+body{
+    background-color: #ccc !important;
+}
+
 #container {
     z-index: 0;
-    /*height: 900px*/
+    margin: 0 300px;
+    height: auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 #container .navbar {
@@ -74,6 +83,7 @@
 }
 
 #body {
+
 }
 
 /* Drawer details */
@@ -294,6 +304,11 @@
 #body .content .card .card-footer i {
     margin: 0px 8px;
     font-size: 20px;
+}
+
+.btn-sub{
+    display: flex;
+    justify-content: space-between;
 }
 
 #footer {

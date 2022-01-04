@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="../lib/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="../lib/fontawesome/css/all.css">
 </head>
-<body>
+<body>   
     <div id="header">
         <div class="left">
             <div class="drawer js-drawer">
@@ -22,7 +22,8 @@
         </div>
         <div class="right">
             <div class="create-class mr-5 ">
-                <a href="{{ route('gv-tao-lop') }}"><i class="fas fa-plus text-dark"></i></a>
+                <a class="text-dark" href="{{ route('gv-tao-lop') }}"><i class="fas fa-plus text-dark mr-2"></i> Tạo lớp mới</a>
+                
             </div>
         </div>
     </div>
@@ -30,7 +31,7 @@
         <div class="dra-header">
             <div class="dra-item">
                 <i class="fas fa-home icon"></i>
-                <a href="../teacher/index.html">Lớp học</a>
+                <a href="{{ route('gv-trang-chu') }}">Lớp học</a>
             </div>
             <div class="dra-item">
                 <i class="far fa-calendar icon"></i>
@@ -47,7 +48,7 @@
             @foreach($dsLop as $lop)
                 <div class="dra-item">
                     <div class="dra-item-avt icon">C</div>
-                    {{ $lop->ten_lop }}
+                    <a href="{{ route('gv-chi-tiet-lop',['lop_hoc_id' => $lop->id]) }}"> {{ $lop->ten_lop }}</a>                 
                 </div>
             @endforeach
         </div>
@@ -55,7 +56,7 @@
         <div class="dra-footer">
             <div class="dra-item">
                 <i class="far fa-save icon"></i>
-                Lớp học đã lưu trữ
+                <a href="{{ route('gv-ds-lop-luu-tru') }}">Lớp học đã lưu trữ</a>
             </div>
             <div class="dra-item">
                 <i class="fas fa-cog icon"></i>
@@ -93,7 +94,7 @@
                         <div class="card">
                             <div class="card-header">
                                 <div class="left">
-                                    <a class="title" href="{{ route('gv-chi-tiet-lop') }}">{{ $lop->ten_lop }}</a>
+                                    <a class="title" href="{{ route('gv-chi-tiet-lop',['lop_hoc_id' => $lop->id]) }}">{{ $lop->ten_lop }}</a>
                                     <a class="subtitle" href="#">{{ $lop->mo_ta }}</a>
                                 </div>
                                 <div class="right">
@@ -105,16 +106,32 @@
                             </div>
                             <div class="card-body"></div>
                             <div class="card-footer">
-                                <i class="fas fa-briefcase"></i>
-                                <i class="far fa-folder"></i>
+                                <a href="{{ route('gv-xoa-lop',['lop_hoc_id' => $lop->id]) }}" onClick="return confirm('Bạn có chắc muốn xoá lớp học này?')" ><i class="fas fa-trash text-dark"></i> </i></a>
+                                <a href="{{ route('gv-chinh-sua-lop',['lop_hoc_id' => $lop->id]) }}"><i class="far fa-edit text-dark"></i></a>
                             </div>
                         </div>
                     </div>
                @endforeach
             </div>
         </div>
+        <div id="toast"></div>
         <div id="footer"></div>
     </div>
+    <script src="../asset/js/showNoti.js"></script>
+    <script>
+        if( {{ Session::has('success') }} )
+        {
+            showSuccessToast( 'Thành công',"{{ Session::get('success') }} ");
+        }
+        
+    </script>
+    <script>
+        if( {{ Session::has('error') }} )
+        {
+            showErrorToast( 'Lỗi',"{{ Session::get('error') }}");
+        }   
+    </script>
     <script src="../asset/js/style.js"></script>
 </body>
 </html>
+

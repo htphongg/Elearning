@@ -32,25 +32,31 @@
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                 </div>
-                @if ( Session::has('error'))
-                    <strong class="text-danger mb-5" >{{ Session::get('error') }}</strong>
-                @endif
                 <button  class="button" id="js-btnDangNhap" type="submit">Đăng nhập</button>
             </form>
             <div class="footer">
-                <!-- <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-                    <label class="form-check-label text-primary" for="flexCheckChecked">
-                      Ghi nhớ đăng nhập
-                    </label>
-                </div> -->
                 <div></div>
                 <div class="forgot-pass text-primary">
                     <a href="{{route('quen-mat-khau')}}">Quên mật khẩu?</a>
                 </div>  
             </div>
         </div>
+        <div id="toast"></div>
    </div>
+   <script src="../asset/js/showNoti.js"></script>
+   <script>
+        if( {{ Session::has('success') }} )
+        {
+            showSuccessToast( 'Thành công',"{{ Session::get('success') }} ");
+        }
+        
+    </script>
+    <script>
+        if( {{ Session::has('error') }} )
+        {
+            showErrorToast( 'Lỗi',"{{ Session::get('error') }}");
+        }   
+    </script>
    <script src="../asset/js/login.js"></script>
 </body>
 </html>
