@@ -87,3 +87,9 @@
 #addclass li {
     padding-bottom: 1rem;
 }
+
+#addclass a{
+    margin-top: 100px;
+    margin-left:260px;
+    right: 0px;
+}

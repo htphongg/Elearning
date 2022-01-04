@@ -24,7 +24,7 @@
         </div>
         <div class="right">
             <div class="addclass">
-                <a href="{{ route('sv-tham-gia-lop') }}"><i class="fas fa-plus"></i></a>
+                <a href="{{ route('sv-tham-gia-lop') }}"><i class="fas fa-plus mr-2"></i>Tham gia lớp học</a>
             </div>
         </div>
     </div>
@@ -109,7 +109,7 @@
                             </div>
                             <div class="card-body"></div>
                             <div class="card-footer">
-                                <i class="far fa-trash-alt"></i>
+                                <a href="{{ route('sv-roi-lop',['lop_hoc_id' => $lop->id ]) }}" onClick="return confirm('Bạn có chắc muốn rời khỏi lớp học này?')" ><i class="far fa-trash-alt text-dark"></i></a>
                                 <i class="fas fa-briefcase"></i>
                             </div>
                         </div>

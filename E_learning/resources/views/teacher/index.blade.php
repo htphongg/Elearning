@@ -22,7 +22,8 @@
         </div>
         <div class="right">
             <div class="create-class mr-5 ">
-                <a href="{{ route('gv-tao-lop') }}"><i class="fas fa-plus text-dark"></i></a>
+                <a class="text-dark" href="{{ route('gv-tao-lop') }}"><i class="fas fa-plus text-dark mr-2"></i> Tạo lớp mới</a>
+                
             </div>
         </div>
     </div>
@@ -105,7 +106,7 @@
                             </div>
                             <div class="card-body"></div>
                             <div class="card-footer">
-                                <a href="{{ route('gv-xoa-lop',['lop_hoc_id' => $lop->id]) }}"><i class="fas fa-trash text-dark"></i> </i></a>
+                                <a href="{{ route('gv-xoa-lop',['lop_hoc_id' => $lop->id]) }}" onClick="return confirm('Bạn có chắc muốn xoá lớp học này?')" ><i class="fas fa-trash text-dark"></i> </i></a>
                                 <a href="{{ route('gv-chinh-sua-lop',['lop_hoc_id' => $lop->id]) }}"><i class="far fa-edit text-dark"></i></a>
                             </div>
                         </div>

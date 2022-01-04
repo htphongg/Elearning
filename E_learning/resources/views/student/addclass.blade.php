@@ -26,6 +26,7 @@
                     <li>Sử dụng mã lớp học gồm 6 chữ cái hoặc số, không có dấu cách hoặc ký hiệu</li>
                 </ul>
             </form>
+            <a href="{{route('sv-trang-chu')}}" class="btn btn-danger">Quay lại</a>
         </div>
     </div>
 </body>
