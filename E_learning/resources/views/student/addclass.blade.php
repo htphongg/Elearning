@@ -20,12 +20,13 @@
                     <input type="text" class="form-control" placeholder="Mã lớp" required name="codeclass">
                 </div>
                 <button class="button" type="submit">Tham gia</button>
-                <div class="instructions"> Cách đăng nhập bằng mã lớp học:</div>
+                <div class="instructions"> Cách tham gia bằng mã lớp học:</div>
                 <ul>
                     <li>Sử dụng tài khoản được cấp phép</li>
                     <li>Sử dụng mã lớp học gồm 6 chữ cái hoặc số, không có dấu cách hoặc ký hiệu</li>
                 </ul>
             </form>
+            <a href="{{route('sv-trang-chu')}}" class="btn btn-danger">Quay lại</a>
         </div>
     </div>
 </body>

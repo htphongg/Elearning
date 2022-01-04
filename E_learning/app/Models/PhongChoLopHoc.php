@@ -9,4 +9,9 @@ class PhongChoLopHoc extends Model
 {
     use HasFactory;
     protected $table = 'phong_cho_lop_hoc';
+
+    // public function dsNguoiDung()
+    // {
+    //     return $this->hasMany('App\Models\NguoiDung');
+    // }
 }

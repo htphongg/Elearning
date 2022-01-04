@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,6 +10,7 @@
     <link rel="stylesheet" href="../lib/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="../lib/fontawesome/css/all.css">
 </head>
+
 <body>
     <div id="header">
         <div class="left">
@@ -16,7 +18,7 @@
                 <i class="fas fa-bars"></i>
             </div>
             <div class="logo">
-                <img src="../asset/img/googlelogo_clr_74x24px.svg" alt="">                   
+                <img src="../asset/img/googlelogo_clr_74x24px.svg" alt="">
             </div>
             <span class="webname">Lớp học</span>
         </div>
@@ -25,7 +27,7 @@
         <div class="dra-header">
             <div class="dra-item">
                 <i class="fas fa-home icon"></i>
-                <a href="#">Trang chủ</a>
+                <a href="{{ route('ad-trang-chu') }}">Trang Chủ</a>
             </div>
             <div class="dra-item">
                 <i class="far fa-calendar icon"></i>
@@ -33,7 +35,21 @@
             </div>
         </div>
         <hr>
-       
+        <div class="dra-body">
+            <div class="dra-item">
+                <div class="dra-item-avt icon">G</div>
+                <a href="{{ route('ad-ds-giang-vien') }}">Giảng Viên</a>
+            </div>
+            <div class="dra-item">
+                <div class="dra-item-avt icon">S</div>
+                <a href="{{ route('ad-ds-sinh-vien') }}">Sinh Viên</a>
+            </div>
+            <div class="dra-item">
+                <div class="dra-item-avt icon">L</div>
+                <a href="{{ route('ad-ds-lop') }}">Lớp Học</a>
+            </div>
+        </div>
+        <hr>
         <div class="dra-footer">
             <div class="dra-item">
                 <i class="fas fa-cog icon"></i>
@@ -49,13 +65,13 @@
             </div>
             <div class="dra-item">
                 <i class="fas fa-sign-out-alt icon"></i>
-                <a href="{{route('ad-dang-xuat')}}">Đăng xuất</a>
+                <a href="{{ route('ad-dang-xuat') }}">Đăng xuất</a>
             </div>
         </div>
     </div>
     <!-- <div id="line"><hr></div> -->
-    <div id="container">      
-       <!-- <div class="navbar">
+    <div id="container">
+        <!-- <div class="navbar">
             <ul class="nav">
                 <li class="nav-item">
                     <a class="nav-link" href="#">Link</a>
@@ -75,4 +91,5 @@
 
     <script src="../asset/js/style.js"></script>
 </body>
+
 </html>

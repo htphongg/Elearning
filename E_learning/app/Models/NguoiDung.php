@@ -18,6 +18,9 @@ class NguoiDung extends Authenticatable
 
     public function dsLopHoc()
     {
-        return $this->belongsToMany('App\Models\LopHoc','chi_tiet_lop_hoc')->withPivot('lop_hoc_id','nguoi_dung_id');
+        return $this->belongsToMany('App\Models\LopHoc','chi_tiet_lop_hoc')->withPivot('lop_hoc_id','nguoi_dung_id','trang_thai','cach_tham_gia');
+        //chi_tiet_lop_hoc.lop_hoc_id = lop_hoc.id AND
+        //chi_tiet_lop_hoc.nguoi_dung_id = nguoi_dung.id
     }
+
 }

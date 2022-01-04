@@ -59,11 +59,26 @@
                 </div>
             </div>
             <div class="container-btn">
-                <button type="submit" class="btn btn-success">Lưu thông tin</button>
+                <button type="submit" class="btn btn-success">Lưu thay đổi</button>
                 <a href="{{route('gv-trang-chu')}}" class="btn btn-danger" >Quay về trang chủ</a>
             </div>
         </form>
     </div>
+    <div id="toast"></div>
+    <script src="../asset/js/showNoti.js"></script>
+    <script>
+        if( {{ Session::has('success') }} )
+        {
+            showSuccessToast( 'Thành công',"{{ Session::get('success') }} ");
+        }
+        
+    </script>
+    <script>
+        if( {{ Session::has('error') }} )
+        {
+            showErrorToast( 'Lỗi',"{{ Session::get('error') }}");
+        }   
+    </script>
     <script src="../asset/js/change-password.js"></script>
 </body>
 </html>

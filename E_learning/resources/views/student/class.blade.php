@@ -48,7 +48,7 @@
                 <i class="far fa-list-alt icon"></i>
                 Việc cần làm
             </div>
-            @foreach($dsLop as $lop)
+            @foreach($dsLopDaVao as $lop)
                 <div class="dra-item">
                     <div class="dra-item-avt icon">C</div>
                     <a href=" {{route('sv-chi-tiet-lop',['lop_hoc_id' => $lop->id])}} " class="dra-item-desc"> {{ $lop->ten_lop }} </a>
@@ -114,18 +114,45 @@
                             <a href="#">Thông báo nội dung nào đó cho lớp học của bạn</a>
                         </div>
                         <div class="post">
-
+                            @foreach($lopHoc->dsBaiDang as $baiDang)
+                                <a href="{{ route('sv-chi-tiet-bai-dang',['id' => $baiDang->id,'type' => $baiDang->loai_bai_dang_id,'lop_hoc_id' => $lopHoc->id]) }}">
+                                    <div class="example">
+                                        <div class="ex-left">
+                                            <div class="ex-avt">
+                                                @if(strcasecmp($baiDang->loaiBaiDang->ten_loai,"Tài liệu") == 0 || strcasecmp($baiDang->loaiBaiDang->ten_loai,"Thông báo") == 0)
+                                                    <i class="far fa-bookmark"></i>
+                                                @else
+                                                    <i class="fas fa-file-alt"></i>
+                                                @endif
+                                            </div>
+                                            <div class="ex-title">
+                                                Đã đăng một @if(strcasecmp($baiDang->loaiBaiDang->ten_loai,"Tài liệu") == 0)
+                                                                                tài liệu
+                                                                            @elseif (strcasecmp($baiDang->loaiBaiDang->ten_loai,"Thông báo") == 0)
+                                                                                thông báo
+                                                                            @else
+                                                                                bài tập
+                                                                            @endif
+                                                mới: {{ $baiDang->tieu_de}}
+                                            </div>
+                                        </div>
+                                        <div class="ex-right">
+                                            <div class="ex-date-up">
+                                                Đã đăng vào: @php 
+                                                                echo date_format (new DateTime($baiDang->created_at), 'd/m/Y');
+                                                            @endphp
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            @endforeach
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div id="footer">
-
-        </div>
+        <div id="footer"></div>
     </div>
-
     <script src="../asset/js/style.js"></script>
 </body>
-
 </html>
