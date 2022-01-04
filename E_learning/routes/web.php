@@ -28,9 +28,8 @@ use App\Http\Controllers\Admin\AdminController;
 // Sinh viên tham gia băg mã lớp và đang trong phòng chờ
 // và giảng viên gửi mail mời tham gia thì ntn?
 //Xử lý hết hạn cho link email
-//Gửi mail có template
-//Link đầy đủ
-// Thông báo cần xác nhận trc khi xoá
+
+
 
 //Đăng nhập
 Route::get('/', [NguoiDungController::class, 'formDangNhap'])->name('dang-nhap')->middleware('guest');
@@ -58,6 +57,12 @@ Route::middleware(['auth'])->group(function () {
         //Tham gia lớp học
         Route::get('/tham-gia-lop', [SinhVienController::class, 'thamGiaLop'])->name('sv-tham-gia-lop');
         Route::post('/tham-gia-lop', [SinhVienController::class, 'xlthamGiaLop'])->name('sv-xl-tham-gia-lop');
+
+        //Rời lớp
+        Route::get('/roi-lop',[SinhVienController::class,'roiLop'])->name('sv-roi-lop');
+
+        //Xem chi tiết bài đăng
+        Route::get('/chi-tiet-bai-dang/{id}/{type}',[SinhVienController::class,'xemChiTietBaiDang'])->name('sv-chi-tiet-bai-dang');
 
         //Chi tiết lớp
         Route::get('/chi-tiet-lop', [SinhVienController::class, 'showChiTietLop'])->name('sv-chi-tiet-lop');
@@ -100,8 +105,22 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/moi-tham-gia',[GiangVienController::class,'xlMoiThamGia'])->name('gv-xl-moi-tham-gia');
         Route::get('/xl-tham-gia/{id}/{lop_id}',[GiangVienController::class,'xlThamGia'])->name('gv-xl-tham-gia');
 
+        //Xoá sinh viên khỏi lớp
+        Route::get('/xoa-sinh-vien',[GiangVienController::class,'xoaSinhVien'])->name('gv-xoa-sinh-vien');
+
         //Đăng bài
         Route::get('/dang-bai',[GiangVienController::class,'formDangBai'])->name('gv-dang-bai');
+        Route::post('/dang-bai',[GiangVienController::class,'xlDangBai'])->name('gv-xl-dang-bai');
+
+        //Xem chi tiết bài
+        Route::get('/chi-tiet-bai-dang/{id}/{type}',[GiangVienController::class,'xemChiTietBaiDang'])->name('gv-chi-tiet-bai-dang');
+
+        //Cập nhật bài
+        Route::get('/chinh_sua_bai/{id}',[GiangVienController::class,'formChinhSuaBaiDang'])->name('gv-chinh-sua-bai-dang');
+        Route::post('/chinh_sua_bai/{id}',[GiangVienController::class,'xlChinhSuaBaiDang'])->name('gv-xl-chinh-sua-bai-dang');
+
+        //Xoá bài
+        Route::get('/xoa-bai',[GiangVienController::class,'xoaBaiDang'])->name('gv-xoa-bai');
 
         //Cập nhật thông tin cá nhân
         Route::get('/cap-nhat-thong-tin', [GiangVienController::class, 'formCapNhatThongTinCaNhan'])->name('gv-cap-nhat-thong-tin');
@@ -144,7 +163,6 @@ Route::middleware(['auth'])->group(function () {
 
         //Xóa giảng viên
         Route::get('/xoa_bo_gv/{id}', [AdminController::class, 'xlXoaGV'])->name('ad-xoa-bo-gv');
-
 
         // //Load danh sách sinh viên
         Route::get('/ds_sinh_vien', [AdminController::class, 'LayDSSV'])->name('ad-ds-sinh-vien');

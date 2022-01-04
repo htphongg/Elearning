@@ -10,6 +10,8 @@ function hiddenDrawer(){
     drawerdetails.classList.remove('open')
 }
 
+
 drawerBtn.addEventListener('click',showDrawer)
 header.addEventListener('click',hiddenDrawer)
+
 

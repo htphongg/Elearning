@@ -100,7 +100,7 @@
                 <div class="wrap-ac">
                     <div class="account">
                         <div class="ac-avt"></div>
-                        <div class="ac-name">{{ $ngDung->ho_ten }}</div>
+                        <div class="ac-name">{{ $ngDung->ho_ten }}</div>                       
                     </div>
                     <hr>
                 </div>
@@ -115,23 +115,36 @@
             </div>
             <hr>
         </div>
-        <div class="task">
-            <input type="checkbox"/>
-            <a href="#" class="btn">Tác vụ <i class="fas fa-lg fa-caret-down"></i></a>
-            <i class="fas fa-lg fa-sort sort"></i>
-        </div>
         @foreach ($lopHoc->dsNguoiDung as $ngDung)
             @if($ngDung->loai_nguoi_dung_id == 1 && $ngDung->pivot->trang_thai == 1)
                 <div class="wrap-ac">
                     <div class="account">
                         <div class="ac-avt"></div>
                         <div class="ac-name">{{ $ngDung->ho_ten }}</div>
+                        <div class="ac-delete">
+                            <a href="{{ route('gv-xoa-sinh-vien',['lop_hoc_id' => $lopHoc->id, 'nguoi_dung_id' => $ngDung->id]) }}" onClick="return confirm('Bạn có chắc muốn xoá sinh viên này?')" class="btn btn-danger"><i class="far fa-trash-alt"></i></a>
+                        </div>
                     </div>
                 <hr>
                 </div>
             @endif
         @endforeach
     </div>
-    <script src="../asset/js/style.js"></script>
+    <div id="toast"></div>
 </body>
+    <script src="../asset/js/showNoti.js"></script>
+    <script>
+        if( {{ Session::has('success') }} )
+        {
+            showSuccessToast( 'Thành công',"{{ Session::get('success') }} ");
+        }
+        
+    </script>
+    <script>
+        if( {{ Session::has('error') }} )
+        {
+            showErrorToast( 'Lỗi',"{{ Session::get('error') }}");
+        }   
+    </script>
+    <script src="../asset/js/style.js"></script>
 </html>
