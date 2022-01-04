@@ -88,7 +88,7 @@
         <div class="dra-footer">
             <div class="dra-item">
                 <i class="far fa-save icon"></i>
-                Lớp học đã lưu trữ
+                <a href="{{ route('gv-ds-lop-luu-tru') }}">Lớp học đã lưu trữ</a>
             </div>
             <div class="dra-item">
                 <i class="fas fa-cog icon"></i>

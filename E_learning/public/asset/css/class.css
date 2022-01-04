@@ -233,6 +233,7 @@
   
   #body {
     margin: 25px 0px 175px 175px;
+    height: 900px;
   }
   
   #body .content {
@@ -343,7 +344,7 @@
     display: flex;
   }
   #body .content .main-content .left .meetting .button:hover {
-    background-color: rgba(187, 212, 236, 0.4);
+    cursor: pointer;
   }
   #body .content .main-content .left .meetting .button span {
     font-size: 14px;
@@ -384,8 +385,9 @@
   }
   
   #body .content .main-content .left .pathclass .text {
-    margin-top: 10px;
-    margin-right: 5px;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
   }
   
   #body .content .main-content .left .pathclass .text i {
@@ -397,7 +399,6 @@
     font-size: 1.375rem;
     color: #1967d2;
     font-family: "Google Sans", Roboto, Arial, sans-serif;
-    margin: auto;
     white-space: pre-wrap;
   }
   /*hết*/
@@ -496,11 +497,84 @@
   #body .content .main-content .right .post {
     margin-top: 25px;
     width: 100%;
-    height: 300px;
-    border-radius: 1rem;
-    border: solid 0.2px #ccc;
+    height: auto;
   }
   
   #footer {
+
   }
   
+
+  
+  /* Example */
+  .example:hover .ex-right .ex-more-if {
+    display: inline-block;
+  }
+  
+  .example:hover {
+    background-color: #e8f0fe;
+    border-radius: 0.5rem;
+    cursor: pointer;
+  }
+  .example {
+    height: 62px;
+    width: 100%;
+    border-radius: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    border: solid 0.2px #ccc;
+    margin: 15px 0px;
+  }
+  
+  .example .ex-left {
+    display: flex;
+    margin: 12px 24px;
+    align-items: center;
+  }
+  
+  .example .ex-left .ex-avt {
+    width: 36px;
+    height: 36px;
+    background-color: #4285f4;
+    border-radius: 50%;
+    display: flex;
+    margin-right: 16px;
+  }
+  
+  .example .ex-left i {
+    margin: auto;
+    color: #fff;
+  }
+  
+  .example .ex-left .ex-title {
+    letter-spacing: 0.01785714em;
+    font-family: "Google Sans", Roboto, Arial, sans-serif;
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.25rem;
+    color: #3c4043;
+  }
+  
+  .example .ex-right .ex-more-if {
+    margin-right: 14px;
+    color: #5f6368;
+    display: none;
+  }
+  
+  .example .ex-right {
+    display: flex;
+    margin: 0px 16px;
+    align-items: center;
+  }
+  
+  .example .ex-right .ex-date-up {
+    letter-spacing: 0.025em;
+    font-family: Roboto, Arial, sans-serif;
+    font-size: 0.75rem;
+    font-weight: 400;
+    line-height: 1rem;
+    color: #5f6368;
+    margin: 0px 32px;
+  }
+  
+  /* End Example */

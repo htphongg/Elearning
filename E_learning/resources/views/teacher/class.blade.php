@@ -4,35 +4,26 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Class</title>
+    <title>{{  $lopHoc->ten_lop }}</title>
     <link rel="stylesheet" href="../asset/css/class.css">
     <link rel="stylesheet" href="../lib/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="../lib/fontawesome/css/all.css">
 </head>
 <body>
-
     <div id="header">
         <div class="left">
             <div class="drawer js-drawer">
                 <i class="fas fa-bars"></i>
             </div>
             <div class="title">
-                <span class="main-title">CĐ TH 19PMC - Lập trình web PHP Nâng cao (LT + ĐA)</span>
-                <span class="sub-title">Học kỳ 1 - NH 21-22</span>
+                <a href="{{route('gv-chi-tiet-lop',['lop_hoc_id' => $lopHoc->id]) }}" class="main-title">{{ $lopHoc->ten_lop }}</a>
+                <a href="{{route('gv-chi-tiet-lop',['lop_hoc_id' => $lopHoc->id]) }}"class="sub-title">{{ $lopHoc->mo_ta }}</a>
             </div>
             <div class="route">
-                <a href="./class.html">Bảng tin</a>
-                <a href="./work.html">Bài tập trên lớp</a>
-                <a href="./everybody.html">Mọi người</a>
-                <a href="./score.html">Số điểm</a>
-            </div>
-        </div>
-        <div class="right">
-            <div class="menu">
-                <i class="fas fa-bars"></i>
-            </div>
-            <div class="account">
-                <i class="far fa-user-circle"></i>
+                <a href="{{route('gv-chi-tiet-lop',['lop_hoc_id' => $lopHoc->id]) }}">Bảng tin</a>
+                <a href="{{route('gv-cong-viec',['lop_hoc_id' => $lopHoc->id]) }}">Bài tập trên lớp</a>
+                <a href="{{route('gv-moi-nguoi',['lop_hoc_id' => $lopHoc->id]) }}">Mọi người</a>
+                <a href="{{route('gv-chi-tiet-lop',['lop_hoc_id' => $lopHoc->id]) }}">Số điểm</a>
             </div>
         </div>
     </div>
@@ -42,7 +33,7 @@
         <div class="dra-header">
             <div class="dra-item">
                 <i class="fas fa-home icon"></i>
-                <a href="../index.html">Lớp học</a>
+                <a href="{{ route('gv-trang-chu') }}">Lớp học</a>
             </div>
             <div class="dra-item">
                 <i class="far fa-calendar icon"></i>
@@ -51,49 +42,39 @@
         </div>
         <hr>
         <div class="dra-body">
-            <div class="dra-body-title">Đã đăng ký</div>
+            <div class="dra-body-title">Giảng dạy</div>
             <div class="dra-item">
                 <i class="far fa-list-alt icon"></i>
-                Việc cần làm
+                Để đánh giá
             </div>
-            <div class="dra-item">
-                <div class="dra-item-avt icon">C</div>
-               CĐTH19PMC
-            </div>
-            <div class="dra-item">
-                <div class="dra-item-avt icon">C</div>
-                Lập trình web PHP
-            </div>
-            <div class="dra-item">
-                <div class="dra-item-avt icon">C</div>
-                ASP.NET Core MVC
-            </div>
-            <div class="dra-item">
-                <div class="dra-item-avt icon">C</div>
-                Lập trình di động
-            </div>
-            <div class="dra-item">
-                <div class="dra-item-avt icon">C</div>
-                Lập trình di động
-            </div>
-            <div class="dra-item">
-                <div class="dra-item-avt icon">C</div>
-                Lập trình di động
-            </div>
-            <div class="dra-item">
-                <div class="dra-item-avt icon">C</div>
-                Lập trình di động
-            </div>
+            @foreach($dsLop as $lop)
+                <div class="dra-item">
+                    <div class="dra-item-avt icon">C</div>
+                    <a href="{{ route('gv-chi-tiet-lop',['lop_hoc_id' => $lop->id]) }}"> {{ $lop->ten_lop }}</a>
+                </div>
+            @endforeach
         </div>
         <hr>
         <div class="dra-footer">
             <div class="dra-item">
                 <i class="far fa-save icon"></i>
-                Lớp học đã lưu trữ
+                <a href="{{ route('gv-ds-lop-luu-tru') }}">Lớp học đã lưu trữ</a>
             </div>
             <div class="dra-item">
                 <i class="fas fa-cog icon"></i>
                 Cài đặt
+            </div>
+            <div class="dra-item">
+                <i class="fas fa-user-circle icon"></i>
+                <a href="{{route('gv-cap-nhat-thong-tin')}}">Cập nhật thông tin cá nhân</a>
+            </div>
+            <div class="dra-item">
+                <i class="fas fa-exchange-alt icon"></i>
+                <a href="{{route('gv-doi-mat-khau')}}">Thay đổi mật khẩu</a>
+            </div>
+            <div class="dra-item">
+                <i class="fas fa-sign-out-alt icon"></i>
+                <a href="{{route('gv-dang-xuat')}}">Đăng xuất</a>
             </div>
         </div>
     </div>
@@ -103,8 +84,8 @@
         <div id="body">
             <div class="content">
                 <div class="title">
-                    <span class="subject-name">CĐ TH 19PMC - Lập trình web PHP Nâng cao (LT + ĐA)</span>
-                    <span class="desc">Học kỳ 1 - NH 21-22</span>
+                    <span class="subject-name">{{ $lopHoc->ten_lop }}</span>
+                    <span class="desc">{{ $lopHoc->mo_ta }}</span>
                     <div class="dropdown menu">
                         <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
                             Tùy chỉnh
@@ -133,7 +114,7 @@
                                 <i class="fas fa-ellipsis-v"></i>
                             </div>
                             <div class="text">
-                                <span>7xre7km</span>
+                                <span>{{ $lopHoc->ma_lop }}</span>
                                 <a href="#"><i class="fas fa-lg fa-expand"></i></a>
                             </div>
                         </div>
@@ -147,20 +128,47 @@
                         <div class="post-noti">
                             <div class="post-noti-avt"></div>
                             <a href="#">Thông báo nội dung nào đó cho lớp học của bạn</a>
-                            <!-- <a href="#"><i class="fas fa-lg fa-retweet"></i></a> -->
                         </div>
                         <div class="post">
-                            
+                            @foreach($lopHoc->dsBaiDang as $baiDang)
+                                <a href="{{ route('gv-chi-tiet-bai-dang',['id' => $baiDang->id,'type' => $baiDang->loai_bai_dang_id,'lop_hoc_id' => $lopHoc->id]) }}">
+                                    <div class="example">
+                                        <div class="ex-left">
+                                            <div class="ex-avt">
+                                                @if(strcasecmp($baiDang->loaiBaiDang->ten_loai,"Tài liệu") == 0 || strcasecmp($baiDang->loaiBaiDang->ten_loai,"Thông báo") == 0)
+                                                    <i class="far fa-bookmark"></i>
+                                                @else
+                                                    <i class="fas fa-file-alt"></i>
+                                                @endif
+                                            </div>
+                                            <div class="ex-title">
+                                                Đã đăng một @if(strcasecmp($baiDang->loaiBaiDang->ten_loai,"Tài liệu") == 0)
+                                                                                tài liệu
+                                                                            @elseif (strcasecmp($baiDang->loaiBaiDang->ten_loai,"Thông báo") == 0)
+                                                                                thông báo
+                                                                            @else
+                                                                                bài tập
+                                                                            @endif
+                                                mới: {{ $baiDang->tieu_de}}
+                                            </div>
+                                        </div>
+                                        <div class="ex-right">
+                                            <div class="ex-date-up">
+                                                Đã đăng vào: @php 
+                                                                echo date_format (new DateTime($baiDang->created_at), 'd/m/Y');
+                                                            @endphp
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            @endforeach
                         </div>
                     </div>                   
                 </div>
             </div>
-        </div>
-        <div id="footer">
-            
-        </div>
-    </div>
-
-    <script src="../asset/js/style.js"></script>
+        </div>      
+    </div> 
+    <div id="footer"></div>
 </body>
+    <script src="{{ asset('asset/js/style.js') }}"></script>
 </html>
