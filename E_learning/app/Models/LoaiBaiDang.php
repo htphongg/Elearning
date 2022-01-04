@@ -9,4 +9,10 @@ class LoaiBaiDang extends Model
 {
     use HasFactory;
     protected $table = 'loai_bai_dang';
+
+    public function dsBaiDang()
+    {
+        return $this->hasMany('App\Models\BaiDang');
+    }
+
 }

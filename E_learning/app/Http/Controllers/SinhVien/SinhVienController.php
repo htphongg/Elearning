@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\NguoiDung;
 use App\Models\ChiTietLopHoc;
 use App\Models\LopHoc;
+use App\Models\BaiDang;
 use App\Models\PhongChoLopHoc;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -207,6 +208,70 @@ class SinhVienController extends Controller
                 return redirect()->route('sv-trang-chu')->with('success','Hãy chờ Giảng viên cho phép bạn tham gia lớp');
             }
         }
+    }
+
+    public function xemChiTietBaiDang(Request $req, $bai_dang_id, $loai_bai_dang_id)
+    {
+        if($bai_dang_id != null)
+        {   
+            if($loai_bai_dang_id == 2)
+            {
+                //Lấy dsLop đã tham gia
+                $nguoi_dung_id = Auth::id();
+                $dsLopDaVao =[];
+            
+                $dsLop = NguoiDung::find($nguoi_dung_id)->dsLopHoc;
+                
+                foreach($dsLop as $lop)
+                {
+                    if($lop->pivot->trang_thai == 1)
+                        array_push($dsLopDaVao,$lop);
+                }
+
+                //Lấy thông tin lớp học hiện tại
+                $lopHoc = LopHoc::find($req->lop_hoc_id);
+
+                //Lấy bài đăng
+                $baiDang = BaiDang::find($bai_dang_id);
+                
+                return view('./student/details-homework',compact('lopHoc','dsLopDaVao','baiDang'));
+            }
+            if($loai_bai_dang_id == 1 || $loai_bai_dang_id == 3)
+            {
+                //Lấy dsLop đã tham gia
+                $nguoi_dung_id = Auth::id();
+                $dsLopDaVao =[];
+            
+                $dsLop = NguoiDung::find($nguoi_dung_id)->dsLopHoc;
+                
+                foreach($dsLop as $lop)
+                {
+                    if($lop->pivot->trang_thai == 1)
+                        array_push($dsLopDaVao,$lop);
+                }
+
+                //Lấy thông tin lớp học hiện tại
+                $lopHoc = LopHoc::find($req->lop_hoc_id);
+
+                $baiDang = BaiDang::find($bai_dang_id);
+                
+                return view('./student/details-document',compact('lopHoc','dsLopDaVao','baiDang'));
+            }
+        }
+        else
+            return redirect()->back()->with('error','Không tìm thấy bài đăng này.');
+    }
+
+    public function roiLop( Request $req)
+    {
+        if($req->lop_hoc_id != null)
+        {
+            ChiTietLopHoc::where('lop_hoc_id','=',$req->lop_hoc_id)
+                        ->where('nguoi_dung_id','=',Auth::id())->delete();
+            return redirect()->route('sv-trang-chu')->with('success','Đã rời khỏi lớp học.');
+        }
+        else
+            return redirect()->back()->with('error','Thao tác thất bại');
     }
 
     public function dangXuat()

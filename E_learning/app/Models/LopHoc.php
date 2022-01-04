@@ -19,4 +19,9 @@ class LopHoc extends Model
     {
         return $this->belongsToMany('App\Models\NguoiDung','chi_tiet_lop_hoc')->withPivot('lop_hoc_id','nguoi_dung_id','trang_thai','cach_tham_gia');
     }
+
+    public function dsBaiDang()
+    {
+        return $this->hasMany('App\Models\BaiDang');
+    }
 }

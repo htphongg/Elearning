@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\NguoiDung;
 use App\Models\lopHoc;
+use App\Models\BaiDang;
+use App\Models\DinhKemBaiDang;
 use App\Models\PhongChoLopHoc;
 use App\Models\ChiTietLopHoc;
 use Illuminate\Support\Str;
@@ -14,6 +16,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\CapNhatThongTinCaNhanRequest;
 use Mail;
+use Illuminate\Http\UploadedFile;
 
 class GiangVienController extends Controller
 {
@@ -91,6 +94,8 @@ class GiangVienController extends Controller
         {
             LopHoc::where('id', $req->lop_hoc_id)->delete();
 
+            ChiTietLopHoc::where('lop_hoc_id','=',$req->lop_hoc_id)->delete();
+
             return redirect()->route('gv-trang-chu')->with('success','Đã lưu vào lớp học lưu trữ');
         }
         return redirect()->route('gv-trang-chu')->with('error','Lữu trữ thất bại');
@@ -141,9 +146,190 @@ class GiangVienController extends Controller
             return redirect()->back()->with('error','Không thể thực hiện tác vụ này.');
     }
 
-    public function formDangBai()
+    public function formDangBai(Request $req)
     {
-        return view('./teacher/create-post');
+        return view('./teacher/create-post',['lop_hoc_id' => $req->lop_hoc_id]);
+    }
+
+    public function xlDangBai( Request $req)
+    {   
+        // dd($req);
+        if($req->tieu_de != null && $req->noi_dung != null && $req->loai_bai_dang != null)
+        {
+            if(strcasecmp($req->loai_bai_dang,'tài liệu') == 0){
+                $baidang = new BaiDang();
+
+                $baidang->tieu_de = $req->tieu_de;
+                $baidang->noi_dung = $req->noi_dung;
+                $baidang->han_nop = $req->deadline;
+                $baidang->loai_bai_dang_id = 1;
+                $baidang->lop_hoc_id = $req->lop_hoc_id;
+                $baidang->save();
+
+                if($req->dinh_kem != null)
+                {
+                    $dkemBaiDang = new DinhKemBaiDang();
+
+                    $dkemBaiDang->bai_dang_id = $baidang->id;
+                    $dkemBaiDang->dinh_kem = $req->dinh_kem->getClientOriginalName();
+                    
+                    //Lưu trữ file
+                    $req->dinh_kem->storeAs('dinhkem', $req->dinh_kem->getClientOriginalName());
+
+                    $dkemBaiDang->save();
+                }
+                
+                return redirect()->route('gv-cong-viec',['lop_hoc_id' => $req->lop_hoc_id])->with('success','Đăng bài thành công');
+            }
+
+            if(strcasecmp($req->loai_bai_dang,'bài tập') == 0){
+                $baidang = new BaiDang();
+
+                $baidang->tieu_de = $req->tieu_de;
+                $baidang->noi_dung = $req->noi_dung;
+                $baidang->han_nop = $req->deadline;
+                $baidang->loai_bai_dang_id = 2;
+                $baidang->lop_hoc_id = $req->lop_hoc_id;
+                $baidang->save();
+
+                if($req->dinh_kem != null)
+                {
+                    $dkemBaiDang = new DinhKemBaiDang();
+
+                    $dkemBaiDang->bai_dang_id = $baidang->id;
+                    $dkemBaiDang->dinh_kem = $req->dinh_kem->getClientOriginalName();
+                    
+                    //Lưu trữ file
+                    $req->dinh_kem->storeAs('dinhkem', $req->dinh_kem->getClientOriginalName());
+
+                    $dkemBaiDang->save();
+                }
+                
+                return redirect()->route('gv-cong-viec',['lop_hoc_id' => $req->lop_hoc_id])->with('success','Đăng bài thành công');
+            }
+
+            if(strcasecmp($req->loai_bai_dang,'thông báo') == 0){
+                $baidang = new BaiDang();
+
+                $baidang->tieu_de = $req->tieu_de;
+                $baidang->noi_dung = $req->noi_dung;
+                $baidang->han_nop = $req->deadline;
+                $baidang->loai_bai_dang_id = 3;
+                $baidang->lop_hoc_id = $req->lop_hoc_id;
+                $baidang->save();
+
+                if($req->dinh_kem != null)
+                {
+                    $dkemBaiDang = new DinhKemBaiDang();
+
+                    $dkemBaiDang->bai_dang_id = $baidang->id;
+                    $dkemBaiDang->dinh_kem = $req->dinh_kem->getClientOriginalName();
+                    
+                    //Lưu trữ file
+                    $req->dinh_kem->storeAs('dinhkem', $req->dinh_kem->getClientOriginalName());
+                   
+                    $dkemBaiDang->save();
+                }
+                
+                return redirect()->route('gv-cong-viec',['lop_hoc_id' => $req->lop_hoc_id])->with('success','Đăng bài thành công');
+            }
+        }
+        else
+            return redirect()->back()->with('error','Thao tác thất bại.');
+    }
+
+    public function formChinhSuaBaiDang($bai_dang_id)
+    {
+        if($bai_dang_id != null)
+        {
+            $baiDang = BaiDang::find($bai_dang_id);
+            return view('./teacher/edit-post',compact('baiDang'));
+        }
+        else
+            return redirect()->back()->with('error','Không tìm thấy bài đăng này.');
+    }
+
+    public function xlChinhSuaBaiDang(Request $req , $bai_dang_id)
+    {
+        if($bai_dang_id != null)
+        {
+            $baiDang = BaiDang::find($bai_dang_id);
+            if($baiDang != null)
+            {
+                $baiDang->tieu_de = $req->tieu_de;
+                $baiDang->noi_dung = $req->noi_dung;
+                $baiDang->han_nop = $req->deadline;
+
+                //Xử lý cập nhật đÍnh kèm
+                if($req->dinh_kem != null)
+                {
+                    $dinhkembaiDang = DinhKemBaiDang::where('bai_dang_id','=',$bai_dang_id)->first();
+                    if($dinhkembaiDang == null)
+                    {
+                        $dkemBaiDang = new DinhKemBaiDang();
+                        $dkemBaiDang->bai_dang_id = $bai_dang_id;
+                        $dkemBaiDang->dinh_kem = $req->dinh_kem;
+                        $dkemBaiDang->save();
+                    }
+                    else
+                    {
+                        $dinhkembaiDang->update(['dinh_kem' => $req->dinh_kem]);
+                    }
+                }
+
+                $baiDang->save();
+                return redirect()->route('gv-cong-viec',['lop_hoc_id' => $req->lop_hoc_id])->with('success','Chỉnh sửa thành công.');
+            }
+            return redirect()->back()->with('error','Không tìm thấy bài đăng này.');
+        }
+        else
+            return redirect()->back()->with('error','Thao tác thất bại.');
+    }
+
+    public function xemChiTietBaiDang(Request $req, $bai_dang_id, $loai_bai_dang_id)
+    {
+        if($bai_dang_id != null)
+        {   
+            if($loai_bai_dang_id == 2)
+            {
+                //Lấy dsLop đã tham gia
+                $nguoi_dung_id = Auth::id();
+                $dsLop = NguoiDung::find($nguoi_dung_id)->dsLopHoc;
+                //Lấy thông tin lớp học hiện tại
+                $lopHoc = LopHoc::find($req->lop_hoc_id);
+
+                //Lấy bài đăng
+                $baiDang = BaiDang::find($bai_dang_id);
+                
+                return view('./teacher/details-homework',compact('lopHoc','dsLop','baiDang'));
+            }
+            if($loai_bai_dang_id == 1 || $loai_bai_dang_id == 3)
+            {
+                //Lấy dsLop đã tham gia
+                $nguoi_dung_id = Auth::id();
+                $dsLop = NguoiDung::find($nguoi_dung_id)->dsLopHoc;
+                //Lấy thông tin lớp học hiện tại
+                $lopHoc = LopHoc::find($req->lop_hoc_id);
+
+                $baiDang = BaiDang::find($bai_dang_id);
+                
+                return view('./teacher/details-document',compact('lopHoc','dsLop','baiDang'));
+            }
+        }
+        else
+            return redirect()->back()->with('error','Không tìm thấy bài đăng này.');
+
+    }
+
+    public function xoaBaiDang( Request $req)
+    {
+        if($req->bai_dang_id != null)
+        {
+            BaiDang::find($req->bai_dang_id)->delete();
+            return redirect()->back()->with('success','Xoá thành công.');
+        }
+        else
+            return redirect()->back()->with('error','Xoá không thành công.');
     }
 
     public function formCapNhatThongTinCaNhan()
@@ -227,6 +413,7 @@ class GiangVienController extends Controller
         $dsLop = NguoiDung::find($nguoi_dung_id)->dsLopHoc;
 
         $lopHoc = LopHoc::find($req->lop_hoc_id);
+
         return view('./teacher/work', compact('lopHoc', 'dsLop'));
     }
 
@@ -270,7 +457,8 @@ class GiangVienController extends Controller
                     return redirect()->back()->with('success','Đã gửi lời mời đến người dùng này.');
                 }   
                 else
-                    return redirect()->back()->with('error','Người dùng này đã tham gia lớp học rồi.');  
+                    return redirect()->back()->with('error','Người dùng này đã tham gia lớp học rồi hoặc đang trong phòng chờ.');  
+                
             }
             else
                 return redirect()->back()->with('error','Email này không tồn tại trong hệ thống');
@@ -285,21 +473,45 @@ class GiangVienController extends Controller
     {
         if($ng_dung_id != null && $lop_hoc_id != null)
         {
-            // $temp = LopHoc::find($lop_hoc_id)->dsNguoiDung->where('nguoi_dung_id','=',$ng_dung_id)->pivot->trang_thai->first();
+            $temp = ChiTietLopHoc::where('lop_hoc_id','=',$lop_hoc_id)
+                                    ->where('nguoi_dung_id','=',$ng_dung_id)
+                                    ->where('trang_thai','=',1)->first();
+            
+            if($temp == null)
+            {
+                $ctLopHoc = new ChiTietLopHoc();
 
-            $ctLopHoc = new ChiTietLopHoc();
+                $ctLopHoc->lop_hoc_id = $lop_hoc_id;
+                $ctLopHoc->nguoi_dung_id = $ng_dung_id;
+                $ctLopHoc->trang_thai = true;
+                $ctLopHoc->cach_tham_gia = true;
 
-            $ctLopHoc->lop_hoc_id = $lop_hoc_id;
-            $ctLopHoc->nguoi_dung_id = $ng_dung_id;
-            $ctLopHoc->trang_thai = true;
-            $ctLopHoc->cach_tham_gia = true;
+                $ctLopHoc->save();
 
-            $ctLopHoc->save();
-
-            return "Tham gia lớp học thành công";
-            // return view('index');
+                return "Tham gia lớp học thành công";
+            }
+            else
+                return view('./errors/404');
         }
         return view('./errors/404');
+    }
+
+    public function xoaSinhVien( Request $req)
+    {
+        if($req->lop_hoc_id != null && $req->nguoi_dung_id != null)
+        {
+            $user = ChiTietLopHoc::where('lop_hoc_id','=',$req->lop_hoc_id)
+                                    ->where('nguoi_dung_id','=',$req->nguoi_dung_id);
+            if($user != null)
+            {
+                $user->delete();
+                return redirect()->back()->with('success','Xoá thành công sinh viên khỏi lớp');
+            }               
+            else
+                return redirect()->back()->with('error','Thao tác thất bại');    
+        }
+        else
+            return redirect()->back()->with('error','Thao tác thất bại');
     }
 
     public function dangXuat()

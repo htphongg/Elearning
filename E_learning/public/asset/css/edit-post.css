@@ -1,4 +1,4 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -9,23 +9,24 @@ body{
 }
 
 #container{
-    margin: 22px 380px;
-    padding: 40px;
-    height: auto;
+    margin: 40px 400px;
+    padding: 30px;
     background-color: #fff;
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
 }
 
-.container-btn{
+#container .btn-create{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
 }
+
 
 /* Toast */
 #toast {
     position: fixed;
-    top: 20px;
+    top: 10px;
     right: 25px;
     /* bottom: 50px; */
     z-index: 999999;

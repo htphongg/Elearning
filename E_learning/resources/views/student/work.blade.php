@@ -117,148 +117,104 @@
             <div class="post-title">
                 <div class="wrap">
                     <span>Thông báo</span>
-                    <i class="fas fa-ellipsis-v"></i>
                 </div>
                 <hr>
             </div>
             <!-- Example -->
-            <div class="example">
-                <div class="ex-left">
-                    <div class="ex-avt">
-                        <i class="far fa-bookmark"></i>
-                    </div>
-                    <div class="ex-title">Danh sách nhóm đồ án môn học</div>
-                </div>
-                <div class="ex-right">
-                    <div class="ex-date-up">
-                        Đã đăng vào 11 thg 11
-                    </div>
-                    <div class="ex-more-if">
-                        <i class="fas fa-ellipsis-v"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="example">
-                <div class="ex-left">
-                    <div class="ex-avt">
-                        <i class="far fa-bookmark"></i>
-                    </div>
-                    <div class="ex-title">Đăng ký đồ án LT Web PHP Nâng Cao</div>
-                </div>
-                <div class="ex-right">
-                    <div class="ex-date-up">
-                        Đã đăng vào 1 thg 11
-                    </div>
-                    <div class="ex-more-if">
-                        <i class="fas fa-ellipsis-v"></i>
-                    </div>
-                </div>
-            </div>
+            @foreach($lopHoc->dsBaiDang as $baiDang)
+                @if($baiDang->loai_bai_dang_id == 3)
+                    <a href="{{ route('sv-chi-tiet-bai-dang',['id' => $baiDang->id,'type' => $baiDang->loai_bai_dang_id,'lop_hoc_id' => $lopHoc->id]) }}">
+                        <div class="example">
+                            <div class="ex-left">
+                                <div class="ex-avt">
+                                    <i class="far fa-bookmark"></i>
+                                </div>
+                                <div class="ex-title">{{ $baiDang->tieu_de }}</div>
+                            </div>
+                            <div class="ex-right">
+                                <div class="ex-date-up">
+                                    Đã đăng vào:
+                                    @php 
+                                        echo date_format (new DateTime($baiDang->created_at), 'd-m-Y');
+                                    @endphp
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                @endif
+            @endforeach 
             <!-- End Example -->
             <div class="post-title">
                 <div class="wrap">
                     <span>Tài liệu</span>
-                    <i class="fas fa-ellipsis-v"></i>
                 </div>
                 <hr>
             </div>
             <!-- Example -->
-            <div class="example">
-                <div class="ex-left">
-                    <div class="ex-avt">
-                        <i class="far fa-bookmark"></i>
-                    </div>
-                    <div class="ex-title">Bài 1: Giới thiệu Laravel Framework</div>
-                </div>
-                <div class="ex-right">
-                    <div class="ex-date-up">
-                        Đã đăng vào 27 thg 9
-                    </div>
-                    <div class="ex-more-if">
-                        <i class="fas fa-ellipsis-v"></i>
-                    </div>
-                </div>
-            </div>
+            @foreach($lopHoc->dsBaiDang as $baiDang)
+                @if($baiDang->loai_bai_dang_id == 1)
+                    <a href="{{ route('sv-chi-tiet-bai-dang',['id' => $baiDang->id,'type' => $baiDang->loai_bai_dang_id,'lop_hoc_id' => $lopHoc->id]) }}">
+                        <div class="example">
+                            <div class="ex-left">
+                                <div class="ex-avt">
+                                    <i class="far fa-bookmark"></i>
+                                </div>
+                                <div class="ex-title">{{ $baiDang->tieu_de }}</div>
+                            </div>
+                            <div class="ex-right">
+                                <div class="ex-date-up">
+                                    Đã đăng vào: 
+                                    @php 
+                                        echo date_format (new DateTime($baiDang->created_at), 'd-m-Y');
+                                    @endphp
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                @endif
+            @endforeach 
             <!-- End Example -->
             <div class="post-title">
                 <div class="wrap">
                     <span>Bài tập</span>
-                    <i class="fas fa-ellipsis-v"></i>
                 </div>
                 <hr>
             </div>
             <!-- Example -->
-            <div class="example">
-                <div class="ex-left">
-                    <div class="ex-avt">
-                        <i class="far fa-bookmark"></i>
-                    </div>
-                    <div class="ex-title">Bài tập 1: Cài đặt môi trường phát triển</div>
-                </div>
-                <div class="ex-right">
-                    <div class="ex-date-up">
-                        Đến hạn 23:59, 27 thg 9
-                    </div>
-                    <div class="ex-more-if">
-                        <i class="fas fa-ellipsis-v"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="example">
-                <div class="ex-left">
-                    <div class="ex-avt">
-                        <i class="far fa-bookmark"></i>
-                    </div>
-                    <div class="ex-title">Bài tập 1: Cài đặt môi trường phát triển</div>
-                </div>
-                <div class="ex-right">
-                    <div class="ex-date-up">
-                        Đến hạn 23:59, 27 thg 9
-                    </div>
-                    <div class="ex-more-if">
-                        <i class="fas fa-ellipsis-v"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="example">
-                <div class="ex-left">
-                    <div class="ex-avt">
-                        <i class="far fa-bookmark"></i>
-                    </div>
-                    <div class="ex-title">Bài tập 1: Cài đặt môi trường phát triển</div>
-                </div>
-                <div class="ex-right">
-                    <div class="ex-date-up">
-                        Đến hạn 23:59, 27 thg 9
-                    </div>
-                    <div class="ex-more-if">
-                        <i class="fas fa-ellipsis-v"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="example">
-                <div class="ex-left">
-                    <div class="ex-avt">
-                        <i class="far fa-bookmark"></i>
-                    </div>
-                    <div class="ex-title">Bài tập 1: Cài đặt môi trường phát triển</div>
-                </div>
-                <div class="ex-right">
-                    <div class="ex-date-up">
-                        Đến hạn 23:59, 27 thg 9
-                    </div>
-                    <div class="ex-more-if">
-                        <i class="fas fa-ellipsis-v"></i>
-                    </div>
-                </div>
-            </div>
+            @foreach($lopHoc->dsBaiDang as $baiDang)
+                @if($baiDang->loai_bai_dang_id == 2)
+                    <a href="{{ route('sv-chi-tiet-bai-dang',['id' => $baiDang->id,'type' => $baiDang->loai_bai_dang_id,'lop_hoc_id' => $lopHoc->id]) }}">
+                        <div class="example">
+                            <div class="ex-left">
+                                <div class="ex-avt">
+                                    <i class="far fa-bookmark"></i>
+                                </div>
+                                <div class="ex-title">{{ $baiDang->tieu_de }}</div>
+                            </div>
+                            <div class="ex-right">
+                                @if( $baiDang->han_nop != null)
+                                    <div class="ex-date-up">
+                                        Ngày đến hạn:
+                                        @php 
+                                            echo date_format (new DateTime($baiDang->han_nop), 'd-m-Y');
+                                        @endphp
+                                    </div>
+                                    
+                                @else
+                                    <div class="ex-date-up">
+                                        Không có ngày đến hạn
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
+                    </a>
+                @endif
+            @endforeach  
             <!-- End Example -->
-
             <!-- End Post -->
         </div>
     </div>
-
-    <script src="../asset/js/style.js"></script>
+    <div class="box mt-5"></div>
 </body>
-
+<script src="../asset/js/style.js"></script>
 </html>
