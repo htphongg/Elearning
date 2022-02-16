@@ -17,16 +17,16 @@ class NguoiDungSeeder extends Seeder
     public function run()
     {
         $ngDung = new NguoiDung();
-        $ngDung->ho_ten = 'Hồ Thanh Phúc';
+        $ngDung->ho_ten = 'Giảng Viên Clone';
         $ngDung->ngay_sinh = '2001-1-1';
         $ngDung->gioi_tinh = 'Nam';
         $ngDung->dia_chi = 'Hồ Chí Minh';
-        $ngDung->sdt = '564561';
-        $ngDung->email = '0306191259@caothang.edu.vn';
-        $ngDung->ten_dang_nhap = 'htphuc';
+        $ngDung->sdt = '65653';
+        $ngDung->email = 'gvclone@caothang.edu.vn';
+        $ngDung->ten_dang_nhap = 'gvclone';
         $ngDung->password = Hash::make('123456');
         $ngDung->token = Str::random(10);
-        $ngDung->loai_nguoi_dung_id = 1;
+        $ngDung->loai_nguoi_dung_id = 2;
         $ngDung->save();
     }
 }

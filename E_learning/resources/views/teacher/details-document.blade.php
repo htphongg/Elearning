@@ -30,7 +30,7 @@
         <div class="dra-header">
             <div class="dra-item">
                 <i class="fas fa-home icon"></i>
-                <a href="../index.html">Lớp học</a>
+                <a href="{{ route('gv-trang-chu') }}">Lớp học</a>
             </div>
             <div class="dra-item">
                 <i class="far fa-calendar icon"></i>
@@ -76,7 +76,6 @@
         </div>
     </div>
     <!-- End Drawer details -->
-
     <div id="container">
         <div class="post">
             <div class="post-title">
@@ -85,7 +84,7 @@
                 </div>
                 <div class="post-text">
                     <span>{{ $baiDang->tieu_de }}</span>
-                    <p>Tên giảng viên • @php echo date_format (new DateTime($baiDang->created_at), 'd/m/Y'); @endphp </p>
+                    <p>{{ $lopHoc->dsNguoiDung->where('loai_nguoi_dung_id','=',2)->first()->ho_ten }} • @php echo date_format (new DateTime($baiDang->created_at), 'd/m/Y'); @endphp </p>
                 </div>
             </div>
             <div class="line"><hr></div>
@@ -97,8 +96,8 @@
                 @if(count($baiDang->dsDinhKem) == 0)
                     <p>Không có tệp đính kèm nào.</p>
                 @else
-                    @foreach($baiDang->dsDinhKem as $dinhKem)
-                        {{$dinhKem->dinh_kem}};
+                    @foreach($baiDang->dsDinhKem as $dkem)
+                        <embed src='{{ asset("../dinhkem/post/$dkem->dinh_kem") }}' width="100%" height="500px" />
                     @endforeach
                 @endif 
             </div>
@@ -108,44 +107,33 @@
                     <i class="fas fa-user-friends"></i>
                     <p>Nhận xét của lớp học</p>
                 </div>
-                <div class="comment mt-2 mb-2">
-                    <div class="comment-avt">
-                        <i class="far fa-user-circle mr-3"></i>
+                @foreach($baiDang->dsBinhLuan as $cmt)
+                    <div class="comment mt-2 mb-2">
+                        <div class="comment-avt">
+                            <i class="far fa-user-circle mr-3"></i>
+                        </div>
+                        <div class="comment-content">
+                            <p class="mb-0 font-weight-bold">{{$cmt->nguoiDung->ho_ten}}</p>
+                            <p class="mb-0">{{$cmt->noi_dung}}</p>
+                        </div>
                     </div>
-                    <div class="comment-content">
-                        <p class="mb-0 font-weight-bold">Huỳnh Thanh Phong</p>
-                        <p class="mb-0">sdhgfádjfhákjfslfkjhsdakfáDjfsdạkfsdkjfgsdhjklf</p>
-                    </div>
-                </div>
-                <div class="comment mt-2 mb-2">
-                    <div class="comment-avt">
-                        <i class="far fa-user-circle mr-3"></i>
-                    </div>
-                    <div class="comment-content">
-                        <p class="mb-0 font-weight-bold">Huỳnh Thanh Phong • </p>
-                        <p class="mb-0">sdhgfádjfhákjfslfkjhsdakfáDjfsdạkfsdkjfgsdhjklf</p>
-                    </div>
-                </div>
-                <div class="comment mt-2 mb-2">
-                    <div class="comment-avt">
-                        <i class="far fa-user-circle mr-3"></i>
-                    </div>
-                    <div class="comment-content">
-                        <p class="mb-0 font-weight-bold">Huỳnh Thanh Phong</p>
-                        <p class="mb-0">sdhgfádjfhákjfslfkjhsdakfáDjfsdạkfsdkjfgsdhjklf</p>
-                    </div>
-                </div>
+                @endforeach
             </div>
             <div class="line"><hr>
                 <div class="post-cmt-title">
                     <p>Nhận xét của bạn:</p>
                 </div>
             </div>
-            <form action="#">
+            <form action=" {{ route('gv-binh-luan',['bai_dang_id' => $baiDang->id, 'lop_hoc_id' => $lopHoc->id ]) }}" method = "post">
+                @csrf
                 <div class="user-cmt">
                     <div class="user-cmt-left w-100">
                         <i class="far fa-user-circle"></i>
-                        <input  class="w-100" type="text" name="user_comment">
+                        <input  class="w-100 mr-2" type="text" name="user_comment">
+                        <label for="images">
+                            <i class="fas fa-camera mt-2"> </i>
+                        </label>
+                        <input style="display: none;" type="file" id="images" name="images">
                     </div>
                     <div class="user-cmt-right">
                         <button type="submit" class="btn btn-info"><i class="far fa-paper-plane"></i></button>
@@ -154,6 +142,21 @@
             </form>
         </div>
     </div>
+    <div id="toast"></div>
 </body>
+<script src="{{ asset('../asset/js/showNoti.js') }}"></script>
+<script>
+    if( {{ Session::has('success') }} )
+    {
+        showSuccessToast( 'Thành công',"{{ Session::get('success') }} ");
+    }
+    
+</script>
+<script>
+    if( {{ Session::has('error') }} )
+    {
+        showErrorToast( 'Lỗi',"{{ Session::get('error') }}");
+    }   
+</script>
 <script src="{{ asset('../asset/js/style.js') }}"></script>
 </html>

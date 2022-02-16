@@ -12,7 +12,7 @@ use App\Models\PhongChoLopHoc;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Hash;
-
+use App\Models\BinhLuan;
 class SinhVienController extends Controller
 {
     public function layDsLop()
@@ -174,8 +174,6 @@ class SinhVienController extends Controller
         return view('./student/everybody', compact('lopHoc', 'dsLopDaVao'));
     }
 
-
-
     public function thamGiaLop()
     {
         return view('./student/addclass');
@@ -194,7 +192,10 @@ class SinhVienController extends Controller
 
             if($user != null)
             {
-                return redirect()->route('sv-trang-chu')->with('error','Bạn đã tham gia lớp học này rồi.');
+                if($user->trang_thai == 0)
+                    return redirect()->route('sv-trang-chu')->with('error','Bạn đã xin tham gia lớp này rồi. Hãy chờ giảng viên cho phép bạn vào lớp.');
+                else
+                    return redirect()->route('sv-trang-chu')->with('error','Bạn đã tham gia lớp học này rồi.');
             }
             else
             {
@@ -233,14 +234,14 @@ class SinhVienController extends Controller
 
                 //Lấy bài đăng
                 $baiDang = BaiDang::find($bai_dang_id);
-                
+          
                 return view('./student/details-homework',compact('lopHoc','dsLopDaVao','baiDang'));
             }
             if($loai_bai_dang_id == 1 || $loai_bai_dang_id == 3)
             {
                 //Lấy dsLop đã tham gia
                 $nguoi_dung_id = Auth::id();
-                $dsLopDaVao =[];
+                $dsLopDaVao =[];            
             
                 $dsLop = NguoiDung::find($nguoi_dung_id)->dsLopHoc;
                 
@@ -272,6 +273,26 @@ class SinhVienController extends Controller
         }
         else
             return redirect()->back()->with('error','Thao tác thất bại');
+    }
+
+    public function binhLuan(Request $req, $bai_dang_id, $lop_hoc_id)
+    {
+        
+        if($req->user_comment != null || $req->user_comment != '')
+        {
+            $binhLuan  = new BinhLuan();
+
+            $binhLuan->bai_dang_id = $bai_dang_id;
+            $binhLuan->lop_hoc_id = $lop_hoc_id;
+            $binhLuan->nguoi_dung_id = Auth::id();
+            $binhLuan->noi_dung = $req->user_comment;
+
+            $binhLuan->save();
+
+            return redirect()->back()->with('success','Nhận xét thành công.');
+        }
+        else
+            return redirect()->back()->with('error','Nhận xét thất bại.');
     }
 
     public function dangXuat()

@@ -22,5 +22,9 @@ class NguoiDung extends Authenticatable
         //chi_tiet_lop_hoc.lop_hoc_id = lop_hoc.id AND
         //chi_tiet_lop_hoc.nguoi_dung_id = nguoi_dung.id
     }
+    public function dsBinhLuan()
+    {
+        return $this->hasMany('App\Models\BinhLuan');
+    }
 
 }
