@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Classroom</title>
+    <title>Cập nhật thông tin giảng viên</title>
     <link rel="stylesheet" href="{{ asset('../asset/css/function-style-admin.css') }}">
     <link rel="stylesheet" href="{{ asset('../lib/bootstrap/css/bootstrap.css') }}">
     <link rel="stylesheet" href="{{ asset('../lib/fontawesome/css/all.css') }}">
@@ -22,11 +22,6 @@
             </div>
             <span class="webname">Lớp học</span>
         </div>
-        <!-- <div class="right">
-            <div class="addclass">
-                <a href="{{ route('ad-them-moi-gv') }}"><i class="fas fa-plus"></i></a>
-            </div>
-        </div> -->
     </div>
     <div class="dra-details">
         <div class="dra-header">
@@ -53,9 +48,21 @@
                 <div class="dra-item-avt icon">L</div>
                 <a href="">Lớp Học</a>
             </div>
+            <div class="dra-item">
+                <div class="dra-item-avt icon">B</div>
+                <a href="{{ route('ad-ds-bai-dang') }}">Bài Đăng</a>
+            </div>
         </div>
         <hr>
         <div class="dra-footer">
+            <div class="dra-item">
+                <i class="fas fa-user-circle icon"></i>
+                <a href="{{ route('ad-cap-nhat-thong-tin') }}">Cập nhật thông tin cá nhân</a>
+            </div>
+            <div class="dra-item">
+                <i class="fas fa-exchange-alt icon"></i>
+                <a href="{{ route('ad-doi-mat-khau') }}">Thay đổi mật khẩu</a>
+            </div>
             <div class="dra-item">
                 <i class="fas fa-sign-out-alt icon"></i>
                 <a href="{{ route('ad-dang-xuat') }}">Đăng xuất</a>
@@ -128,10 +135,10 @@
                         <div class="valid-feedback">Valid.</div>
                         <div class="invalid-feedback">Please fill out this field.</div>
                     </div>
-                   <div class="btn-sub">
+                    <div class="btn-sub">
                         <button type="submit" class="btn btn-primary">Lưu</button>
                         <a href="{{ route('ad-ds-giang-vien') }}" class="btn btn-danger">Quay lại</a>
-                   </div>
+                    </div>
                 </form>
             </div>
         </div>
@@ -139,4 +146,5 @@
     </div>
     <script src="{{ asset('../asset/js/style.js') }}"></script>
 </body>
+
 </html>
