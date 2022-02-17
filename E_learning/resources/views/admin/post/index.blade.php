@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Danh sách giảng viên</title>
+    <title>Classroom</title>
     <link rel="stylesheet" href="../asset/css/style-admin.css">
     <link rel="stylesheet" href="../lib/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="../lib/fontawesome/css/all.css">
@@ -23,9 +23,7 @@
             <span class="webname">Lớp học</span>
         </div>
         <div class="right">
-            <div class="addclass">
-                <a href="{{ route('ad-them-moi-gv') }}"><i class="fas fa-plus"></i></a>
-            </div>
+
         </div>
     </div>
     <div class="dra-details">
@@ -60,7 +58,6 @@
         </div>
         <hr>
         <div class="dra-footer">
-
             <div class="dra-item">
                 <i class="fas fa-user-circle icon"></i>
                 <a href="{{ route('ad-cap-nhat-thong-tin') }}">Cập nhật thông tin cá nhân</a>
@@ -80,38 +77,71 @@
         <div id="body">
             <div class="top mt-5 "> </div>
             <div class="content">
-                <h2 class="text-center mb-3">Danh Sách Giảng Viên</h2>
+                <h2 class="text-center mb-3">Danh Sách Bài Đăng</h2>
+                <form action="{{ route('ad-loc') }}" method="POST">
+                    @csrf
+                    <h6 class="title-dropdown1">Loại bài đăng:</h6>
+                    <select name="loai_bai_dang" id="dropdown-type">
+                        <option value="0">Tất cả</option>
+                        @foreach ($ds_loai as $loaibaidang)
+                            <option value="{{ $loaibaidang->id }}"
+                                {{ $loaibaidang->id == $index_baidang ? 'selected' : '' }}>
+                                {{ $loaibaidang->ten_loai }}</option>
+                        @endforeach
+                    </select>
+                    <h6 class="title-dropdown2">Lớp:</h6>
+                    <select name="lop_hoc" id="dropdown-class">
+                        <option value="0" selected>Tất cả</option>
+                        @foreach ($ds_baidang_cuaLop as $baidangcualop)
+                            <option value="{{ $baidangcualop->id }}"
+                                {{ $baidangcualop->id == $index_lophoc ? 'selected' : '' }}>
+                                {{ $baidangcualop->ten_lop }}
+                            </option>
+                        @endforeach
+                    </select>
+                    <button id="btn-filter" type="submit">Lọc</button>
+                </form>
                 <Table class="table text-center table-bordered">
-                    <thead class="table-dark">
+                    <thead class="table-dark ">
                         <tr>
-                            <th>Họ tên</th>
-                            <th>Ngày sinh</th>
-                            <th>Giới tính</th>
-                            <th>Địa chỉ</th>
-                            <th>Số điện thoại</th>
-                            <th>Email</th>
-                            <th>Tên đăng nhập</th>
+                            <th>Tiêu đề</th>
+                            <th>Nội dung</th>
+                            <th>Hạn nộp</th>
+                            <th>Loại</th>
+                            <th>Lớp</th>
                             <th>Chức năng</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($dsGV as $GV)
+                        @forelse ($ds_baidang as $baidang)
                             <tr>
-                                <td>{{ $GV->ho_ten }}</td>
-                                <td>{{ Date_format(new Datetime($GV->ngay_sinh), 'd-m-Y') }}</td>
-                                <td>{{ $GV->gioi_tinh }}</td>
-                                <td>{{ $GV->dia_chi }}</td>
-                                <td>{{ $GV->sdt }}</td>
-                                <td>{{ $GV->email }}</td>
-                                <td>{{ $GV->ten_dang_nhap }}</td>
+                                <td>{{ $baidang->tieu_de }}</td>
+                                <td class="text-left">{{ substr($baidang->noi_dung, 0, 30) }}</td>
                                 <td>
-                                    <a class="btn btn-success"
-                                        href="{{ route('ad-cap-nhat-gv', ['id' => $GV->id]) }}">Sửa</a>
-                                    <a class="btn btn-danger" onclick="return confirm('Bạn có chắc muốn xóa?')"
-                                        href="{{ route('ad-xoa-bo-gv', ['id' => $GV->id]) }}">Xóa</a>
+                                    @if ($baidang->han_nop != null)
+                                        {{ Date_format(new Datetime($baidang->han_nop), 'H:i:A d-m-Y') }}
+                                    @endif
+
                                 </td>
+                                <td>
+                                    {{ $baidang->loaiBaiDang->ten_loai }}
+                                </td>
+                                <td>
+                                    {{ $baidang->lopHoc->ten_lop }}
+                                </td>
+                                <td><a href="{{ route('ad-chi-tiet-bai-dang', ['id' => $baidang->id]) }}"
+                                        class="btn btn-primary">Xem chi
+                                        tiết</a>
+                                    <a href="{{ route('ad-xoa-bo-bd', ['id' => $baidang->id]) }}"
+                                        onclick="return confirm('Bạn có chắc muốn xóa?')" class="btn btn-danger">Xóa</a>
+                                </td>
+
                             </tr>
-                        @endforeach
+                        @empty
+                            <tr>
+                                <td colspan="6">không có dữ liệu</td>
+                            </tr>
+                        @endforelse
                     </tbody>
                 </Table>
 
@@ -122,7 +152,6 @@
 
         </div>
     </div>
-
     <script src="../asset/js/style.js"></script>
 </body>
 

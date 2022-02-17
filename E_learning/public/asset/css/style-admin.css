@@ -73,10 +73,11 @@
     font-size: 22px;
 }
 
-#body {
-}
+#body {}
+
 
 /* Drawer details */
+
 .dra-details.open {
     display: block;
 }
@@ -172,7 +173,10 @@
     height: auto;
     margin: 8px 8px 8px 0px;
 }
+
+
 /* End Drawer details */
+
 
 /* #line {
     padding-top: 65px;
@@ -296,8 +300,50 @@
     font-size: 20px;
 }
 
-#footer {
+#body .content .title-dropdown1 {
+    float: right;
+    position: relative;
+    right: 460px;
 }
+
+#dropdown-type {
+    position: absolute;
+    right: 380px;
+    width: 100px;
+}
+
+#body .content .title-dropdown2 {
+    float: right;
+    position: relative;
+    right: 205px;
+}
+
+#dropdown-class {
+    position: absolute;
+    right: 80px;
+    width: 245px;
+}
+
+#btn-filter {
+    position: absolute;
+    right: 25px;
+    padding: 0;
+    width: 50px;
+    height: 25px;
+    background-color: lightslategray;
+    color: white;
+    padding-bottom: 5px;
+}
+
+
+/* 
+#body .content .detail .detail-content .container-content .showcontent {
+    border: 0;
+    background-color: white;
+    width: 300px;
+} */
+
+#footer {}
 
 @keyframes drawerFaceIn {
     from {

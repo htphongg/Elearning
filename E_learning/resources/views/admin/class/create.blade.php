@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Classroom</title>
+    <title>Thêm mới lớp</title>
     <link rel="stylesheet" href="../asset/css/function-style-admin.css">
     <link rel="stylesheet" href="../lib/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="../lib/fontawesome/css/all.css">
@@ -50,9 +50,21 @@
                 <div class="dra-item-avt icon">L</div>
                 <a href="">Lớp Học</a>
             </div>
+            <div class="dra-item">
+                <div class="dra-item-avt icon">B</div>
+                <a href="{{ route('ad-ds-bai-dang') }}">Bài Đăng</a>
+            </div>
         </div>
         <hr>
         <div class="dra-footer">
+            <div class="dra-item">
+                <i class="fas fa-user-circle icon"></i>
+                <a href="{{ route('ad-cap-nhat-thong-tin') }}">Cập nhật thông tin cá nhân</a>
+            </div>
+            <div class="dra-item">
+                <i class="fas fa-exchange-alt icon"></i>
+                <a href="{{ route('ad-doi-mat-khau') }}">Thay đổi mật khẩu</a>
+            </div>
             <div class="dra-item">
                 <i class="fas fa-sign-out-alt icon"></i>
                 <a href="{{ route('ad-dang-xuat') }}">Đăng xuất</a>
@@ -71,7 +83,8 @@
                     @csrf
                     <div class="form-group">
                         <label for="code">Mã lớp:</label>
-                        <input type="text" class="form-control" value="{{ Str::random(6) }}" name="ma_lop" required disabled>
+                        <input type="text" class="form-control" value="{{ Str::random(6) }}" name="ma_lop" required
+                            disabled>
                         <div class="valid-feedback">Valid.</div>
                         <div class="invalid-feedback">Please fill out this field.</div>
                     </div>
@@ -100,4 +113,5 @@
     </div>
     <script src="../asset/js/style.js"></script>
 </body>
+
 </html>
