@@ -8,11 +8,79 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 use App\Models\NguoiDung;
 use App\Models\LopHoc;
+use App\Models\BaiDang;
+use App\Models\LoaiBaiDang;
+use App\Models\DinhKemBaiDang;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
+    // public function LayThongtin()
+    // {
+    //     $thongtinAdmin = NguoiDung::all()->where('loai_nguoi_dung_id', '0');
+    //     return view('./admin/index', compact('thongtinAdmin'));
+    // }
+
+    public function formCapNhatThongTinCaNhan()
+    {
+        if (Auth::check()) {
+            $id = Auth::id();
+            $ngDung = NguoiDung::find($id);
+            return view('./admin/update-infor', ['ngDung' => $ngDung]);
+        }
+    }
+
+    public function xuLyCapNhatThongTinCaNhan(Request $req)
+    {
+        if ($req->nguoi_dung_id != null) {
+            $ngDung = NguoiDung::find($req->nguoi_dung_id);
+
+            $ngDung->dia_chi = $req->address;
+
+            $ng = NguoiDung::where('email', '=', $req->email)->first();
+
+            if ($ng != null) {
+                return redirect()->route('ad-xl-cap-nhat-thong-tin', ['nguoi_dung_id' => $req->nguoi_dung_id])->with('error', 'Email đã được sử dụng');
+            } else {
+                $ngDung->email = $req->email;
+            }
+
+            $ngDung->save();
+
+            return redirect()->route('ad-trang-chu')->with('success', 'Cập nhật thông tin cá nhân thành công');
+        }
+        return redirect()->route('ad-trang-chu')->with('error', 'Xác thực người dùng thất bại');
+    }
+
+    public function formDoiMatKhau()
+    {
+        if (Auth::check()) {
+            $id = Auth::id();
+            $ngDung = NguoiDung::find($id);
+            return view('./admin/change-password', ['ngDung' => $ngDung]);
+        }
+    }
+
+    public function xuLyDoiMatKhau(Request $req)
+    {
+        $ngDung = NguoiDung::find($req->nguoi_dung_id);
+
+        if (Hash::check($req->old_password, $ngDung->password)) {
+            if (strcmp($req->new_password, $req->cf_new_password) == 0) {
+                $ngDung->password = Hash::make($req->new_password);
+                $ngDung->save();
+                Auth::logout();
+                return redirect()->route('dang-nhap')->with('success', 'Đổi mật khâu thành công. Hãy đăng nhập lại');
+            } else {
+                return redirect()->route('ad-xl-doi-mat-khau')->with('error', 'Xác nhận mật khẩu mới không đÚng');
+            }
+        } else {
+            return redirect()->route('ad-xl-doi-mat-khau')->with('error', 'Mật khẩu cũ không đúng');
+        }
+        return redirect()->route('ad-trang-chu')->with('error', 'Xác thực người dùng thất bại');
+    }
+
     public function dangXuat()
     {
         Session::flush();
@@ -152,20 +220,20 @@ class AdminController extends Controller
         $dsLH = LopHoc::all();
         return view('./admin/class/index', compact('dsLH'));
     }
-    public function formThemMoiLH()
-    {
-        return view('./admin/class/create');
-    }
-    public function xlThemMoiLH(Request $rq)
-    {
-        $lop = new LopHoc();
-        $lop->ma_lop = $rq->ma_lop;
-        $lop->ten_lop = $rq->ten_lop;
-        $lop->mo_ta = $rq->mo_ta;
-        $lop->anh_nen_id = 1;
-        $lop->save();
-        return redirect()->route('ad-ds-lop');
-    }
+    // public function formThemMoiLH()
+    // {
+    //     return view('./admin/class/create');
+    // }
+    // public function xlThemMoiLH(Request $rq)
+    // {
+    //     $lop = new LopHoc();
+    //     $lop->ma_lop = $rq->ma_lop;
+    //     $lop->ten_lop = $rq->ten_lop;
+    //     $lop->mo_ta = $rq->mo_ta;
+    //     $lop->anh_nen_id = 1;
+    //     $lop->save();
+    //     return redirect()->route('ad-ds-lop');
+    // }
 
     public function formCapNhatLH($id)
     {
@@ -176,18 +244,17 @@ class AdminController extends Controller
         return view('./admin/class/edit', compact('dsLH'));
     }
 
-    public function xlCapnhatLH(Request $rq, $id)
-    {
-        $LH = LopHoc::find($id);
-        if ($LH == null) {
-            return "không tìm thấy lớp học có ID = {$id} ";
-        }
-        $LH->ten_lop = $rq->ten_lop;
-        $LH->mo_ta = $rq->mo_ta;
-        $LH->save();
-        return redirect()->route('ad-ds-lop');
-    }
-
+    // public function xlCapnhatLH(Request $rq, $id)
+    // {
+    //     $LH = LopHoc::find($id);
+    //     if ($LH == null) {
+    //         return "không tìm thấy lớp học có ID = {$id} ";
+    //     }
+    //     $LH->ten_lop = $rq->ten_lop;
+    //     $LH->mo_ta = $rq->mo_ta;
+    //     $LH->save();
+    //     return redirect()->route('ad-ds-lop');
+    // }
 
     public function xlXoaLH($id)
     {
@@ -197,5 +264,72 @@ class AdminController extends Controller
         }
         $dsLH->delete();
         return redirect()->route('ad-ds-lop');
+    }
+
+    public function XemChiTietLop($id)
+    {
+        $chitietlop = LopHoc::find($id);
+        if ($chitietlop == null) {
+            return "Không có bài đăng có ID = {$id} này ";
+        }
+        return view('./admin/class/detail', compact('chitietlop'));
+    }
+
+    public function LayDSBaiDang()
+    {
+        $index_baidang = 0;
+        $index_lophoc = 0;
+        $ds_loai = LoaiBaiDang::all();
+        $ds_baidang_cuaLop = LopHoc::all();
+        $ds_baidang = BaiDang::all();
+        return view('./admin/post/index', compact('ds_baidang', 'ds_baidang_cuaLop', 'ds_loai'), ['index_baidang' => $index_baidang, 'index_lophoc' => $index_lophoc]);
+    }
+    public function LocDuLieu(Request $rq)
+    {
+        $ds_loai = LoaiBaiDang::all();
+        $ds_baidang_cuaLop = LopHoc::all();
+        $ds_baidang = BaiDang::all();
+        $index_baidang = $rq->loai_bai_dang;
+        $index_lophoc = $rq->lop_hoc;
+        if ($rq->loai_bai_dang == "0" && $rq->lop_hoc == "0") {
+            return view('./admin/post/index', compact('ds_baidang', 'ds_baidang_cuaLop', 'ds_loai'), ['index_baidang' => $index_baidang, 'index_lophoc' => $index_lophoc]);
+        } else {
+
+            $loai = LoaiBaiDang::find($rq->loai_bai_dang);
+            $baidang_cuaLop = LopHoc::find($rq->lop_hoc);
+            //lọc theo lớp nếu người dùng chọn bài đăng là tất cả
+            if ($rq->loai_bai_dang == "0") {
+                //dd('kkkkk');
+                $ds_baidang = BaiDang::where('lop_hoc_id', $baidang_cuaLop->id)->get();
+                return view('./admin/post/index', compact('ds_baidang', 'ds_baidang_cuaLop', 'ds_loai'), ['index_baidang' => $index_baidang, 'index_lophoc' => $index_lophoc]);
+            }
+
+            //lọc theo bài đăng nếu người dùng chọn lớp là tất cả
+            if ($rq->lop_hoc == "0") {
+                $ds_baidang = BaiDang::where('loai_bai_dang_id',  $loai->id)->get();
+                return view('./admin/post/index', compact('ds_baidang', 'ds_baidang_cuaLop', 'ds_loai'), ['index_baidang' => $index_baidang, 'index_lophoc' => $index_lophoc]);
+            }
+
+            $ds_baidang = BaiDang::where([['loai_bai_dang_id',  $loai->id], ['lop_hoc_id', $baidang_cuaLop->id]])->get();
+            return view('./admin/post/index', compact('ds_baidang', 'ds_baidang_cuaLop', 'ds_loai'), ['index_baidang' => $index_baidang, 'index_lophoc' => $index_lophoc]);
+        }
+    }
+    public function XemChiTietBaiDang($id)
+    {
+        $chitietbaidang = BaiDang::find($id);
+        $dinhkem = DinhKemBaiDang::all();
+        if ($chitietbaidang == null) {
+            return "Không có bài đăng có ID = {$id} này ";
+        }
+        return view('./admin/post/detail', compact('chitietbaidang'));
+    }
+    public function xlXoaBaiDang($id)
+    {
+        $baidang = BaiDang::find($id);
+        if ($baidang == null) {
+            return "không tìm thấy bài đăng có ID = {$id} ";
+        }
+        $baidang->delete();
+        return redirect()->route('ad-ds-bai-dang');
     }
 }

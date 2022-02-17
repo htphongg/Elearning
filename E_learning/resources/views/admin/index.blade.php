@@ -48,20 +48,20 @@
                 <div class="dra-item-avt icon">L</div>
                 <a href="{{ route('ad-ds-lop') }}">Lớp Học</a>
             </div>
+            <div class="dra-item">
+                <div class="dra-item-avt icon">B</div>
+                <a href="{{ route('ad-ds-bai-dang') }}">Bài Đăng</a>
+            </div>
         </div>
         <hr>
         <div class="dra-footer">
             <div class="dra-item">
-                <i class="fas fa-cog icon"></i>
-                Cài đặt
-            </div>
-            <div class="dra-item">
                 <i class="fas fa-user-circle icon"></i>
-                <a href="#">Cập nhật thông tin cá nhân</a>
+                <a href="{{ route('ad-cap-nhat-thong-tin') }}">Cập nhật thông tin cá nhân</a>
             </div>
             <div class="dra-item">
                 <i class="fas fa-exchange-alt icon"></i>
-                <a href="#">Thay đổi mật khẩu</a>
+                <a href="{{ route('ad-doi-mat-khau') }}">Thay đổi mật khẩu</a>
             </div>
             <div class="dra-item">
                 <i class="fas fa-sign-out-alt icon"></i>
@@ -88,7 +88,7 @@
             </ul>
        </div> -->
     </div>
-
+    <div id="toast"></div>
     <script src="../asset/js/style.js"></script>
 </body>
 

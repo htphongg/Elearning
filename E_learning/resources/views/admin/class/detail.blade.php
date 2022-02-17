@@ -4,11 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Danh sách lớp</title>
-    <link rel="stylesheet" href="../asset/css/style-admin.css">
-    <link rel="stylesheet" href="../lib/bootstrap/css/bootstrap.css">
-    <link rel="stylesheet" href="../lib/fontawesome/css/all.css">
+    <meta name="viewport" content="wispanh=device-wispanh, initial-scale=1.0">
+    <title>Cập nhật thông tin sinh viên</title>
+    <link rel="stylesheet" href="{{ asset('../asset/css/function-style-admin.css') }}">
+    <link rel="stylesheet" href="{{ asset('../lib/bootstrap/css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ asset('../lib/fontawesome/css/all.css') }}">
 </head>
 
 <body>
@@ -18,7 +18,7 @@
                 <i class="fas fa-bars"></i>
             </div>
             <div class="logo">
-                <img src="../asset/img/googlelogo_clr_74x24px.svg" alt="">
+                <img src="{{ asset('../asset/img/googlelogo_clr_74x24px.SVg') }}" alt="">
             </div>
             <span class="webname">Lớp học</span>
         </div>
@@ -49,7 +49,7 @@
             </div>
             <div class="dra-item">
                 <div class="dra-item-avt icon">L</div>
-                <a href="{{ route('ad-ds-lop') }}">Lớp Học</a>
+                <a href="">Lớp Học</a>
             </div>
             <div class="dra-item">
                 <div class="dra-item-avt icon">B</div>
@@ -72,50 +72,46 @@
             </div>
         </div>
     </div>
-    <!-- <div id="line">
-        <hr>
-    </div> -->
     <div id="container">
         <div id="body">
-            <div class="top"> </div>
+            <div class="top"></div>
             <div class="content">
-                <h2 class="mb-3 text-center mt-5">Danh Sách Lớp</h2>
-                <table class="table table-bordered">
-                    <thead class="table-dark  text-center">
-                        <tr>
-                            <th>Mã lớp</th>
-                            <th>Tên lớp</th>
-                            <th>Mô tả</th>
-                            <th>Chức năng</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($dsLH as $LH)
-                            <tr>
-                                <td class="text-center">{{ $LH->ma_lop }}</td>
-                                <td>{{ $LH->ten_lop }}</td>
-                                <td>{{ $LH->mo_ta }}</td>
-                                <td class="text-center">
-                                    <a class="btn btn-primary"
-                                        href="{{ route('ad-chi-tiet-lop', ['id' => $LH->id]) }}">Xem chi tiết</a>
-                                    <a class="btn btn-danger" onclick="return confirm('Bạn có chắc muốn xóa?')"
-                                        href="{{ route('ad-xoa-bo-lh', ['id' => $LH->id]) }}">Xóa</a>
-                                </td>
-
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-
+                <h1 class="text-center">Chi tiết</h1>
+                <hr />
+                <div>
+                    <dl class="row">
+                        <span class="col-sm-2">
+                            Mã lớp
+                        </span>
+                        <span class="col-sm-10">
+                            {{ $chitietlop->ma_lop }}
+                        </span>
+                        <span class="col-sm-2">
+                            Tên lớp
+                        </span>
+                        <span class="col-sm-10">
+                            {{ $chitietlop->ten_lop }}
+                        </span>
+                        <span class="col-sm-2">
+                            Mô tả
+                        </span>
+                        <span class="col-sm-10">
+                            {{ $chitietlop->mo_ta }}
+                        </span>
+                        <span class="col-sm-2">
+                            Ngày tạo
+                        </span>
+                        <span class="col-sm-10">
+                            {{ Date_format(new Datetime($chitietlop->created_at), 'H:i:A d-m-Y') }}
+                        </span>
+                    </dl>
+                </div>
+                <a href="{{ route('ad-ds-lop') }}" class="btn btn-danger">Quay lại</a>
             </div>
         </div>
-
-        <div id="footer">
-
-        </div>
+        <div id="footer"></div>
     </div>
-
-    <script src="../asset/js/style.js"></script>
+    <script src="{{ asset('../asset/js/style.js') }}"></script>
 </body>
 
 </html>
