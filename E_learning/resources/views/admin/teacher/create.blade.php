@@ -86,7 +86,7 @@
                     <div class="form-group">
                         <label for="pwd">Mật khẩu:</label>
                         <input type="password" class="form-control" id="pwd" placeholder="Mật khẩu" name="password"
-                            required>
+                            minlength=6 required>
                         <div class="valid-feedback">Valid.</div>
                         <div class="invalid-feedback">Please fill out this field.</div>
                     </div>
