@@ -25,6 +25,8 @@
         <div class="right">
             <div class="addclass">
                 <a href="{{ route('ad-them-moi-gv') }}"><i class="fas fa-plus"></i></a>
+                <a href="{{ route('ad-them-moi-gv') }}" id="text">Thêm</a>
+
             </div>
         </div>
     </div>
