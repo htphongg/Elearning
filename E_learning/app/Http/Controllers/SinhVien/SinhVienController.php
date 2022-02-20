@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Hash;
 use App\Models\BinhLuan;
+
 class SinhVienController extends Controller
 {
     public function layDsLop()
@@ -170,24 +171,18 @@ class SinhVienController extends Controller
     public function xlthamGiaLop(Request $request)
     {
         $lop = LopHoc::where('ma_lop', '=', $request->codeclass)->first();
-        if($lop == null)
-        {
-            return redirect()->route('sv-trang-chu')->with('error','Không tìm thấy lớp học này');
-        }
-        else
-        {
-            $user = ChiTietLopHoc::where('lop_hoc_id','=',$lop->id)
-                                ->where('nguoi_dung_id','=',Auth::id())->first();
+        if ($lop == null) {
+            return redirect()->route('sv-trang-chu')->with('error', 'Không tìm thấy lớp học này');
+        } else {
+            $user = ChiTietLopHoc::where('lop_hoc_id', '=', $lop->id)
+                ->where('nguoi_dung_id', '=', Auth::id())->first();
 
-            if($user != null)
-            {
-                if($user->trang_thai == 0)
-                    return redirect()->route('sv-trang-chu')->with('error','Bạn đã xin tham gia lớp này rồi. Hãy chờ giảng viên cho phép bạn vào lớp.');
+            if ($user != null) {
+                if ($user->trang_thai == 0)
+                    return redirect()->route('sv-trang-chu')->with('error', 'Bạn đã xin tham gia lớp này rồi. Hãy chờ giảng viên cho phép bạn vào lớp.');
                 else
-                    return redirect()->route('sv-trang-chu')->with('error','Bạn đã tham gia lớp học này rồi.');
-            }
-            else
-            {
+                    return redirect()->route('sv-trang-chu')->with('error', 'Bạn đã tham gia lớp học này rồi.');
+            } else {
                 $ctLopHoc = new ChiTietLopHoc();
                 $ctLopHoc->lop_hoc_id = $lop->id;
                 $ctLopHoc->nguoi_dung_id = Auth::id();
@@ -228,8 +223,8 @@ class SinhVienController extends Controller
             if ($loai_bai_dang_id == 1 || $loai_bai_dang_id == 3) {
                 //Lấy dsLop đã tham gia
                 $nguoi_dung_id = Auth::id();
-                $dsLopDaVao =[];            
-            
+                $dsLopDaVao = [];
+
                 $dsLop = NguoiDung::find($nguoi_dung_id)->dsLopHoc;
 
                 foreach ($dsLop as $lop) {
@@ -260,25 +255,23 @@ class SinhVienController extends Controller
             return redirect()->back()->with('error', 'Thao tác thất bại');
     }
 
-    public function binhLuan(Request $req, $bai_dang_id, $lop_hoc_id)
-    {
-        
-        if($req->user_comment != null || $req->user_comment != '')
-        {
-            $binhLuan  = new BinhLuan();
+    // public function binhLuan(Request $req, $bai_dang_id, $lop_hoc_id)
+    // {
 
-            $binhLuan->bai_dang_id = $bai_dang_id;
-            $binhLuan->lop_hoc_id = $lop_hoc_id;
-            $binhLuan->nguoi_dung_id = Auth::id();
-            $binhLuan->noi_dung = $req->user_comment;
+    //     if ($req->user_comment != null || $req->user_comment != '') {
+    //         $binhLuan  = new BinhLuan();
 
-            $binhLuan->save();
+    //         $binhLuan->bai_dang_id = $bai_dang_id;
+    //         $binhLuan->lop_hoc_id = $lop_hoc_id;
+    //         $binhLuan->nguoi_dung_id = Auth::id();
+    //         $binhLuan->noi_dung = $req->user_comment;
 
-            return redirect()->back()->with('success','Nhận xét thành công.');
-        }
-        else
-            return redirect()->back()->with('error','Nhận xét thất bại.');
-    }
+    //         $binhLuan->save();
+
+    //         return redirect()->back()->with('success', 'Nhận xét thành công.');
+    //     } else
+    //         return redirect()->back()->with('error', 'Nhận xét thất bại.');
+    // }
 
     public function dangXuat()
     {
@@ -287,7 +280,7 @@ class SinhVienController extends Controller
         return redirect()->route('dang-nhap');
     }
 
-    public function vietBinhLuan(Request $req, $bai_dang_id, $loai_bai_dang_id, $lop_hoc_id)
+    public function vietBinhLuan(Request $req, $bai_dang_id)
     {
         if (trim($req->user_comment) != '') {
             $idNgDung = Auth::id();
@@ -298,33 +291,9 @@ class SinhVienController extends Controller
             $binhluan->noi_dung = $req->user_comment;
             $binhluan->save();
 
-            $nguoi_dung_id = Auth::id();
-            $dsLopDaVao = [];
-
-            $dsLop = NguoiDung::find($nguoi_dung_id)->dsLopHoc;
-
-            foreach ($dsLop as $lop) {
-                if ($lop->pivot->trang_thai == 1)
-                    array_push($dsLopDaVao, $lop);
-            }
-
-            //Lấy thông tin lớp học hiện tại
-            $lopHoc = LopHoc::find($lop_hoc_id);
-
-            //Lấy bài đăng
-            $baiDang = BaiDang::find($bai_dang_id);
-
-            $cmt = BinhLuan::where('bai_dang_id', '=', $bai_dang_id)->get();
-
-            if ($loai_bai_dang_id == 1 || $loai_bai_dang_id == 3) {
-                return redirect()->back();
-                //return view('./student/details-document', compact('lopHoc', 'dsLopDaVao', 'baiDang', 'cmt', 'bai_dang_id', 'loai_bai_dang_id'));
-            }
-
-            if ($loai_bai_dang_id == 2) {
-                return redirect()->back();
-                //return view('./student/details-homework', compact('lopHoc', 'dsLopDaVao', 'baiDang', 'cmt', 'bai_dang_id', 'loai_bai_dang_id'));
-            }
+            return redirect()->back();
+        } else {
+            return redirect()->back();
         }
     }
 }

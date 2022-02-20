@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,6 +10,7 @@
     <link rel="stylesheet" href="../lib/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="../lib/fontawesome/css/all.css">
 </head>
+
 <body>
     <div id="header">
         <div class="left">
@@ -32,7 +32,7 @@
         <div class="dra-header">
             <div class="dra-item">
                 <i class="fas fa-home icon"></i>
-                <a href="{{route('sv-trang-chu')}}">Lớp học</a>
+                <a href="{{ route('sv-trang-chu') }}">Lớp học</a>
             </div>
             <div class="dra-item">
                 <i class="far fa-calendar icon"></i>
@@ -46,10 +46,11 @@
                 <i class="far fa-list-alt icon"></i>
                 Việc cần làm
             </div>
-            @foreach($dsLopDaVao as $lop)
+            @foreach ($dsLopDaVao as $lop)
                 <div class="dra-item">
                     <div class="dra-item-avt icon">C</div>
-                    <a href=" {{route('sv-chi-tiet-lop',['lop_hoc_id' => $lop->id])}} " class="dra-item-desc"> {{ $lop->ten_lop }} </a>
+                    <a href=" {{ route('sv-chi-tiet-lop', ['lop_hoc_id' => $lop->id]) }} " class="dra-item-desc">
+                        {{ $lop->ten_lop }} </a>
                 </div>
             @endforeach
         </div>
@@ -65,15 +66,15 @@
             </div>
             <div class="dra-item">
                 <i class="fas fa-user-circle icon"></i>
-                <a href="{{route('sv-cap-nhat-thong-tin')}}">Cập nhật thông tin cá nhân</a>
+                <a href="{{ route('sv-cap-nhat-thong-tin') }}">Cập nhật thông tin cá nhân</a>
             </div>
             <div class="dra-item">
                 <i class="fas fa-exchange-alt icon"></i>
-                <a href="{{route('sv-doi-mat-khau')}}">Thay đổi mật khẩu</a>
+                <a href="{{ route('sv-doi-mat-khau') }}">Thay đổi mật khẩu</a>
             </div>
             <div class="dra-item">
                 <i class="fas fa-sign-out-alt icon"></i>
-                <a href="{{route('sv-dang-xuat')}}">Đăng xuất</a>
+                <a href="{{ route('sv-dang-xuat') }}">Đăng xuất</a>
             </div>
         </div>
     </div>
@@ -90,15 +91,18 @@
                 </div>
             </div>
             <div class="content row ">
-                @foreach($dsLopDaVao as $lop)
+                @foreach ($dsLopDaVao as $lop)
                     <div class="col-md-3">
                         <div class="card">
                             <div class="card-header">
                                 <div class="left">
-                                    <a class="title" href="{{ route('sv-chi-tiet-lop',['lop_hoc_id' => $lop->id]) }}">{{ $lop->ten_lop }}</a>
-                                    <a class="subtitle" href="#"> {{ $lop->mo_ta}} </a>
+                                    <a class="title"
+                                        href="{{ route('sv-chi-tiet-lop', ['lop_hoc_id' => $lop->id]) }}">{{ $lop->ten_lop }}</a>
+                                    <a class="subtitle"
+                                        href="{{ route('sv-chi-tiet-lop', ['lop_hoc_id' => $lop->id]) }}">
+                                        {{ $lop->mo_ta }} </a>
                                     <a href="#">
-                                      <!-- Hiển thị tên giảng viên -->
+                                        <!-- Hiển thị tên giảng viên -->
                                     </a>
                                 </div>
                                 <div class="right">
@@ -109,7 +113,9 @@
                             </div>
                             <div class="card-body"></div>
                             <div class="card-footer">
-                                <a href="{{ route('sv-roi-lop',['lop_hoc_id' => $lop->id ]) }}" onClick="return confirm('Bạn có chắc muốn rời khỏi lớp học này?')" ><i class="far fa-trash-alt text-dark"></i></a>
+                                <a href="{{ route('sv-roi-lop', ['lop_hoc_id' => $lop->id]) }}"
+                                    onClick="return confirm('Bạn có chắc muốn rời khỏi lớp học này?')"><i
+                                        class="far fa-trash-alt text-dark"></i></a>
                                 <i class="fas fa-briefcase"></i>
                             </div>
                         </div>
@@ -122,20 +128,17 @@
     </div>
     <script src="../asset/js/showNoti.js"></script>
     <script>
-            if( {{ Session::has('success') }} )
-            {
-                showSuccessToast( 'Thành công',"{{ Session::get('success') }} ");
-            }
-            
-        </script>
-        <script>
-            if( {{ Session::has('error') }} )
-            {
-                showErrorToast( 'Lỗi',"{{ Session::get('error') }}");
-            }   
-        </script>
+        if ({{ Session::has('success') }}) {
+            showSuccessToast('Thành công', "{{ Session::get('success') }} ");
+        }
+    </script>
+    <script>
+        if ({{ Session::has('error') }}) {
+            showErrorToast('Lỗi', "{{ Session::get('error') }}");
+        }
+    </script>
     <script src="../asset/js/login.js"></script>
     <script src="../asset/js/style.js"></script>
 </body>
-</html>
 
+</html>
