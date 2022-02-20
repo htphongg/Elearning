@@ -137,7 +137,7 @@
             </div>
             {{-- <form
                 action="{{ route('gv-binh-luan', ['bai_dang_id' => $bai_dang_id, 'type' => $loai_bai_dang_id, 'lop_hoc_id' => $lopHoc->id]) }}" method = "POST"> --}}
-            <form action="{{ route('sv-binh-luan', ['id' => $bai_dang_id, 'type' => $loai_bai_dang_id]) }}"
+            <form action="{{ route('gv-binh-luan', ['id' => $bai_dang_id, 'type' => $loai_bai_dang_id]) }}"
                 enctype="multipart/form-data" method="POST">
                 @csrf
                 <div class="user-cmt">
