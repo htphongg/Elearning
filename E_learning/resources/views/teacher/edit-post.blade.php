@@ -13,7 +13,7 @@
 <body>
     <div id="container">
         <h3 class="text-center">Chỉnh sửa bài viết </h3>
-        <form action="{{ route('gv-xl-chinh-sua-bai-dang',['id' => $baiDang->id, 'lop_hoc_id' => $baiDang->lop_hoc_id]) }}" class="was-validated" method="post">
+        <form action="{{ route('gv-xl-chinh-sua-bai-dang',['id' => $baiDang->id, 'lop_hoc_id' => $baiDang->lop_hoc_id]) }}" class="was-validated" method="post" enctype="multipart/form-data">
             @csrf
             <div class="row">
                 <div class="col">

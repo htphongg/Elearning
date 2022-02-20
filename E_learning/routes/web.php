@@ -22,15 +22,6 @@ use App\Http\Controllers\Admin\AdminController;
 
 
 //Start - Phong
-
-//Problems
-//Chứng thực xong vẫn có thể lui về trang đăng nhập
-// Sinh viên tham gia băg mã lớp và đang trong phòng chờ
-// và giảng viên gửi mail mời tham gia thì ntn?
-//Xử lý hết hạn cho link email
-
-
-
 //Đăng nhập
 Route::get('/', [NguoiDungController::class, 'formDangNhap'])->name('dang-nhap')->middleware('guest');
 Route::post('/', [NguoiDungController::class, 'xuLyDangNhap'])->name('xl-dang-nhap')->middleware('guest');
@@ -78,6 +69,9 @@ Route::middleware(['auth'])->group(function () {
 
         //Đăng xuất
         Route::get('/dang-xuat', [SinhVienController::class, 'dangXuat'])->name('sv-dang-xuat');
+
+        //Bình luận
+        Route::post('/binh-luan/{bai_dang_id}/{lop_hoc_id}',[SinhVienController::class,'vietBinhLuan'])->name('sv-binh-luan');
     });
 
     //Giảng viên
@@ -112,8 +106,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/xoa-sinh-vien', [GiangVienController::class, 'xoaSinhVien'])->name('gv-xoa-sinh-vien');
 
         //Đăng bài
-        Route::get('/dang-bai', [GiangVienController::class, 'formDangBai'])->name('gv-dang-bai');
-        Route::post('/dang-bai', [GiangVienController::class, 'xlDangBai'])->name('gv-xl-dang-bai');
+        Route::get('/dang-bai/lop/{lop_hoc_id}',[GiangVienController::class,'formDangBai'])->name('gv-dang-bai');
+        Route::post('/dang-bai/lop/{lop_hoc_id}',[GiangVienController::class,'xlDangBai'])->name('gv-xl-dang-bai');
 
         //Xem chi tiết bài
         Route::get('/chi-tiet-bai-dang/{id}/{type}', [GiangVienController::class, 'xemChiTietBaiDang'])->name('gv-chi-tiet-bai-dang');
@@ -144,6 +138,9 @@ Route::middleware(['auth'])->group(function () {
 
         //Viết bình luận
         Route::get('/binh-luan/{id}/{type}/{id_lop}', [GiangVienController::class, 'vietBinhLuan'])->name('gv-binh-luan');
+
+        //Bình luận
+        Route::post('/binh-luan/{bai_dang_id}/{lop_hoc_id}',[GiangVienController::class,'binhLuan'])->name('gv-binh-luan'); 
 
         //Đăng xuất
         Route::get('/dang-xuat', [GiangVienController::class, 'dangXuat'])->name('gv-dang-xuat');
