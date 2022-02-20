@@ -116,7 +116,8 @@
 
                     </div>
                 </div>
-                <a href="{{ route('ad-ds-bai-dang') }}" class="btn btn-danger">Quay lại</a>
+                <a href="
+                            {{ route('ad-ds-bai-dang') }}" class="btn btn-danger">Quay lại</a>
             </div>
         </div>
         <div id="footer"></div>

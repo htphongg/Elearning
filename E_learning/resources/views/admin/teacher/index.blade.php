@@ -18,7 +18,7 @@
                 <i class="fas fa-bars"></i>
             </div>
             <div class="logo">
-                <img src="../asset/img/googlelogo_clr_74x24px.svg" alt="">
+                <img src="../asset/img/googlelogo_clr_74x24px.GVg" alt="">
             </div>
             <span class="webname">Lớp học</span>
         </div>
@@ -60,7 +60,6 @@
         </div>
         <hr>
         <div class="dra-footer">
-
             <div class="dra-item">
                 <i class="fas fa-user-circle icon"></i>
                 <a href="{{ route('ad-cap-nhat-thong-tin') }}">Cập nhật thông tin cá nhân</a>
@@ -75,13 +74,16 @@
             </div>
         </div>
     </div>
-
+    <!-- <div id="line">
+    </div> -->
     <div id="container">
         <div id="body">
-            <div class="top mt-5 "> </div>
+            <div class="top">
+
+            </div>
             <div class="content">
-                <h2 class="text-center mb-3">Danh Sách Giảng Viên</h2>
-                <Table class="table text-center table-bordered">
+                <h2 class="text-center mt-3 mb-3 mt-5">Danh Sách Giảng Viên</h2>
+                <table class="table text-center table-bordered">
                     <thead class="table-dark">
                         <tr>
                             <th>Họ tên</th>
@@ -113,7 +115,7 @@
                             </tr>
                         @endforeach
                     </tbody>
-                </Table>
+                </table>
 
             </div>
         </div>

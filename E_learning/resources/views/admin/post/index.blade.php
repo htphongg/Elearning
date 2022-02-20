@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Classroom</title>
+    <title>Danh sách lớp</title>
     <link rel="stylesheet" href="../asset/css/style-admin.css">
     <link rel="stylesheet" href="../lib/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="../lib/fontawesome/css/all.css">
@@ -72,12 +72,14 @@
             </div>
         </div>
     </div>
-
+    <!-- <div id="line">
+        <hr>
+    </div> -->
     <div id="container">
         <div id="body">
-            <div class="top mt-5 "> </div>
+            <div class="top"> </div>
             <div class="content">
-                <h2 class="text-center mb-3">Danh Sách Bài Đăng</h2>
+                <h2 class="mb-3 text-center mt-5">Danh Sách Lớp</h2>
                 <form action="{{ route('ad-loc') }}" method="POST">
                     @csrf
                     <h6 class="title-dropdown1">Loại bài đăng:</h6>
@@ -144,7 +146,6 @@
                         @endforelse
                     </tbody>
                 </Table>
-
             </div>
         </div>
 
@@ -152,6 +153,7 @@
 
         </div>
     </div>
+
     <script src="../asset/js/style.js"></script>
 </body>
 
