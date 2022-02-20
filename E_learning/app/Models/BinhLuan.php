@@ -10,14 +10,8 @@ class BinhLuan extends Model
 {
     use HasFactory;
     protected $table = 'binh_luan';
-
-    public function nguoiDung()
+    public function nguoiViet()
     {
-        return $this->belongsTo('App\Models\NguoiDung');
-    }
-
-    public function baiDang()
-    {
-        return $this->belongsTo('App\Models\BaiDang');
+        return $this->belongsTo('App\Models\NguoiDung', 'nguoi_dung_id');
     }
 }

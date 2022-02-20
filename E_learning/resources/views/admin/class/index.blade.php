@@ -5,11 +5,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Classroom</title>
+    <title>Danh sách lớp</title>
     <link rel="stylesheet" href="../asset/css/style-admin.css">
     <link rel="stylesheet" href="../lib/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="../lib/fontawesome/css/all.css">
 </head>
+
 <body>
     <div id="header">
         <div class="left">
@@ -22,9 +23,7 @@
             <span class="webname">Lớp học</span>
         </div>
         <div class="right">
-            <div class="addclass">
-                <a href="{{ route('ad-them-moi-lh') }}"><i class="fas fa-plus"></i></a>
-            </div>
+
         </div>
     </div>
     <div class="dra-details">
@@ -52,9 +51,21 @@
                 <div class="dra-item-avt icon">L</div>
                 <a href="{{ route('ad-ds-lop') }}">Lớp Học</a>
             </div>
+            <div class="dra-item">
+                <div class="dra-item-avt icon">B</div>
+                <a href="{{ route('ad-ds-bai-dang') }}">Bài Đăng</a>
+            </div>
         </div>
         <hr>
         <div class="dra-footer">
+            <div class="dra-item">
+                <i class="fas fa-user-circle icon"></i>
+                <a href="{{ route('ad-cap-nhat-thong-tin') }}">Cập nhật thông tin cá nhân</a>
+            </div>
+            <div class="dra-item">
+                <i class="fas fa-exchange-alt icon"></i>
+                <a href="{{ route('ad-doi-mat-khau') }}">Thay đổi mật khẩu</a>
+            </div>
             <div class="dra-item">
                 <i class="fas fa-sign-out-alt icon"></i>
                 <a href="{{ route('ad-dang-xuat') }}">Đăng xuất</a>
@@ -85,8 +96,10 @@
                                 <td>{{ $LH->ten_lop }}</td>
                                 <td>{{ $LH->mo_ta }}</td>
                                 <td class="text-center">
-                                    <a class="btn btn-success" href="{{ route('ad-cap-nhat-lh', ['id' => $LH->id]) }}">Sửa</a>
-                                    <a class="btn btn-danger" href="{{ route('ad-xoa-bo-lh', ['id' => $LH->id]) }}">Xóa</a>
+                                    <a class="btn btn-primary"
+                                        href="{{ route('ad-chi-tiet-lop', ['id' => $LH->id]) }}">Xem chi tiết</a>
+                                    <a class="btn btn-danger" onclick="return confirm('Bạn có chắc muốn xóa?')"
+                                        href="{{ route('ad-xoa-bo-lh', ['id' => $LH->id]) }}">Xóa</a>
                                 </td>
 
                             </tr>

@@ -2,13 +2,13 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-  }
-  
-  body{
-    background-color: #f8f9fd;
-  }
+}
 
-  #header {
+body {
+    background-color: #f8f9fd;
+}
+
+#header {
     height: 65px;
     display: flex;
     justify-content: space-between;
@@ -19,32 +19,32 @@
     top: 0px;
     background-color: #fff;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 2px 5px 0 rgba(0, 0, 0, 0.19);
-  }
-  
-  #header .left {
+}
+
+#header .left {
     display: flex;
     align-items: center;
-  }
-  
-  #header .left .drawer:hover {
+}
+
+#header .left .drawer:hover {
     cursor: pointer;
-  }
-  
-  #header .left .drawer {
+}
+
+#header .left .drawer {
     margin-left: 25px;
     margin-right: 22px;
-  }
-  
-  #header .left .drawer i {
+}
+
+#header .left .drawer i {
     font-size: 20px;
-  }
-  
-  #header .left .title {
+}
+
+#header .left .title {
     display: flex;
     flex-direction: column;
-  }
-  
-  #header .left .title .main-title {
+}
+
+#header .left .title .main-title {
     letter-spacing: 0.00625em;
     font-family: "Google Sans", Roboto, Arial, sans-serif;
     font-size: 1rem;
@@ -52,25 +52,25 @@
     line-height: 1.5rem;
     font-weight: bold;
     color: #3c4043;
-  }
-  
-  #header .left .title .sub-title {
+}
+
+#header .left .title .sub-title {
     letter-spacing: 0.025em;
     font-family: Roboto, Arial, sans-serif;
     font-size: 0.75rem;
     font-weight: 400;
     line-height: 1rem;
     color: #5f6368;
-  }
-  
-  #header .left .route {
+}
+
+#header .left .route {
     width: 400px;
     display: flex;
     padding: 2px 24px;
     justify-content: space-evenly;
-  }
-  
-  #header .left .route a {
+}
+
+#header .left .route a {
     letter-spacing: 0.01785714em;
     font-family: "Google Sans", Roboto, Arial, sans-serif;
     font-size: 0.875rem;
@@ -78,64 +78,67 @@
     color: #3c4043;
     text-transform: none;
     text-decoration: none;
-  }
-  
-  #header .left .route a:hover {
+}
+
+#header .left .route a:hover {
     font-size: 18px;
     line-height: 1.25rem;
     font-family: "Google Sans", Roboto, Arial, sans-serif;
     color: #4285f4;
-  }
-  
-  #header .right {
+}
+
+#header .right {
     display: flex;
     align-items: center;
-  }
-  
-  #header .right .menu {
+}
+
+#header .right .menu {
     right: 0px;
-  }
-  
-  #header .right .account {
+}
+
+#header .right .account {
     margin-right: 25px;
     margin-left: 25px;
-  }
-  
-  #header .right .menu i,
-  #header .right .account i {
+}
+
+#header .right .menu i,
+#header .right .account i {
     font-size: 20px;
-  }
-  
-  #container{
+}
+
+#container {
     height: auto;
     width: auto;
     display: flex;
     padding: 100px 0px;
     justify-content: space-around;
-  }
+}
 
-  #container .post{
+#container .post {
     max-width: 900px;
     min-width: 900px;
     display: flex;
     flex-direction: column;
-  }
+}
 
-  #container .post .line{
+#container .post .line {
     padding-left: 70px;
-  }
+}
 
-  #container .post hr{
+#container .post hr {
     border-color: #4285f4;
     padding-left: 70px;
-  }
-  /* Post */
-  .post-title{
+}
+
+
+/* Post */
+
+.post-title {
     display: flex;
     align-items: flex-start;
-  }
+}
 
-  .post-title .post-logo{
+.post-title .post-logo {
     background-color: #4285f4;
     width: 50px;
     height: 50px;
@@ -146,106 +149,121 @@
     color: white;
     font-size: 20px;
     margin-right: 20px;
-  }
+}
 
-  .post-title .post-text span{
+.post-title .post-text span {
     color: #4285f4;
     font-family: "Google Sans", Roboto, Arial, sans-serif;
     font-size: 2rem;
     font-weight: 400;
     line-height: 2.5rem;
-  }
+}
 
-  .post-title .post-text p{
+.post-title .post-text p {
     letter-spacing: .01428571em;
-    font-family: Roboto,Arial,sans-serif;
+    font-family: Roboto, Arial, sans-serif;
     font-size: 0.875rem;
     font-weight: 400;
     line-height: 1.25rem;
     color: #5f6368;
-  }
+}
 
-  .post-content{
+.post-content {
     padding-left: 70px;
-  }
-  
-  
-  .post-acttached{
-    padding-left: 70px;
+}
 
-  }
-  
-  .post-cmt{
+.post-acttached {
     padding-left: 70px;
-  }
-  
-  .post-cmt .post-cmt-title{
+}
+
+.post-cmt {
+    padding-left: 70px;
+}
+
+.post-cmt .post-cmt-title {
     display: flex;
-  }
+}
 
-  .post-cmt .comment{
+.post-cmt .comment {
     display: flex;
     align-items: center;
-  }
+}
 
-  .post-cmt .comment .comment-avt{
+.post-cmt .comment .comment-avt {
     width: 50px;
     height: 50px;
     border-radius: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
-  }
+}
 
-  .post-cmt .comment .comment-avt i{
+.post-cmt .comment .comment-avt i {
     font-size: 30px;
-  }
+}
 
-  .post-cmt .post-cmt-title p{
+.post-cmt .post-cmt-title p {
     letter-spacing: .01785714em;
-    font-family: 'Google Sans',Roboto,Arial,sans-serif;
+    font-family: 'Google Sans', Roboto, Arial, sans-serif;
     font-size: 0.875rem;
     font-weight: 500;
     line-height: 1.25rem;
     color: #3c4043;
     margin-left: 10px;
-  }
+}
 
-
-  .user-cmt{
+.user-cmt {
     display: flex;
     padding-left: 70px;
-  }
-  
-  .user-cmt .user-cmt-left{
+}
+
+.user-cmt .user-cmt-left {
     display: flex;
     align-items: center;
-  }
+}
 
-  .user-cmt .user-cmt-left i{
+.user-cmt .user-cmt-left i {
     font-size: 30px;
     margin-right: 10px;
-  }
+}
 
-  .user-cmt .user-cmt-right{
+.user-cmt .user-cmt-right {
     display: flex;
     flex-direction: column;
     justify-content: center;
     margin-left: 10px;
     font-size: 20px;
-  }
-  .user-cmt .user-cmt-right i:hover{
+    margin: 0;
+}
+
+.user-cmt .user-cmt-right i:hover {
     cursor: pointer;
-  }
-  /* End Post */ 
+}
+
+#icon-paperclip {
+    text-decoration: none;
+    color: black;
+    height: 2.5px;
+    width: 2.5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    font-size: 1.33333em;
+    right: 20px;
+}
 
 
- /* Drawer details */
- .dra-details.open {
+/* End Post */
+
+
+/* Drawer details */
+
+.dra-details.open {
     display: block;
-  }
-  
-  .dra-details {
+}
+
+.dra-details {
     width: 300px;
     height: 100%;
     background-color: #fff;
@@ -255,45 +273,45 @@
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.4);
     display: none;
     animation: drawerFaceIn ease 0.5s;
-  }
-  
-  .dra-details hr {
+}
+
+.dra-details hr {
     margin-top: 0px;
     margin-bottom: 0px;
-  }
-  
-  .dra-details .dra-header {
+}
+
+.dra-details .dra-header {
     height: auto;
     margin: 8px 8px 8px 0px;
-  }
-  
-  .dra-details .dra-item:hover {
+}
+
+.dra-details .dra-item:hover {
     background-color: #f6f6f6;
     border-radius: 1rem;
     cursor: pointer;
-  }
-  
-  .dra-details .dra-item a {
+}
+
+.dra-details .dra-item a {
     color: #5f6368;
     text-decoration: none;
-  }
-  
-  .dra-details .dra-item {
+}
+
+.dra-details .dra-item {
     width: 100%;
     height: 56px;
     display: flex;
     align-items: center;
     padding: 0px 26px;
     font-size: 16px;
-  }
-  
-  .dra-details .dra-item .icon {
+}
+
+.dra-details .dra-item .icon {
     color: #5f6368;
     margin-right: 16px;
     font-size: 18px;
-  }
-  
-  .dra-details .dra-item .dra-item-avt {
+}
+
+.dra-details .dra-item .dra-item-avt {
     width: 32px;
     height: 32px;
     border-radius: 50%;
@@ -302,15 +320,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-  
-  .dra-details .dra-body {
+}
+
+.dra-details .dra-body {
     width: 100%;
     height: auto;
     margin: 8px 8px 8px 0px;
-  }
-  
-  .dra-details .dra-body .dra-body-title {
+}
+
+.dra-details .dra-body .dra-body-title {
     display: flex;
     align-items: center;
     height: 40px;
@@ -321,22 +339,22 @@
     font-weight: bold;
     line-height: 1.25rem;
     color: #5f6368;
-  }
-  
-  .dra-details .dra-footer {
+}
+
+.dra-details .dra-footer {
     width: 100%;
     height: auto;
     margin: 8px 8px 8px 0px;
-  }
-  
-  @keyframes drawerFaceIn {
+}
+
+@keyframes drawerFaceIn {
     from {
-      opacity: 0;
-      transform: translateX(-200px);
+        opacity: 0;
+        transform: translateX(-200px);
     }
     to {
-      opacity: 1;
-      transform: translateX(0px);
+        opacity: 1;
+        transform: translateX(0px);
     }
   }
   
