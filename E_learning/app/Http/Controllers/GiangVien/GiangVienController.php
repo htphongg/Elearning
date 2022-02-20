@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\NguoiDung;
 use App\Models\lopHoc;
 use App\Models\BaiDang;
+use App\Models\BinhLuan;
 use App\Models\DinhKemBaiDang;
 use App\Models\PhongChoLopHoc;
 use App\Models\ChiTietLopHoc;
@@ -15,7 +16,6 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\CapNhatThongTinCaNhanRequest;
-use App\Models\BinhLuan;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\UploadedFile;
 
@@ -135,16 +135,16 @@ class GiangVienController extends Controller
             return redirect()->back()->with('error', 'Không thể thực hiện tác vụ này.');
     }
 
-    public function formDangBai(Request $req)
+    public function formDangBai(Request $req,$lop_hoc_id)
     {
-        return view('./teacher/create-post', ['lop_hoc_id' => $req->lop_hoc_id]);
+        return view('./teacher/create-post',['lop_hoc_id' => $lop_hoc_id]);
     }
 
-    public function xlDangBai(Request $req)
-    {
-        // dd($req);
-        if ($req->tieu_de != null && $req->noi_dung != null && $req->loai_bai_dang != null) {
-            if (strcasecmp($req->loai_bai_dang, 'tài liệu') == 0) {
+    public function xlDangBai( Request $req,$lop_hoc_id)
+    {   
+        if($req->tieu_de != null && $req->noi_dung != null && $req->loai_bai_dang != null)
+        {
+            if(strcasecmp($req->loai_bai_dang,'tài liệu') == 0){
                 $baidang = new BaiDang();
 
                 $baidang->tieu_de = $req->tieu_de;
@@ -153,7 +153,7 @@ class GiangVienController extends Controller
                 $baidang->loai_bai_dang_id = 1;
                 $baidang->lop_hoc_id = $req->lop_hoc_id;
                 $baidang->save();
-
+                // dd($req->dinh_kem);
                 if ($req->dinh_kem != null) {
                     $dkemBaiDang = new DinhKemBaiDang();
 
@@ -161,7 +161,7 @@ class GiangVienController extends Controller
                     $dkemBaiDang->dinh_kem = $req->dinh_kem->getClientOriginalName();
 
                     //Lưu trữ file
-                    $req->dinh_kem->storeAs('dinhkem', $req->dinh_kem->getClientOriginalName());
+                    $req->dinh_kem->storeAs('dinhkem/post/', $req->dinh_kem->getClientOriginalName());
 
                     $dkemBaiDang->save();
                 }
@@ -186,7 +186,7 @@ class GiangVienController extends Controller
                     $dkemBaiDang->dinh_kem = $req->dinh_kem->getClientOriginalName();
 
                     //Lưu trữ file
-                    $req->dinh_kem->storeAs('dinhkem', $req->dinh_kem->getClientOriginalName());
+                    $req->dinh_kem->storeAs('dinhkem/post/', $req->dinh_kem->getClientOriginalName());
 
                     $dkemBaiDang->save();
                 }
@@ -211,8 +211,8 @@ class GiangVienController extends Controller
                     $dkemBaiDang->dinh_kem = $req->dinh_kem->getClientOriginalName();
 
                     //Lưu trữ file
-                    $req->dinh_kem->storeAs('dinhkem', $req->dinh_kem->getClientOriginalName());
-
+                    $req->dinh_kem->storeAs('dinhkem/post/', $req->dinh_kem->getClientOriginalName());
+                   
                     $dkemBaiDang->save();
                 }
 
@@ -241,15 +241,22 @@ class GiangVienController extends Controller
                 $baiDang->han_nop = $req->deadline;
 
                 //Xử lý cập nhật đÍnh kèm
-                if ($req->dinh_kem != null) {
-                    $dinhkembaiDang = DinhKemBaiDang::where('bai_dang_id', '=', $bai_dang_id)->first();
-                    if ($dinhkembaiDang == null) {
+                if($req->dinh_kem != null)
+                {
+                    $dinhkembaiDang = DinhKemBaiDang::where('bai_dang_id','=',$bai_dang_id)->first();
+
+                    if($dinhkembaiDang == null)
+                    {
                         $dkemBaiDang = new DinhKemBaiDang();
                         $dkemBaiDang->bai_dang_id = $bai_dang_id;
-                        $dkemBaiDang->dinh_kem = $req->dinh_kem;
+                        $dkemBaiDang->dinh_kem = $req->dinh_kem->getClientOriginalName();
+                        $req->dinh_kem->storeAs('dinhkem/post/', $req->dinh_kem->getClientOriginalName());
                         $dkemBaiDang->save();
-                    } else {
-                        $dinhkembaiDang->update(['dinh_kem' => $req->dinh_kem]);
+                    }
+                    else
+                    {
+                        $dinhkembaiDang->update(['dinh_kem' => $req->dinh_kem->getClientOriginalName()]);
+                        $req->dinh_kem->storeAs('dinhkem/post/', $req->dinh_kem->getClientOriginalName());
                     }
                 }
 
@@ -299,9 +306,11 @@ class GiangVienController extends Controller
     {
         if ($req->bai_dang_id != null) {
             BaiDang::find($req->bai_dang_id)->delete();
-            return redirect()->back()->with('success', 'Xoá thành công.');
-        } else
-            return redirect()->back()->with('error', 'Xoá không thành công.');
+            DinhKemBaiDang::where('bai_dang_id','=',$req->bai_dang_id)->delete();
+            return redirect()->back()->with('success','Xoá thành công.');
+        }
+        else
+            return redirect()->back()->with('error','Xoá không thành công.');
     }
 
     public function formCapNhatThongTinCaNhan()
@@ -463,6 +472,26 @@ class GiangVienController extends Controller
                 return redirect()->back()->with('error', 'Thao tác thất bại');
         } else
             return redirect()->back()->with('error', 'Thao tác thất bại');
+    }
+
+    public function binhLuan(Request $req, $bai_dang_id, $lop_hoc_id)
+    {
+        
+        if($req->user_comment != null || $req->user_comment != '')
+        {
+            $binhLuan  = new BinhLuan();
+
+            $binhLuan->bai_dang_id = $bai_dang_id;
+            $binhLuan->lop_hoc_id = $lop_hoc_id;
+            $binhLuan->nguoi_dung_id = Auth::id();
+            $binhLuan->noi_dung = $req->user_comment;
+
+            $binhLuan->save();
+
+            return redirect()->back()->with('success','Nhận xét thành công.');
+        }
+        else
+            return redirect()->back()->with('error','Nhận xét thất bại.');
     }
 
     public function dangXuat()

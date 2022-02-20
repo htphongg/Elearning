@@ -33,7 +33,7 @@
         <div class="dra-header">
             <div class="dra-item">
                 <i class="fas fa-home icon"></i>
-                <a href="../index.html">Lớp học</a>
+                <a href="{{ route('gv-trang-chu') }}">Lớp học</a>
             </div>
             <div class="dra-item">
                 <i class="far fa-calendar icon"></i>
@@ -79,7 +79,6 @@
         </div>
     </div>
     <!-- End Drawer details -->
-
     <div id="container">
         <div class="post">
             <div class="post-title">
@@ -88,7 +87,7 @@
                 </div>
                 <div class="post-text">
                     <span>{{ $baiDang->tieu_de }}</span>
-                    <p>Tên giảng viên • @php echo date_format (new DateTime($baiDang->created_at), 'd/m/Y'); @endphp </p>
+                    <p>{{ $lopHoc->dsNguoiDung->where('loai_nguoi_dung_id','=',2)->first()->ho_ten }} • @php echo date_format (new DateTime($baiDang->created_at), 'd/m/Y'); @endphp </p>
                 </div>
             </div>
             <div class="line">
@@ -104,8 +103,8 @@
                 @if (count($baiDang->dsDinhKem) == 0)
                     <p>Không có tệp đính kèm nào.</p>
                 @else
-                    @foreach ($baiDang->dsDinhKem as $dinhKem)
-                        {{ $dinhKem->dinh_kem }};
+                    @foreach($baiDang->dsDinhKem as $dkem)
+                        <embed src='{{ asset("../dinhkem/post/$dkem->dinh_kem") }}' width="100%" height="500px" />
                     @endforeach
                 @endif
             </div>
@@ -136,7 +135,8 @@
                 </div>
             </div>
             <form
-                action="{{ route('gv-binh-luan', ['id' => $bai_dang_id, 'type' => $loai_bai_dang_id, 'id_lop' => $lopHoc->id]) }}">
+                action="{{ route('gv-binh-luan', ['bai_dang_id' => $bai_dang_id, 'type' => $loai_bai_dang_id, 'lop_hoc_id' => $lopHoc->id]) }}" method = "POST">
+                @csrf
                 <div class="user-cmt">
                     <div class="user-cmt-left w-100">
                         <i class="far fa-user-circle"></i>
@@ -150,7 +150,20 @@
             </form>
         </div>
     </div>
+    <div id="toast"></div>
 </body>
+<script src="{{ asset('../asset/js/showNoti.js') }}"></script>
+<script>
+    if( {{ Session::has('success') }} )
+    {
+        showSuccessToast( 'Thành công',"{{ Session::get('success') }} ");
+    }
+</script>
+<script>
+    if( {{ Session::has('error') }} )
+    {
+        showErrorToast( 'Lỗi',"{{ Session::get('error') }}");
+    }   
+</script>
 <script src="{{ asset('../asset/js/style.js') }}"></script>
-
 </html>

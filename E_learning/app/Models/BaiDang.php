@@ -27,5 +27,10 @@ class BaiDang extends Model
     {
         return $this->hasMany('App\Models\DinhKemBaiDang');
     }
+
+    public function dsBinhLuan()
+    {
+        return $this->hasMany('App\Models\BinhLuan');
+    }
 }
 

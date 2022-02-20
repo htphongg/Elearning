@@ -88,9 +88,9 @@
                 </div>
                 <div class="post-text">
                     <span>{{ $baiDang->tieu_de }}</span>
-                    <p>Tên giảng viên • @php echo date_format (new DateTime($baiDang->created_at), 'd/m/Y'); @endphp </p>
-                    <p>
-                        @if ($baiDang->han_nop != null)
+                    <p>{{ $lopHoc->dsNguoiDung->where('loai_nguoi_dung_id','=',2)->first()->ho_ten }} • @php echo date_format (new DateTime($baiDang->created_at), 'd/m/Y'); @endphp </p>
+                    <p> 
+                        @if($baiDang->han_nop != null)
                             <strong>Hạn nộp:</strong> @php echo date_format (new DateTime($baiDang->han_nop), 'd/m/Y | H:i:s' ); @endphp
                         @else
                             Không có ngày đến hạn
@@ -111,8 +111,8 @@
                 @if (count($baiDang->dsDinhKem) == 0)
                     <p>Không có tệp đính kèm nào.</p>
                 @else
-                    @foreach ($baiDang->dsDinhKem as $dinhKem)
-                        {{ $dinhKem->dinh_kem }};
+                    @foreach($baiDang->dsDinhKem as $dkem)
+                        <embed src='{{ asset("../dinhkem/post/$dkem->dinh_kem") }}' width="100%" height="500px" />
                     @endforeach
                 @endif
             </div>
@@ -143,9 +143,10 @@
                 </div>
             </div>
             <form
-                action="{{ route('sv-binh-luan', ['id' => $bai_dang_id, 'type' => $loai_bai_dang_id, 'id_lop' => $lopHoc->id]) }}">
+                action="{{ route('sv-binh-luan', ['bai_dang_id' => $bai_dang_id, 'type' => $loai_bai_dang_id, 'lop_hoc_id' => $lopHoc->id]) }}" method="POST">
+                @csrf
                 <div class="user-cmt">
-                    <div class="user-cmt-left w-100">
+                <div class="user-cmt-left w-100">
                         <i class="far fa-user-circle"></i>
                         <input class="w-100" type="text" name="user_comment">
                         <a href=""><i id="icon-paperclip" class="fas fa-lg fa-paperclip"></i></a>
@@ -177,7 +178,22 @@
             </div>
         </form>
     </div>
+    <div id="toast"></div>
 </body>
+<script src="{{ asset('../asset/js/showNoti.js') }}"></script>
+<script>
+    if( {{ Session::has('success') }} )
+    {
+        showSuccessToast( 'Thành công',"{{ Session::get('success') }} ");
+    }
+    
+</script>
+<script>
+    if( {{ Session::has('error') }} )
+    {
+        showErrorToast( 'Lỗi',"{{ Session::get('error') }}");
+    }   
+</script>
 <script src="{{ asset('../asset/js/style.js') }}"></script>
 
 </html>
