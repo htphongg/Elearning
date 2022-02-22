@@ -101,7 +101,7 @@
                             </option>
                         @endforeach
                     </select>
-                    <button id="btn-filter" type="submit">Lọc</button>
+                    <button id="btn-filter" type="submit" class="btn">Lọc</button>
                 </form>
                 <Table class="table text-center table-bordered">
                     <thead class="table-dark ">

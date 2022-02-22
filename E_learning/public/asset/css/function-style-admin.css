@@ -8,7 +8,7 @@
     margin-top: 15px;
 }
 
-body{
+body {
     background-color: #ccc !important;
 }
 
@@ -82,11 +82,11 @@ body{
     font-size: 22px;
 }
 
-#body {
+#body {}
 
-}
 
 /* Drawer details */
+
 .dra-details.open {
     display: block;
 }
@@ -182,7 +182,10 @@ body{
     height: auto;
     margin: 8px 8px 8px 0px;
 }
+
+
 /* End Drawer details */
+
 
 /* #line {
     padding-top: 65px;
@@ -306,13 +309,12 @@ body{
     font-size: 20px;
 }
 
-.btn-sub{
+.btn-sub {
     display: flex;
     justify-content: space-between;
 }
 
-#footer {
-}
+#footer {}
 
 @keyframes drawerFaceIn {
     from {

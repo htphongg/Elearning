@@ -316,12 +316,14 @@ class AdminController extends Controller
     }
     public function XemChiTietBaiDang($id)
     {
+
         $chitietbaidang = BaiDang::find($id);
+
         $dinhkem = DinhKemBaiDang::all();
         if ($chitietbaidang == null) {
             return "Không có bài đăng có ID = {$id} này ";
         }
-        return view('./admin/post/detail', compact('chitietbaidang'));
+        return view('./admin/post/detail', compact('chitietbaidang',));
     }
     public function xlXoaBaiDang($id)
     {

@@ -67,6 +67,9 @@ Route::middleware(['auth'])->group(function () {
         //Viết bình luận
         Route::post('/binh-luan/{id}/{type}', [SinhVienController::class, 'vietBinhLuan'])->name('sv-binh-luan');
 
+        Route::post('/nop-bai/{id}', [SinhVienController::class, 'baiNop'])->name('sv-nop-bai');
+
+
         //Đăng xuất
         Route::get('/dang-xuat', [SinhVienController::class, 'dangXuat'])->name('sv-dang-xuat');
 

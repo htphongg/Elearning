@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Session;
 use App\Http\Requests\CapNhatThongTinCaNhanRequest;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\UploadedFile;
+use App\Models\DinhKemBinhLuan;
 
 class GiangVienController extends Controller
 {
@@ -502,9 +503,40 @@ class GiangVienController extends Controller
             $binhluan->nguoi_dung_id = $idNgDung;
             $binhluan->noi_dung = $req->user_comment;
             $binhluan->save();
+            if ($req->dinh_kem_cmt != null) {
+                $dkemBinhLuan = new DinhKemBinhLuan();
 
+                $dkemBinhLuan->binh_luan_id = $binhluan->id;
+                //dd($req->dinh_kem_cmt);
+                $dkemBinhLuan->dinh_kem = $req->dinh_kem_cmt->getClientOriginalName();
+
+                //Lưu trữ file
+                $req->dinh_kem_cmt->storeAs('dinhkem/commet_file/', $req->dinh_kem_cmt->getClientOriginalName());
+
+                $dkemBinhLuan->save();
+            }
             return redirect()->back();
         } else {
+            $idNgDung = Auth::id();
+            $binhluan = new BinhLuan();
+
+            $binhluan->bai_dang_id = $bai_dang_id;
+            $binhluan->nguoi_dung_id = $idNgDung;
+            $binhluan->noi_dung = '';
+            $binhluan->save();
+            if ($req->dinh_kem_cmt != null) {
+                $dkemBinhLuan = new DinhKemBinhLuan();
+
+                $dkemBinhLuan->binh_luan_id = $binhluan->id;
+
+
+                $dkemBinhLuan->dinh_kem = $req->dinh_kem_cmt->getClientOriginalName();
+
+                //Lưu trữ file
+                $req->dinh_kem_cmt->storeAs('dinhkem/commet_file/', $req->dinh_kem_cmt->getClientOriginalName());
+
+                $dkemBinhLuan->save();
+            }
             return redirect()->back();
         }
     }

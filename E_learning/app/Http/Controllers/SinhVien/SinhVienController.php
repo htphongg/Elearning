@@ -13,6 +13,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Hash;
 use App\Models\BinhLuan;
+use App\Models\BaiNop;
+use App\Models\DinhKemBaiNop;
+use App\Models\DinhKemBinhLuan;
 
 class SinhVienController extends Controller
 {
@@ -290,10 +293,77 @@ class SinhVienController extends Controller
             $binhluan->nguoi_dung_id = $idNgDung;
             $binhluan->noi_dung = $req->user_comment;
             $binhluan->save();
+            if ($req->dinh_kem_cmt != null) {
+                $dkemBinhLuan = new DinhKemBinhLuan();
 
+                $dkemBinhLuan->binh_luan_id = $binhluan->id;
+                //dd($req->dinh_kem_cmt);
+                $dkemBinhLuan->dinh_kem = $req->dinh_kem_cmt->getClientOriginalName();
+
+                //Lưu trữ file
+                $req->dinh_kem_cmt->storeAs('dinhkem/commet_file/', $req->dinh_kem_cmt->getClientOriginalName());
+
+                $dkemBinhLuan->save();
+            }
             return redirect()->back();
         } else {
+            $idNgDung = Auth::id();
+            $binhluan = new BinhLuan();
+
+            $binhluan->bai_dang_id = $bai_dang_id;
+            $binhluan->nguoi_dung_id = $idNgDung;
+            $binhluan->noi_dung = '';
+            $binhluan->save();
+            if ($req->dinh_kem_cmt != null) {
+                $dkemBinhLuan = new DinhKemBinhLuan();
+
+                $dkemBinhLuan->binh_luan_id = $binhluan->id;
+
+
+                $dkemBinhLuan->dinh_kem = $req->dinh_kem_cmt->getClientOriginalName();
+
+                //Lưu trữ file
+                $req->dinh_kem_cmt->storeAs('dinhkem/commet_file/', $req->dinh_kem_cmt->getClientOriginalName());
+
+                $dkemBinhLuan->save();
+            }
             return redirect()->back();
+        }
+    }
+
+    public function baiNop(Request $req, $bai_dang_id)
+    {
+        if ($req->dinh_kem != null) {
+            $idNgDung = Auth::id();
+            $daNop = BaiNop::where('nguoi_dung_id', '=', $idNgDung)->count();
+
+            if ($daNop > 0) {
+                $baiNop = BaiNop::where('nguoi_dung_id', '=', $idNgDung)->first();
+                $dkemBaiNop = DinhKemBaiNop::where('bai_nop_id', '=', $baiNop->id)->first();
+
+                $dkemBaiNop->bai_nop_id = $baiNop->id;
+                $dkemBaiNop->dinh_kem = $req->dinh_kem->getClientOriginalName();
+                $dkemBaiNop->save();
+
+                $req->dinh_kem->storeAs('dinhkem', $req->dinh_kem->getClientOriginalName());
+                return redirect()->back()->with('success', 'Nộp lại thành công');
+            } else {
+                $baiNop = new BaiNop();
+                $baiNop->bai_dang_id = $bai_dang_id;
+                $baiNop->nguoi_dung_id = $idNgDung;
+                $baiNop->save();
+
+                $dkemBaiNop = new DinhKemBaiNop();
+
+                $dkemBaiNop->bai_nop_id = $baiNop->id;
+                $dkemBaiNop->dinh_kem = $req->dinh_kem->getClientOriginalName();
+
+                $req->dinh_kem->storeAs('dinhkem/homework/', $req->dinh_kem->getClientOriginalName());
+                $dkemBaiNop->save();
+            }
+            return redirect()->back()->with('success', 'Nộp thành công');
+        } else {
+            return redirect()->back()->with('fail', 'Không có đính kèm');
         }
     }
 }
