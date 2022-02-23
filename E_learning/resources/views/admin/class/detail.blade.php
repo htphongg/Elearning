@@ -104,6 +104,7 @@
                         <span class="col-sm-10">
                             {{ Date_format(new Datetime($chitietlop->created_at), 'H:i:A d-m-Y') }}
                         </span>
+
                     </dl>
                 </div>
                 <a href="{{ route('ad-ds-lop') }}" class="btn btn-danger">Quay lại</a>

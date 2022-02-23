@@ -14,4 +14,8 @@ class BinhLuan extends Model
     {
         return $this->belongsTo('App\Models\NguoiDung', 'nguoi_dung_id');
     }
+    public function dinhKemBinhLuan()
+    {
+        return $this->hasOne('App\Models\DinhKemBinhLuan', 'binh_luan_id');
+    }
 }

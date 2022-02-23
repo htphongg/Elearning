@@ -127,13 +127,27 @@
                 </div>
                 @foreach ($cmt as $cm)
                     <div class="comment mt-2 mb-2">
-                        <div class="comment-avt">
-                            <i class="far fa-user-circle mr-3"></i>
-                        </div>
-                        <div class="comment-content">
-                            <p class="mb-0 font-weight-bold">{{ $cm->nguoiViet->ho_ten }}</p>
-                            <p class="mb-0">{{ $cm->noi_dung }}</p>
-                        </div>
+                        @if ($cm->dinhKemBinhLuan != null)
+                            @if ($cm->id == $cm->dinhKemBinhLuan->binh_luan_id)
+                                <div class="comment-avt">
+                                    <i class="far fa-user-circle mr-3" style="position: relative; top: -45px;"></i>
+                                </div>
+                                <div class="comment-content">
+                                    <p class="mb-0 font-weight-bold">{{ $cm->nguoiViet->ho_ten }}</p>
+                                    <p class="mb-0">{{ $cm->noi_dung }}</p>
+                                    <img src="{{ asset('/dinhkem/commet_file/' . $cm->dinhKemBinhLuan->dinh_kem) }}"
+                                        id="size_file">
+                                </div>
+                            @endif
+                        @else
+                            <div class="comment-avt">
+                                <i class="far fa-user-circle mr-3"></i>
+                            </div>
+                            <div class="comment-content">
+                                <p class="mb-0 font-weight-bold">{{ $cm->nguoiViet->ho_ten }}</p>
+                                <p class="mb-0">{{ $cm->noi_dung }}</p>
+                            </div>
+                        @endif
                     </div>
                 @endforeach
             </div>
@@ -143,16 +157,15 @@
                     <p>Nhận xét của bạn:</p>
                 </div>
             </div>
-            {{-- <form
-                action="{{ route('gv-binh-luan', ['bai_dang_id' => $bai_dang_id, 'type' => $loai_bai_dang_id, 'lop_hoc_id' => $lopHoc->id]) }}" method = "POST"> --}}
             <form action="{{ route('gv-binh-luan', ['id' => $bai_dang_id, 'type' => $loai_bai_dang_id]) }}"
                 enctype="multipart/form-data" method="POST">
                 @csrf
+                <input type="file" id="load_file" name="dinh_kem_cmt" />
                 <div class="user-cmt">
                     <div class="user-cmt-left w-100">
                         <i class="far fa-user-circle"></i>
                         <input class="w-100" type="text" name="user_comment">
-                        <a href=""><i id="icon-paperclip" class="fas fa-lg fa-paperclip"></i></a>
+
                     </div>
                     <div class="user-cmt-right">
                         <button type="submit" class="btn btn-info"><i class="far fa-paper-plane"></i></button>
