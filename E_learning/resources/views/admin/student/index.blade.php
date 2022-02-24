@@ -97,7 +97,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($dsSV as $SV)
+                        @forelse ($dsSV as $SV)
                             <tr>
                                 <td>{{ $SV->ho_ten }}</td>
                                 <td>{{ Date_format(new Datetime($SV->ngay_sinh), 'd-m-Y') }}</td>
@@ -113,7 +113,11 @@
                                         href="{{ route('ad-xoa-bo-sv', ['id' => $SV->id]) }}">Xóa</a>
                                 </td>
                             </tr>
-                        @endforeach
+                        @empty
+                            <tr>
+                                <td colspan="8">không có dữ liệu</td>
+                            </tr>
+                        @endforelse
                     </tbody>
                 </table>
 

@@ -115,7 +115,7 @@
                     </div>
                     <div class="form-group">
                         <label for="address">Địa chỉ:</label>
-                        <input type="text" class="form-control" id="address" name="dia_chi" placeholder="địa chỉ"
+                        <input type="text" class="form-control" id="address" name="dia_chi" placeholder="Địa chỉ"
                             required>
                         <div class="valid-feedback">Valid.</div>
                         <div class="invalid-feedback">Please fill out this field.</div>
