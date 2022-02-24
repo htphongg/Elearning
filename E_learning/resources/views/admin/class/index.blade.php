@@ -90,7 +90,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($dsLH as $LH)
+                        @forelse ($dsLH as $LH)
                             <tr>
                                 <td class="text-center">{{ $LH->ma_lop }}</td>
                                 <td>{{ $LH->ten_lop }}</td>
@@ -103,7 +103,11 @@
                                 </td>
 
                             </tr>
-                        @endforeach
+                        @empty
+                            <tr>
+                                <td colspan="4">không có dữ liệu</td>
+                            </tr>
+                        @endforelse
                     </tbody>
                 </table>
 
