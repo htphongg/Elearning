@@ -4,11 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trang chủ</title>
-    <link rel="stylesheet" href="../asset/css/style.css">
-    <link rel="stylesheet" href="../lib/bootstrap/css/bootstrap.css">
-    <link rel="stylesheet" href="../lib/fontawesome/css/all.css">
+    <meta name="viewport" content="wispanh=device-wispanh, initial-scale=1.0">
+    <title>Cập nhật thông tin sinh viên</title>
+    <link rel="stylesheet" href="{{ asset('../asset/css/function-style-admin.css') }}">
+    <link rel="stylesheet" href="{{ asset('../lib/bootstrap/css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ asset('../lib/fontawesome/css/all.css') }}">
 </head>
 
 <body>
@@ -18,9 +18,12 @@
                 <i class="fas fa-bars"></i>
             </div>
             <div class="logo">
-                <img src="../asset/img/googlelogo_clr_74x24px.svg" alt="">
+                <img src="{{ asset('../asset/img/googlelogo_clr_74x24px.SVg') }}" alt="">
             </div>
             <span class="webname">Lớp học</span>
+        </div>
+        <div class="right">
+
         </div>
     </div>
     <div class="dra-details">
@@ -46,7 +49,7 @@
             </div>
             <div class="dra-item">
                 <div class="dra-item-avt icon">L</div>
-                <a href="{{ route('ad-ds-lop') }}">Lớp Học</a>
+                <a href="">Lớp Học</a>
             </div>
             <div class="dra-item">
                 <div class="dra-item-avt icon">B</div>
@@ -69,42 +72,47 @@
             </div>
         </div>
     </div>
-    <!-- <div id="line"><hr></div> -->
     <div id="container">
-        <!-- <div class="navbar">
-            <ul class="nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#">Disabled</a>
-                </li>
-            </ul>
-       </div> -->
+        <div id="body">
+            <div class="top"></div>
+            <div class="content">
+                <h1 class="text-center">Chi tiết</h1>
+                <hr />
+                <div>
+                    <dl class="row">
+                        <span class="col-sm-2">
+                            Mã lớp
+                        </span>
+                        <span class="col-sm-10">
+                            {{ $chitietlop->ma_lop }}
+                        </span>
+                        <span class="col-sm-2">
+                            Tên lớp
+                        </span>
+                        <span class="col-sm-10">
+                            {{ $chitietlop->ten_lop }}
+                        </span>
+                        <span class="col-sm-2">
+                            Mô tả
+                        </span>
+                        <span class="col-sm-10">
+                            {{ $chitietlop->mo_ta }}
+                        </span>
+                        <span class="col-sm-2">
+                            Ngày tạo
+                        </span>
+                        <span class="col-sm-10">
+                            {{ Date_format(new Datetime($chitietlop->created_at), 'H:i:A d-m-Y') }}
+                        </span>
+
+                    </dl>
+                </div>
+                <a href="{{ route('ad-ds-lop') }}" class="btn btn-danger">Quay lại</a>
+            </div>
+        </div>
+        <div id="footer"></div>
     </div>
-    <div id="toast"></div>
-    <script src="../asset/js/style.js"></script>
+    <script src="{{ asset('../asset/js/style.js') }}"></script>
 </body>
-    <script src="../asset/js/showNoti.js"></script>
-    <script>
-            if( {{ Session::has('success') }} )
-            {
-                showSuccessToast( 'Thành công',"{{ Session::get('success') }} ");
-            }
-            
-    </script>
-    <script>
-        if( {{ Session::has('error') }} )
-        {
-            showErrorToast( 'Lỗi',"{{ Session::get('error') }}");
-        }   
-    </script>
-    <script src="../asset/js/style.js"></script>
 
 </html>

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Classroom</title>
+    <title>Danh sách sinh viên</title>
     <link rel="stylesheet" href="../asset/css/style-admin.css">
     <link rel="stylesheet" href="../lib/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="../lib/fontawesome/css/all.css">
@@ -24,7 +24,7 @@
         </div>
         <div class="right">
             <div class="addclass">
-                <a href="{{ route('ad-them-moi-sv') }}"><i class="fas fa-plus"></i></a>
+                <a href="{{ route('ad-them-moi-gv') }}"><i class="fas fa-plus color-icon"></i>Thêm mới</a>
             </div>
         </div>
     </div>
@@ -53,9 +53,21 @@
                 <div class="dra-item-avt icon">L</div>
                 <a href="{{ route('ad-ds-lop') }}">Lớp Học</a>
             </div>
+            <div class="dra-item">
+                <div class="dra-item-avt icon">B</div>
+                <a href="{{ route('ad-ds-bai-dang') }}">Bài Đăng</a>
+            </div>
         </div>
         <hr>
         <div class="dra-footer">
+            <div class="dra-item">
+                <i class="fas fa-user-circle icon"></i>
+                <a href="{{ route('ad-cap-nhat-thong-tin') }}">Cập nhật thông tin cá nhân</a>
+            </div>
+            <div class="dra-item">
+                <i class="fas fa-exchange-alt icon"></i>
+                <a href="{{ route('ad-doi-mat-khau') }}">Thay đổi mật khẩu</a>
+            </div>
             <div class="dra-item">
                 <i class="fas fa-sign-out-alt icon"></i>
                 <a href="{{ route('ad-dang-xuat') }}">Đăng xuất</a>
@@ -85,21 +97,27 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($dsSV as $SV)
+                        @forelse ($dsSV as $SV)
                             <tr>
                                 <td>{{ $SV->ho_ten }}</td>
-                                <td>{{ $SV->ngay_sinh }}</td>
+                                <td>{{ Date_format(new Datetime($SV->ngay_sinh), 'd-m-Y') }}</td>
                                 <td>{{ $SV->gioi_tinh }}</td>
                                 <td>{{ $SV->dia_chi }}</td>
                                 <td>{{ $SV->sdt }}</td>
                                 <td>{{ $SV->email }}</td>
                                 <td>{{ $SV->ten_dang_nhap }}</td>
                                 <td>
-                                    <a class="btn btn-success"href="{{ route('ad-cap-nhat-sv', ['id' => $SV->id]) }}">Sửa</a>
-                                    <a class="btn btn-danger"href="{{ route('ad-xoa-bo-sv', ['id' => $SV->id]) }}">Xóa</a>
+                                    <a class="btn btn-success"
+                                        href="{{ route('ad-cap-nhat-sv', ['id' => $SV->id]) }}">Sửa</a>
+                                    <a class="btn btn-danger" onclick="return confirm('Bạn có chắc muốn xóa?')"
+                                        href="{{ route('ad-xoa-bo-sv', ['id' => $SV->id]) }}">Xóa</a>
                                 </td>
                             </tr>
-                        @endforeach
+                        @empty
+                            <tr>
+                                <td colspan="8">không có dữ liệu</td>
+                            </tr>
+                        @endforelse
                     </tbody>
                 </table>
 

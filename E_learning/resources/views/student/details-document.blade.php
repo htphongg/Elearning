@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,6 +10,7 @@
     <link rel="stylesheet" href="{{ asset('../lib/bootstrap/css/bootstrap.css') }}">
     <link rel="stylesheet" href="{{ asset('../lib/fontawesome/css/all.css') }}">
 </head>
+
 <body>
     <div id="header">
         <div class="left">
@@ -21,11 +23,12 @@
             </div>
         </div>
         <div class="right">
-            <a class="btn btn-info mr-5" href="{{route( 'sv-cong-viec', ['lop_hoc_id' => $lopHoc->id] )}}">Quay lại bài tập trên lớp</a>
+            <a class="btn btn-info mr-5" href="{{ route('sv-cong-viec', ['lop_hoc_id' => $lopHoc->id]) }}">Quay lại bài
+                tập trên lớp</a>
         </div>
     </div>
 
-    <!-- Drawer details --> 
+    <!-- Drawer details -->
     <div class="dra-details">
         <div class="dra-header">
             <div class="dra-item">
@@ -44,10 +47,10 @@
                 <i class="far fa-list-alt icon"></i>
                 Việc cần làm
             </div>
-            @foreach($dsLopDaVao as $lop)
+            @foreach ($dsLopDaVao as $lop)
                 <div class="dra-item">
                     <div class="dra-item-avt icon">C</div>
-                    <a href="{{ route('sv-chi-tiet-lop',['lop_hoc_id' => $lop->id]) }}"> {{ $lop->ten_lop }}</a>
+                    <a href="{{ route('sv-chi-tiet-lop', ['lop_hoc_id' => $lop->id]) }}"> {{ $lop->ten_lop }}</a>
                 </div>
             @endforeach
         </div>
@@ -63,15 +66,15 @@
             </div>
             <div class="dra-item">
                 <i class="fas fa-user-circle icon"></i>
-                <a href="{{route('sv-cap-nhat-thong-tin')}}">Cập nhật thông tin cá nhân</a>
+                <a href="{{ route('sv-cap-nhat-thong-tin') }}">Cập nhật thông tin cá nhân</a>
             </div>
             <div class="dra-item">
                 <i class="fas fa-exchange-alt icon"></i>
-                <a href="{{route('sv-doi-mat-khau')}}">Thay đổi mật khẩu</a>
+                <a href="{{ route('sv-doi-mat-khau') }}">Thay đổi mật khẩu</a>
             </div>
             <div class="dra-item">
                 <i class="fas fa-sign-out-alt icon"></i>
-                <a href="{{route('sv-dang-xuat')}}">Đăng xuất</a>
+                <a href="{{ route('sv-dang-xuat') }}">Đăng xuất</a>
             </div>
         </div>
     </div>
@@ -85,67 +88,77 @@
                 </div>
                 <div class="post-text">
                     <span>{{ $baiDang->tieu_de }}</span>
-                    <p>Tên giảng viên • @php echo date_format (new DateTime($baiDang->created_at), 'd/m/Y'); @endphp </p>
+                    <p>{{ $lopHoc->dsNguoiDung->where('loai_nguoi_dung_id', '=', 2)->first()->ho_ten }} •
+                        @php echo date_format (new DateTime($baiDang->created_at), 'd/m/Y'); @endphp </p>
                 </div>
             </div>
-            <div class="line"><hr></div>
-            <div class="post-content"> 
-                {{ $baiDang->noi_dung}}
+            <div class="line">
+                <hr>
             </div>
-            <div class="line"><hr></div>
+            <div class="post-content">
+                {{ $baiDang->noi_dung }}
+            </div>
+            <div class="line">
+                <hr>
+            </div>
             <div class="post-acttached">
-                @if(count($baiDang->dsDinhKem) == 0)
+                @if (count($baiDang->dsDinhKem) == 0)
                     <p>Không có tệp đính kèm nào.</p>
                 @else
-                    @foreach($baiDang->dsDinhKem as $dinhKem)
-                        {{$dinhKem->dinh_kem}};
+                    @foreach ($baiDang->dsDinhKem as $dkem)
+                        <embed src="{{ asset('/dinhkem/post/' . $dkem->dinh_kem) }}" width="100%" height="500px" />
                     @endforeach
-                @endif 
+                @endif
             </div>
-            <div class="line"><hr></div>
+            <div class="line">
+                <hr>
+            </div>
             <div class="post-cmt">
                 <div class="post-cmt-title">
                     <i class="fas fa-user-friends"></i>
                     <p>Nhận xét của lớp học</p>
                 </div>
-                <div class="comment mt-2 mb-2">
-                    <div class="comment-avt">
-                        <i class="far fa-user-circle mr-3"></i>
+                @foreach ($cmt as $cm)
+                    <div class="comment mt-2 mb-2">
+                        @if ($cm->dinhKemBinhLuan != null)
+                            @if ($cm->id == $cm->dinhKemBinhLuan->binh_luan_id)
+                                <div class="comment-avt">
+                                    <i class="far fa-user-circle mr-3" style="position: relative; top: -45px;"></i>
+                                </div>
+                                <div class="comment-content">
+                                    <p class="mb-0 font-weight-bold">{{ $cm->nguoiViet->ho_ten }}</p>
+                                    <p class="mb-0">{{ $cm->noi_dung }}</p>
+                                    <img src="{{ asset('/dinhkem/commet_file/' . $cm->dinhKemBinhLuan->dinh_kem) }}"
+                                        id="size_file">
+                                </div>
+                            @endif
+                        @else
+                            <div class="comment-avt">
+                                <i class="far fa-user-circle mr-3"></i>
+                            </div>
+                            <div class="comment-content">
+                                <p class="mb-0 font-weight-bold">{{ $cm->nguoiViet->ho_ten }}</p>
+                                <p class="mb-0">{{ $cm->noi_dung }}</p>
+                            </div>
+                        @endif
                     </div>
-                    <div class="comment-content">
-                        <p class="mb-0 font-weight-bold">Huỳnh Thanh Phong</p>
-                        <p class="mb-0">sdhgfádjfhákjfslfkjhsdakfáDjfsdạkfsdkjfgsdhjklf</p>
-                    </div>
-                </div>
-                <div class="comment mt-2 mb-2">
-                    <div class="comment-avt">
-                        <i class="far fa-user-circle mr-3"></i>
-                    </div>
-                    <div class="comment-content">
-                        <p class="mb-0 font-weight-bold">Huỳnh Thanh Phong • </p>
-                        <p class="mb-0">sdhgfádjfhákjfslfkjhsdakfáDjfsdạkfsdkjfgsdhjklf</p>
-                    </div>
-                </div>
-                <div class="comment mt-2 mb-2">
-                    <div class="comment-avt">
-                        <i class="far fa-user-circle mr-3"></i>
-                    </div>
-                    <div class="comment-content">
-                        <p class="mb-0 font-weight-bold">Huỳnh Thanh Phong</p>
-                        <p class="mb-0">sdhgfádjfhákjfslfkjhsdakfáDjfsdạkfsdkjfgsdhjklf</p>
-                    </div>
-                </div>
+                @endforeach
             </div>
-            <div class="line"><hr>
+            <div class="line">
+                <hr>
                 <div class="post-cmt-title">
                     <p>Nhận xét của bạn:</p>
                 </div>
             </div>
-            <form action="#">
+            <form action="{{ route('sv-binh-luan', ['id' => $bai_dang_id, 'type' => $loai_bai_dang_id]) }}"
+                enctype="multipart/form-data" method="POST">
+                @csrf
+                <input type="file" id="load_file" name="dinh_kem_cmt" />
                 <div class="user-cmt">
                     <div class="user-cmt-left w-100">
                         <i class="far fa-user-circle"></i>
-                        <input  class="w-100" type="text" name="user_comment">
+                        <input class="w-100" type="text" name="user_comment">
+
                     </div>
                     <div class="user-cmt-right">
                         <button type="submit" class="btn btn-info"><i class="far fa-paper-plane"></i></button>
@@ -154,6 +167,19 @@
             </form>
         </div>
     </div>
+    <div id="toast"></div>
 </body>
+<script src="{{ asset('../asset/js/showNoti.js') }}"></script>
+<script>
+    if ({{ Session::has('success') }}) {
+        showSuccessToast('Thành công', "{{ Session::get('success') }} ");
+    }
+</script>
+<script>
+    if ({{ Session::has('error') }}) {
+        showErrorToast('Lỗi', "{{ Session::get('error') }}");
+    }
+</script>
 <script src="{{ asset('../asset/js/style.js') }}"></script>
+
 </html>

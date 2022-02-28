@@ -142,7 +142,7 @@
                                                 @endif
                                             </div>
                                             <div class="ex-title">
-                                                Đã đăng một @if(strcasecmp($baiDang->loaiBaiDang->ten_loai,"Tài liệu") == 0)
+                                            {{ $lopHoc->dsNguoiDung->where('loai_nguoi_dung_id','=',2)->first()->ho_ten }} đã đăng một @if(strcasecmp($baiDang->loaiBaiDang->ten_loai,"Tài liệu") == 0)
                                                                                 tài liệu
                                                                             @elseif (strcasecmp($baiDang->loaiBaiDang->ten_loai,"Thông báo") == 0)
                                                                                 thông báo

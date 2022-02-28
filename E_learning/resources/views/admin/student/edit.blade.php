@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Classroom</title>
+    <title>Cập nhật thông tin sinh viên</title>
     <link rel="stylesheet" href="{{ asset('../asset/css/function-style-admin.css') }}">
     <link rel="stylesheet" href="{{ asset('../lib/bootstrap/css/bootstrap.css') }}">
     <link rel="stylesheet" href="{{ asset('../lib/fontawesome/css/all.css') }}">
@@ -51,9 +51,21 @@
                 <div class="dra-item-avt icon">L</div>
                 <a href="">Lớp Học</a>
             </div>
+            <div class="dra-item">
+                <div class="dra-item-avt icon">B</div>
+                <a href="{{ route('ad-ds-bai-dang') }}">Bài Đăng</a>
+            </div>
         </div>
         <hr>
         <div class="dra-footer">
+            <div class="dra-item">
+                <i class="fas fa-user-circle icon"></i>
+                <a href="{{ route('ad-cap-nhat-thong-tin') }}">Cập nhật thông tin cá nhân</a>
+            </div>
+            <div class="dra-item">
+                <i class="fas fa-exchange-alt icon"></i>
+                <a href="{{ route('ad-doi-mat-khau') }}">Thay đổi mật khẩu</a>
+            </div>
             <div class="dra-item">
                 <i class="fas fa-sign-out-alt icon"></i>
                 <a href="{{ route('ad-dang-xuat') }}">Đăng xuất</a>
@@ -90,7 +102,7 @@
                         <div class="invalid-feedback">Please fill out this field.</div>
                     </div>
                     <div class="form-group">
-                        <label for="date">Giới tính:</label>
+                        <label for="gender">Giới tính:</label>
                         <br>
                         @if (strcasecmp($dsSV->gioi_tinh, 'Nam') == 0)
                             <input type="radio" id="gender" checked value="Nam" name="gioi_tinh"> Nam
@@ -133,4 +145,5 @@
     </div>
     <script src="{{ asset('../asset/js/style.js') }}"></script>
 </body>
+
 </html>

@@ -80,37 +80,72 @@
             <div class="top"> </div>
             <div class="content">
                 <h2 class="mb-3 text-center mt-5">Danh Sách Lớp</h2>
-                <table class="table table-bordered">
-                    <thead class="table-dark  text-center">
+                <form action="{{ route('ad-loc') }}" method="POST">
+                    @csrf
+                    <h6 class="title-dropdown1">Loại bài đăng:</h6>
+                    <select name="loai_bai_dang" id="dropdown-type">
+                        <option value="0">Tất cả</option>
+                        @foreach ($ds_loai as $loaibaidang)
+                            <option value="{{ $loaibaidang->id }}"
+                                {{ $loaibaidang->id == $index_baidang ? 'selected' : '' }}>
+                                {{ $loaibaidang->ten_loai }}</option>
+                        @endforeach
+                    </select>
+                    <h6 class="title-dropdown2">Lớp:</h6>
+                    <select name="lop_hoc" id="dropdown-class">
+                        <option value="0" selected>Tất cả</option>
+                        @foreach ($ds_baidang_cuaLop as $baidangcualop)
+                            <option value="{{ $baidangcualop->id }}"
+                                {{ $baidangcualop->id == $index_lophoc ? 'selected' : '' }}>
+                                {{ $baidangcualop->ten_lop }}
+                            </option>
+                        @endforeach
+                    </select>
+                    <button id="btn-filter" type="submit" class="btn">Lọc</button>
+                </form>
+                <Table class="table text-center table-bordered">
+                    <thead class="table-dark ">
                         <tr>
-                            <th>Mã lớp</th>
-                            <th>Tên lớp</th>
-                            <th>Mô tả</th>
+                            <th>Tiêu đề</th>
+                            <th>Nội dung</th>
+                            <th>Hạn nộp</th>
+                            <th>Loại</th>
+                            <th>Lớp</th>
                             <th>Chức năng</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($dsLH as $LH)
+                        @forelse ($ds_baidang as $baidang)
                             <tr>
-                                <td class="text-center">{{ $LH->ma_lop }}</td>
-                                <td>{{ $LH->ten_lop }}</td>
-                                <td>{{ $LH->mo_ta }}</td>
-                                <td class="text-center">
-                                    <a class="btn btn-primary"
-                                        href="{{ route('ad-chi-tiet-lop', ['id' => $LH->id]) }}">Xem chi tiết</a>
-                                    <a class="btn btn-danger" onclick="return confirm('Bạn có chắc muốn xóa?')"
-                                        href="{{ route('ad-xoa-bo-lh', ['id' => $LH->id]) }}">Xóa</a>
+                                <td>{{ $baidang->tieu_de }}</td>
+                                <td class="text-left">{{ substr($baidang->noi_dung, 0, 30) }}</td>
+                                <td>
+                                    @if ($baidang->han_nop != null)
+                                        {{ Date_format(new Datetime($baidang->han_nop), 'H:i:A d-m-Y') }}
+                                    @endif
+
+                                </td>
+                                <td>
+                                    {{ $baidang->loaiBaiDang->ten_loai }}
+                                </td>
+                                <td>
+                                    {{ $baidang->lopHoc->ten_lop }}
+                                </td>
+                                <td><a href="{{ route('ad-chi-tiet-bai-dang', ['id' => $baidang->id]) }}"
+                                        class="btn btn-primary">Xem chi
+                                        tiết</a>
+                                    <a href="{{ route('ad-xoa-bo-bd', ['id' => $baidang->id]) }}"
+                                        onclick="return confirm('Bạn có chắc muốn xóa?')" class="btn btn-danger">Xóa</a>
                                 </td>
 
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="4">không có dữ liệu</td>
+                                <td colspan="6">không có dữ liệu</td>
                             </tr>
                         @endforelse
                     </tbody>
-                </table>
-
+                </Table>
             </div>
         </div>
 
