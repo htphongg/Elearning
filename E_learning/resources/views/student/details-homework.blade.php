@@ -123,7 +123,7 @@
             <div class="post-cmt">
                 <div class="post-cmt-title">
                     <i class="fas fa-user-friends"></i>
-                    <p>Nhận xét của lớp học</p>
+                    <p>Nhận xét của lớp học </p>
                 </div>
                 @foreach ($cmt as $cm)
                     <div class="comment mt-2 mb-2">
@@ -180,7 +180,12 @@
             <div class="attached">
                 <div class="attached-header">
                     <p class="attached-header-left">Bài tập của bạn</p>
-                    <p class="attached-header-right">Đã nộp</p>
+                    @if($daNop==1)
+                    <p class="attached-header-right" style="color:green">Đã nộp</p>
+                    @else
+                    <p class="attached-header-right" style="color:red">Thiếu</p>
+                    @endif
+                    
                 </div>
                 <div class="attached-content">
                     <div class="form-group">
