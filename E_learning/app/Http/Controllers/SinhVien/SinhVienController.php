@@ -16,6 +16,7 @@ use App\Models\BinhLuan;
 use App\Models\BaiNop;
 use App\Models\DinhKemBaiNop;
 use App\Models\DinhKemBinhLuan;
+use DateTime;
 
 class SinhVienController extends Controller
 {
@@ -219,13 +220,15 @@ class SinhVienController extends Controller
                 //Lấy bài đăng
                 $baiDang = BaiDang::find($bai_dang_id);
 
+                $daNop = BaiNop::where([['nguoi_dung_id', '=', $nguoi_dung_id],['bai_dang_id','=',$bai_dang_id]])->count();
+
                 $cmt = BinhLuan::where('bai_dang_id', '=', $bai_dang_id)->get();
 
-                return view('./student/details-homework', compact('lopHoc', 'dsLopDaVao', 'baiDang', 'cmt', 'bai_dang_id', 'loai_bai_dang_id'));
+                return view('./student/details-homework', compact('lopHoc', 'dsLopDaVao', 'baiDang', 'cmt', 'bai_dang_id', 'loai_bai_dang_id','daNop'));
             }
             if ($loai_bai_dang_id == 1 || $loai_bai_dang_id == 3) {
                 //Lấy dsLop đã tham gia
-                $nguoi_dung_id = Auth::id();
+                $nguoi_dung_id = Auth::id();                
                 $dsLopDaVao = [];
 
                 $dsLop = NguoiDung::find($nguoi_dung_id)->dsLopHoc;
