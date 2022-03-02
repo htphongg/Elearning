@@ -63,7 +63,7 @@
 
 ![image](https://user-images.githubusercontent.com/91455231/156373389-a5976dcd-29da-4b9b-b0ef-b794a5410223.png)
 
-**-Giao diện trang duyệt sinh viên tham gia lớp học (Giảng viên)**
+**- Giao diện trang duyệt sinh viên tham gia lớp học (Giảng viên)**
 
 ![image](https://user-images.githubusercontent.com/91455231/156377762-22a23eb5-040d-45eb-9beb-e769a4d8dc56.png)
 
