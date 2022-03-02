@@ -18,6 +18,10 @@
  **- Giao diện trang chủ sinh viên**
  
  ![image](https://user-images.githubusercontent.com/91455231/156371371-37223ba0-b2ed-4638-915a-a3570b4fef93.png)
+ 
+ **- Giao diện trang tham gia lớp học (Sinh viên)**
+ 
+ ![image](https://user-images.githubusercontent.com/91455231/156377349-b0a2dd5d-cb45-4438-8819-6b766bf80208.png)
 
 **- Giao diện trang chi tiết lớp học (Sinh viên)**
 
@@ -27,6 +31,10 @@
 
 ![image](https://user-images.githubusercontent.com/91455231/156372017-dff31ad2-2e07-4840-b1ce-f50389c193f5.png)
 
+**- Giao diện trang chi tiết bài tập (Sinh viên)**
+
+![image](https://user-images.githubusercontent.com/91455231/156377028-d338d288-375f-45b9-9522-402cd685253e.png)
+
 **- Giao diện trang mọi người (Sinh viên)**
 
 ![image](https://user-images.githubusercontent.com/91455231/156372202-697e3384-fd1f-4af0-84de-ed7db5b2400e.png)
@@ -34,6 +42,10 @@
 **- Giao diện trang chủ giảng viên**
 
 ![image](https://user-images.githubusercontent.com/91455231/156372687-7d471e12-75e4-4106-bb4b-6495c387aada.png)
+
+**- Giao diện trang tạo lớp học (Giảng viên)**
+
+![image](https://user-images.githubusercontent.com/91455231/156377929-b6837559-49fe-4f65-aa25-8d2a3c9e62d0.png)
 
 **- Giao diện trang chi tiết lớp học (Giảng viên)**
 
@@ -43,9 +55,18 @@
 
 ![image](https://user-images.githubusercontent.com/91455231/156373187-aeba6c1b-9fcd-41c9-8afd-8f9743f93c5b.png)
 
+**- Giao diện chi tiết bài tập (Giảng viên)**
+
+![image](https://user-images.githubusercontent.com/91455231/156376613-6f43a249-a2f4-4d7d-b109-278a2a942ec8.png)
+
 **- Giao diện trang mọi người (Giảng viên)**
 
 ![image](https://user-images.githubusercontent.com/91455231/156373389-a5976dcd-29da-4b9b-b0ef-b794a5410223.png)
+
+**-Giao diện trang duyệt sinh viên tham gia lớp học (Giảng viên)**
+
+![image](https://user-images.githubusercontent.com/91455231/156377762-22a23eb5-040d-45eb-9beb-e769a4d8dc56.png)
+
 
 
 
