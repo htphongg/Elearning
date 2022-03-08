@@ -1,3 +1,14 @@
+**Tài khoản đăng nhập:**
+  - Sinh viên: 
+    Username: htphong
+    Password: 123456
+  - Giảng viên: 
+    Username: tttuan
+    Password: 123456
+  - Admin
+    Username: admin
+    Password: 123456
+
 **- Giao diện đăng nhập**
 
 ![image](https://user-images.githubusercontent.com/91455231/156369277-4b552bd3-daaf-420b-b76e-b9f84703a065.png)
