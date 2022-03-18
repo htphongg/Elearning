@@ -20,11 +20,6 @@
             </div>
             <span class="webname">Lớp học</span>
         </div>
-        <div class="right">
-            <div class="create-class mr-5 ">
-                <a href="{{ route('gv-tao-lop') }}"><i class="fas fa-plus text-dark"></i></a>
-            </div>
-        </div>
     </div>
     <div class="dra-details">
         <div class="dra-header">
